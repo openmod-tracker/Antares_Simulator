@@ -43,6 +43,8 @@
 
 using namespace Antares::Check;
 
+std::vector<unsigned int> performedYears;
+
 namespace fs = std::filesystem;
 
 namespace
