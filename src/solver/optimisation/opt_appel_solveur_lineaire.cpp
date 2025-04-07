@@ -139,8 +139,7 @@ MPSolver* convertToMPSolver(const Optimization::PROBLEME_SIMPLEXE_NOMME& pb,
     std::vector<std::unique_ptr<ComponentFiller>> componentFillers;
     fillModelerComponents(componentFillers, fillersCollection, problemeHebdo->modelerSystem);
 
-    FillContext fillCtx(problemeHebdo->weekInTheYear * 168 + 0,
-                        problemeHebdo->weekInTheYear * 168 + 167);
+    FillContext fillCtx(0, 167);
     LinearProblemBuilder linearProblemBuilder(fillersCollection);
 
     // Note that the modeler is only called for the 1st simulation week,
@@ -260,10 +259,8 @@ static SimplexResult OPT_TryToCallSimplex(const OptimizationOptions& options,
 
     Probleme.NombreDeContraintesCoupes = 0;
 
-    if (solver == nullptr)
-    {
-        solver = convertToMPSolver(Probleme, problemeHebdo, options);
-    }
+    solver = convertToMPSolver(Probleme, problemeHebdo, options);
+
     const std::string filename = createMPSfilename(optPeriodStringGenerator, optimizationNumber);
 
     mpsWriterFactory mps_writer_factory(problemeHebdo->ExportMPS,

@@ -1,5 +1,8 @@
 #include "antares/solver/optimisation/LegacyFiller.h"
 
+#include <chrono>
+#include <iostream>
+
 using namespace Antares::Optimisation::LinearProblemApi;
 
 namespace Antares::Optimization
@@ -12,15 +15,23 @@ LegacyFiller::LegacyFiller(const Antares::Optimization::PROBLEME_SIMPLEXE_NOMME*
 
 void LegacyFiller::addVariables(ILinearProblem& pb, ILinearProblemData& data, FillContext& ctx)
 {
+    auto start = std::chrono::system_clock::now();
     // Create the variables and set objective cost.
     CopyVariables(pb);
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::cout << "Legacy variables in " << elapsed_seconds.count() << " seconds." << std::endl;
 }
 
 void LegacyFiller::addConstraints(ILinearProblem& pb, ILinearProblemData& data, FillContext& ctx)
 {
+    auto start = std::chrono::system_clock::now();
     // Create constraints and set coefs
     CopyRows(pb);
     CopyMatrix(pb);
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    std::cout << "Legacy constraints in " << elapsed_seconds.count() << " seconds." << std::endl;
 }
 
 void LegacyFiller::addObjective(ILinearProblem& pb, ILinearProblemData& data, FillContext& ctx)
@@ -68,6 +79,7 @@ void LegacyFiller::CopyVariables(ILinearProblem& pb) const
     {
         CreateVariable(idxVar, pb);
     }
+    std::cout << "Legacy variables : " << problemeSimplexe_->NombreDeVariables << std::endl;
 }
 
 void LegacyFiller::UpdateContraints(unsigned idxRow, ILinearProblem& pb) const
@@ -95,6 +107,7 @@ void LegacyFiller::CopyRows(ILinearProblem& pb) const
     {
         UpdateContraints(idxRow, pb);
     }
+    std::cout << "Legacy constraints : " << problemeSimplexe_->NombreDeContraintes << std::endl;
 }
 
 std::string LegacyFiller::GetVariableName(unsigned int index) const
