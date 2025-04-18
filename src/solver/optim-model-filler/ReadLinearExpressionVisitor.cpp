@@ -72,17 +72,20 @@ TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const DivisionN
     return dispatch(node->left()) / dispatch(node->right());
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const EqualNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const EqualNode* node)
 {
     throw std::invalid_argument("A linear expression can't contain comparison operators.");
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const LessThanOrEqualNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const LessThanOrEqualNode* node)
 {
     throw std::invalid_argument("A linear expression can't contain comparison operators.");
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const GreaterThanOrEqualNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const GreaterThanOrEqualNode* node)
 {
     throw std::invalid_argument("A linear expression can't contain comparison operators.");
 }
@@ -153,22 +156,26 @@ TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const LiteralNo
     return TimeDependentLinearExpression(fillContext_, LinearExpression(node->value(), {}));
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const PortFieldNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const PortFieldNode* node)
 {
     throw std::invalid_argument("ReadLinearExpressionVisitor cannot visit PortFieldNodes");
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const PortFieldSumNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const PortFieldSumNode* node)
 {
     throw std::invalid_argument("ReadLinearExpressionVisitor cannot visit PortFieldSumNodes");
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const ComponentVariableNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const ComponentVariableNode* node)
 {
     throw std::invalid_argument("ReadLinearExpressionVisitor cannot visit ComponentVariableNodes");
 }
 
-TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(const ComponentParameterNode* node)
+TimeDependentLinearExpression ReadLinearExpressionVisitor::visit(
+  [[maybe_unused]] const ComponentParameterNode* node)
 {
     throw std::invalid_argument("ReadLinearExpressionVisitor cannot visit ComponentParameterNodes");
 }

@@ -103,82 +103,98 @@ static std::invalid_argument IllegalNodeException()
     return std::invalid_argument("Root node of a constraint must be a comparator.");
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const SumNode* sum_node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const SumNode* sum_node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const SubtractionNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const SubtractionNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const MultiplicationNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const MultiplicationNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const DivisionNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const DivisionNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const NegationNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const NegationNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const VariableNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const VariableNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const ParameterNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const ParameterNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const LiteralNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const LiteralNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const PortFieldNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const PortFieldNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const PortFieldSumNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const PortFieldSumNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const ComponentVariableNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const ComponentVariableNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const ComponentParameterNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const ComponentParameterNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const TimeShiftNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const TimeShiftNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const TimeIndexNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const TimeIndexNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const TimeSumNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const TimeSumNode* node)
 {
     throw IllegalNodeException();
 }
 
-std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(const AllTimeSumNode* node)
+std::vector<LinearConstraint> ReadLinearConstraintVisitor::visit(
+  [[maybe_unused]] const AllTimeSumNode* node)
 {
     throw IllegalNodeException();
 }
