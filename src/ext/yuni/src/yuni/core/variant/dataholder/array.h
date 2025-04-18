@@ -237,7 +237,7 @@ protected:
     }
 
     //! Method invokation, with no parameter
-    virtual IDataHolder* invoke(const String& name) override
+    IDataHolder* invoke(const String& name) override
     {
         if (name == "size")
         {
@@ -251,7 +251,7 @@ protected:
         return nullptr;
     }
     //! Method invokation, with 1 parameter
-    virtual IDataHolder* invoke(const String& name, IDataHolder* a1) override
+    IDataHolder* invoke(const String& name, IDataHolder* a1) override
     {
         if (name == "add" or name == "append")
         {
@@ -262,33 +262,33 @@ protected:
         return nullptr;
     }
 
-    virtual IDataHolder* at(uint index) override
+    IDataHolder* at(uint index) override
     {
         return (index < pValue.size()) ? IDataHolder::Ptr::WeakPointer(pValue[index]) : nullptr;
     }
-    virtual const IDataHolder* at(uint index) const override
+    const IDataHolder* at(uint index) const override
     {
         return (index < pValue.size()) ? IDataHolder::Ptr::WeakPointer(pValue[index]) : nullptr;
     }
 
-    virtual void loopbackAssign(IDataHolder& dataholder) const override
+    void loopbackAssign(IDataHolder& dataholder) const override
     {
         dataholder.assignList(pValue);
     }
-    virtual void loopbackAdd(IDataHolder& dataholder) const override
+    void loopbackAdd(IDataHolder& dataholder) const override
     {
         dataholder.addList(pValue);
     }
-    virtual void loopbackMultiply(IDataHolder&) const override
+    void loopbackMultiply(IDataHolder&) const override
     {
     }
-    virtual void loopbackSub(IDataHolder&) const override
+    void loopbackSub(IDataHolder&) const override
     {
     }
-    virtual void loopbackDiv(IDataHolder&) const override
+    void loopbackDiv(IDataHolder&) const override
     {
     }
-    virtual bool loopbackIsEquals(IDataHolder&) const override
+    bool loopbackIsEquals(IDataHolder&) const override
     {
         assert(false and "not implemented");
         return false;
