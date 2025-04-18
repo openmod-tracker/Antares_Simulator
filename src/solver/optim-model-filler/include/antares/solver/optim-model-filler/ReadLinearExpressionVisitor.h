@@ -45,7 +45,7 @@ public:
                                          Optimisation::LinearProblemApi::FillContext fillContext,
                                          const std::string& componentId /* or vector ?*/);
 
-    ReadLinearExpressionVisitor() = default;
+    ReadLinearExpressionVisitor() = delete;
     std::string name() const override;
 
 private:
