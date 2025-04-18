@@ -55,6 +55,7 @@ public:
                            const unsigned scenario,
                            const unsigned hour)
       = 0;
+    virtual ~ILinearProblemData() = default;
 };
 
 } // namespace Antares::Optimisation::LinearProblemApi
