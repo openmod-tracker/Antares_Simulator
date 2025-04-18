@@ -15,6 +15,8 @@ public:
     {
     }
 
+    virtual ~IDataSeries() = default;
+
     virtual double getData(unsigned int rank, unsigned int hour) = 0;
 
     std::string name() const
