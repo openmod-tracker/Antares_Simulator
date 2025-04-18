@@ -30,7 +30,6 @@
 
 namespace Antares
 {
-
 HydroInputsChecker::HydroInputsChecker(Antares::Data::Study& study):
     areas_(study.areas),
     parameters_(study.parameters),
@@ -215,7 +214,6 @@ void HydroInputsChecker::CheckFinalReservoirLevelsConfiguration(uint year)
           double finalLevel = scenarioFinalHydroLevels_.entry[area.index][year];
 
           Antares::Solver::FinalLevelValidator validator(area.hydro,
-                                                         area.index,
                                                          area.name,
                                                          initialLevel,
                                                          finalLevel,
@@ -240,5 +238,4 @@ void HydroInputsChecker::CheckForErrors() const
 {
     errorCollector_.CheckForErrors();
 }
-
 } // namespace Antares
