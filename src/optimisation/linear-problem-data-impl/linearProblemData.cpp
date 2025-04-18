@@ -36,7 +36,7 @@ void LinearProblemData::addDataSeries(std::unique_ptr<IDataSeries> dataSeries)
 }
 
 double LinearProblemData::getData(const std::string& dataSetId,
-                                  const std::string& scenarioGroup,
+                                  [[maybe_unused]] const std::string& scenarioGroup,
                                   const unsigned scenario,
                                   const unsigned hour)
 {
