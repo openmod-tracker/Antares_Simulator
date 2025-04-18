@@ -273,7 +273,6 @@ static SimplexResult OPT_TryToCallSimplex(const SingleOptimOptions& options,
     mpsWriterFactory mps_writer_factory(problemeHebdo->ExportMPS,
                                         problemeHebdo->exportMPSOnError,
                                         optimizationNumber,
-                                        &Probleme,
                                         solver);
 
     auto mps_writer = mps_writer_factory.create();

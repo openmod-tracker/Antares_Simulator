@@ -100,7 +100,6 @@ public:
     mpsWriterFactory(Data::mpsExportStatus exportMPS,
                      bool exportMPSOnError,
                      const int current_optim_number,
-                     PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
                      MPSolver* solver);
 
     std::unique_ptr<I_MPS_writer> create();
@@ -114,7 +113,6 @@ private:
     // Member data...
     Data::mpsExportStatus export_mps_;
     bool export_mps_on_error_;
-    PROBLEME_SIMPLEXE_NOMME* named_splx_problem_ = nullptr;
     MPSolver* solver_ = nullptr;
     uint current_optim_number_;
 };

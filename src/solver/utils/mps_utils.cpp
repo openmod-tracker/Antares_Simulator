@@ -162,11 +162,9 @@ void fullOrToolsMPSwriter::runIfNeeded(Solver::IResultWriter& writer, const std:
 mpsWriterFactory::mpsWriterFactory(Data::mpsExportStatus exportMPS,
                                    bool exportMPSOnError,
                                    const int current_optim_number,
-                                   PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
                                    MPSolver* solver):
     export_mps_(exportMPS),
     export_mps_on_error_(exportMPSOnError),
-    named_splx_problem_(named_splx_problem),
     solver_(solver),
     current_optim_number_(current_optim_number)
 {
