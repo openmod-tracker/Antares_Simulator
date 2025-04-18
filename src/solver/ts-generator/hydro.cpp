@@ -20,6 +20,7 @@
  */
 
 #include <cmath>
+#include <fmt/format.h>
 
 #include <antares/antares/fatal-error.h>
 #include <antares/study/study.h>
@@ -284,7 +285,7 @@ bool GenerateHydroTimeSeries(Data::Study& study, uint currentYear, Solver::IResu
               [&currentYear, &writer, &progression](const Data::Area& area)
               {
                   const int precision = 0;
-                  std::string mcYear = "mc-" + currentYear;
+                  std::string mcYear = fmt::format("mc-{}", currentYear);
                   fs::path outputFolder = fs::path("ts-generator") / "hydro" / mcYear
                                           / area.id.to<std::string>();
 
