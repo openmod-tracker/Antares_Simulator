@@ -287,7 +287,7 @@ void QueueService::wait(QServiceEvent event)
     {
         // waiting for being terminated
         pSignalShouldStop.wait();
-
+        [[fallthrough]];
         // break : do not break - waiting for all threads being stopped
     }
     case qseIdle:
