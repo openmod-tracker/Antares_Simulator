@@ -28,6 +28,8 @@
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/logs/logs.h>
 #include <antares/study/study.h>
+
+#include "antares/solver/optimisation/opt_optimisation_hebdo.h"
 #include "antares/study/simulation.h"
 
 namespace Antares::Solver::Simulation
@@ -94,9 +96,9 @@ static void RecalculDesEchangesMoyens(Data::Study& study,
         NullResultWriter resultWriter;
         NullSimulationObserver simulationObserver;
         OPT_OptimisationHebdomadaire(study.parameters.optOptions,
-                                     &problem,
-                                     resultWriter,
-                                     simulationObserver);
+                                                   &problem,
+                                                   resultWriter,
+                                                   simulationObserver);
     }
     catch (Data::UnfeasibleProblemError&)
     {

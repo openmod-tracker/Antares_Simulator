@@ -35,7 +35,7 @@ public:
                        IResultWriter& writer,
                        Simulation::ISimulationObserver& simulationObserver);
     ~WeeklyOptimization() = default;
-    void solve();
+    void solve() const;
 
 private:
     Antares::Solver::Optimization::OptimizationOptions options_;

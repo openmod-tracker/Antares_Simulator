@@ -22,6 +22,7 @@
 #include "antares/solver/optimisation/weekly_optimization.h"
 
 #include "antares/solver/optimisation/opt_fonctions.h"
+#include "antares/solver/optimisation/opt_optimisation_hebdo.h"
 
 namespace Antares::Solver::Optimization
 {
@@ -36,8 +37,7 @@ WeeklyOptimization::WeeklyOptimization(const OptimizationOptions& options,
 {
 }
 
-void WeeklyOptimization::solve()
-{
+void WeeklyOptimization::solve() const {
     OPT_OptimisationHebdomadaire(options_, problemeHebdo_, writer_, simulationObserver_.get());
 }
 

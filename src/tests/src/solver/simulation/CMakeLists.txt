@@ -16,9 +16,9 @@ add_boost_test(tests-ts-numbers
         SRC tests-ts-numbers.cpp
         LIBS
         Antares::utils
-        model_antares
-        antares-solver-simulation
-        antares-solver-ts-generator)
+        Antares::antares-solver-simulation
+        antares-solver-ts-generator
+)
 
 
 # ===================================

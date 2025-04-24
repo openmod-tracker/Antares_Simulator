@@ -81,7 +81,7 @@ target_link_libraries(antares-solver-simulation
         Antares::concurrency
         Antares::solverUtils
         Antares::misc
-        model_antares
+        Antares::model_antares
         antares-solver-hydro
         antares-solver-variable
         antares-solver-ts-generator

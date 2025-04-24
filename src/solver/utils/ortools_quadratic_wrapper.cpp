@@ -19,12 +19,12 @@
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
 
+#include <antares/solver/utils/ortools_quadratic_wrapper.h>
 #include <ortools/math_opt/cpp/math_opt.h>
 #include <pi_constantes_externes.h>
 #include <vector>
 
 #include <antares/logs/logs.h>
-#include <antares/solver/utils/ortools_quadratic_wrapper.h>
 #include <antares/solver/utils/ortools_utils.h>
 
 using Antares::Solver::Optimization::SingleOptimOptions;

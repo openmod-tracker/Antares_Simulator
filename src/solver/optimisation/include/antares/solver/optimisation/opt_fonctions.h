@@ -24,7 +24,6 @@
 #include <antares/optimization-options/options.h>
 #include <antares/solver/utils/opt_period_string_generator.h>
 #include <antares/writer/i_writer.h>
-#include "antares/config/config.h"
 #include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
 #include "antares/solver/simulation/ISimulationObserver.h"
 #include "antares/study/parameters/adq-patch-params.h"
@@ -35,10 +34,6 @@ using AdqPatchParams = Antares::Data::AdequacyPatch::AdqPatchParams;
 using OptimizationOptions = Antares::Solver::Optimization::OptimizationOptions;
 using SingleOptimOptions = Antares::Solver::Optimization::SingleOptimOptions;
 
-void OPT_OptimisationHebdomadaire(const OptimizationOptions& options,
-                                  PROBLEME_HEBDO* pProblemeHebdo,
-                                  Solver::IResultWriter& writer,
-                                  Solver::Simulation::ISimulationObserver& simulationObserver);
 void OPT_NumeroDeJourDuPasDeTemps(PROBLEME_HEBDO*);
 void OPT_NumeroDIntervalleOptimiseDuPasDeTemps(PROBLEME_HEBDO*);
 void OPT_ConstruireLaListeDesVariablesOptimiseesDuProblemeLineaire(PROBLEME_HEBDO*);

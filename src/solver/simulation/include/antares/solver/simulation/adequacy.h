@@ -50,7 +50,7 @@ public:
     */
     Adequacy(Data::Study& study,
              IResultWriter& resultWriter,
-             Simulation::ISimulationObserver& simulationObserver);
+             ISimulationObserver& simulationObserver);
     //! Destructor
     ~Adequacy() = default;
     //@}
@@ -60,7 +60,7 @@ public:
     //! Current study
     Data::Study& study;
     //! All variables
-    Solver::Variable::Adequacy::AllVariables variables{};
+    Variable::Adequacy::AllVariables variables{};
     //! Prepro only
     bool preproOnly = false;
 
@@ -76,7 +76,7 @@ protected:
               std::list<uint>& failedWeekList,
               const HYDRO_VENTILATION_RESULTS&,
               OptimizationStatisticsWriter& optWriter,
-              const Antares::Data::Area::ScratchMap& scratchmap);
+              const Data::Area::ScratchMap& scratchmap);
 
     void incrementProgression(Progression::Task& progression) const;
 
@@ -101,7 +101,7 @@ private:
     Matrix<> pRES;
     IResultWriter& resultWriter;
 
-    std::reference_wrapper<Simulation::ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<ISimulationObserver> simulationObserver_;
 }; // class Adequacy
 
 } // namespace Antares::Solver::Simulation

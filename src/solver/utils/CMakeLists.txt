@@ -1,22 +1,22 @@
 set(SRC
-        include/antares/solver/utils/ortools_utils.h
-        ortools_utils.cpp
-        include/antares/solver/utils/ortools_quadratic_wrapper.h
-        ortools_quadratic_wrapper.cpp
-        include/antares/solver/utils/filename.h
-        filename.cpp
-        include/antares/solver/utils/named_problem.h
-        named_problem.cpp
-        include/antares/solver/utils/mps_utils.h
-        mps_utils.cpp
-        include/antares/solver/utils/name_translator.h
-        name_translator.cpp
-        include/antares/solver/utils/opt_period_string_generator.h
-        opt_period_string_generator.cpp
         basis_status.cpp
-        include/antares/solver/utils/basis_status.h
         basis_status_impl.cpp
         basis_status_impl.h
+        filename.cpp
+        include/antares/solver/utils/basis_status.h
+        include/antares/solver/utils/filename.h
+        include/antares/solver/utils/mps_utils.h
+        include/antares/solver/utils/name_translator.h
+        include/antares/solver/utils/named_problem.h
+        include/antares/solver/utils/opt_period_string_generator.h
+        include/antares/solver/utils/ortools_quadratic_wrapper.h
+        include/antares/solver/utils/ortools_utils.h
+        mps_utils.cpp
+        name_translator.cpp
+        named_problem.cpp
+        opt_period_string_generator.cpp
+        ortools_quadratic_wrapper.cpp
+        ortools_utils.cpp
 )
 
 add_library(utils ${SRC})

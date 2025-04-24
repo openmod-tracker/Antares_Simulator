@@ -25,6 +25,8 @@
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/solver/optimisation/opt_fonctions.h>
 
+#include "antares/solver/optimisation/opt_optimisation_hebdo.h"
+
 using namespace Yuni;
 using Antares::Constants::nbHoursInAWeek;
 
@@ -32,7 +34,7 @@ namespace Antares::Solver::Simulation
 {
 Adequacy::Adequacy(Data::Study& study,
                    IResultWriter& resultWriter,
-                   Simulation::ISimulationObserver& simulationObserver):
+                   ISimulationObserver& simulationObserver):
     study(study),
     resultWriter(resultWriter),
     simulationObserver_(simulationObserver)
@@ -205,9 +207,9 @@ bool Adequacy::year(Progression::Task& progression,
             try
             {
                 OPT_OptimisationHebdomadaire(study.parameters.optOptions,
-                                             &currentProblem,
-                                             resultWriter,
-                                             simulationObserver_.get());
+                                                           &currentProblem,
+                                                           resultWriter,
+                                                           simulationObserver_.get());
 
                 RemixHydroForAllAreas(study.areas,
                                       currentProblem,
