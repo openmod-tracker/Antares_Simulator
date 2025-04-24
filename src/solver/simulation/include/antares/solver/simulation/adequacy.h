@@ -60,7 +60,7 @@ public:
     //! Current study
     Data::Study& study;
     //! All variables
-    Solver::Variable::Adequacy::AllVariables variables;
+    Solver::Variable::Adequacy::AllVariables variables{};
     //! Prepro only
     bool preproOnly = false;
 
@@ -94,9 +94,9 @@ private:
                            uint numSpace,
                            const HYDRO_VENTILATION_RESULTS&) const;
 
-    uint pNbWeeks;
-    uint pStartTime;
-    uint pNbMaxPerformedYearsInParallel;
+    uint pNbWeeks{0};
+    uint pStartTime{0};
+    uint pNbMaxPerformedYearsInParallel{0};
     std::vector<PROBLEME_HEBDO> pProblemesHebdo;
     Matrix<> pRES;
     IResultWriter& resultWriter;

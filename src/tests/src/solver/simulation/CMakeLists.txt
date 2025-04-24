@@ -13,10 +13,7 @@ set(SRC_TS_NUMBERS
         ${src_solver_simulation}/include/antares/solver/simulation/ITimeSeriesNumbersWriter.h)
 
 add_boost_test(tests-ts-numbers
-        SRC tests-ts-numbers.cpp ${SRC_TS_NUMBERS}
-        INCLUDE
-        "${src_solver_simulation}"
-        "${src_libs_antares_study}"
+        SRC tests-ts-numbers.cpp
         LIBS
         Antares::utils
         model_antares

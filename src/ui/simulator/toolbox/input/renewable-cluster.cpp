@@ -28,11 +28,11 @@
 #include "../components/button.h"
 #include "../../windows/message.h"
 #include "../../application/menus.h"
-#include <antares/study/scenario-builder/updater.hxx>
 #include <wx/wupdlock.h>
 #include <wx/sizer.h>
 #include "renewable-cluster.h"
 #include "antares/study/ui-runtimeinfos.h"
+#include "update/include/ui/common/update/updater.h"
 
 using namespace Yuni;
 

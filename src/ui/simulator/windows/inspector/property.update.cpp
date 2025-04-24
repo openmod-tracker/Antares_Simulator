@@ -23,7 +23,6 @@
 #include <ui/common/lock.h>
 #include <yuni/core/math.h>
 #include <antares/study/filter.h>
-#include <antares/study/scenario-builder/updater.hxx>
 #include <antares/study/area/constants.h>
 #include <ui/common/lock.h>
 #include <wx/sizer.h>
@@ -34,22 +33,18 @@
 #include "../../toolbox/components/mainpanel.h"
 #include <yuni/core/math.h>
 #include <antares/study/filter.h>
-#include <antares/study/scenario-builder/updater.hxx>
 #include <antares/study/area/constants.h>
 #include <antares/solver/ts-generator/law.h>
 #include "../message.h"
 #include "../../application/main/internal-ids.h"
 #include "property.cluster.update.h"
+#include "update/include/ui/common/update/updater.h"
 
 using namespace Yuni;
 
 #include "accumulator.hxx"
 
-namespace Antares
-{
-namespace Window
-{
-namespace Inspector
+namespace Antares::Window::Inspector
 {
 bool InspectorGrid::onPropertyChanging_A(wxPGProperty*,
                                          const PropertyNameType& name,
@@ -1522,6 +1517,6 @@ void InspectorGrid::OnPropertyChanging(wxPropertyGridEvent& event)
     }
 }
 
-} // namespace Inspector
-} // namespace Window
-} // namespace Antares
+} // namespace Antares::Window::Inspector
+
+

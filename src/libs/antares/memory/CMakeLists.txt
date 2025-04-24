@@ -6,7 +6,8 @@ set(HEADERS
 )
 set(SRC_MEMORY
         ${HEADERS}
-        memory.cpp)
+        memory.cpp
+)
 source_group("memory" FILES ${SRC_MEMORY})
 
 add_library(${PROJ} ${SRC_MEMORY}) #Memory conflict with absl memory when building deps https://github.com/AntaresSimulatorTeam/Antares_Simulator/issues/1589

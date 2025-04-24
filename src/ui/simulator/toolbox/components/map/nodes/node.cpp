@@ -26,6 +26,7 @@
 #include "../../../../windows/inspector.h"
 #include <yuni/core/math.h>
 #include "antares/study/ui-runtimeinfos.h"
+#include "update/include/ui/common/update/UpdateStrategy.h"
 
 #define NODE_DRAW_COLOR_VARIATION_LIGHT 30
 #define NODE_DRAW_COLOR_VARIATION_DARK 15
@@ -70,7 +71,8 @@ void Node::createANewAreaIfNotAlreadyAttached()
         // Creating a new Area
         Data::AreaName sFl;
         wxStringToString(pCaption, sFl);
-        pAttachedArea = study->areaAdd(sFl, true);
+        UpdateStrategy strategy(*study);
+        pAttachedArea = study->areaAdd(sFl, &strategy);
         pCaption = wxStringFromUTF8(pAttachedArea->name);
         study->uiinfo->reload();
         MarkTheStudyAsModified();
@@ -370,7 +372,8 @@ void Node::captionHasChanged()
         // Renmamming of the area
         Data::AreaName newName;
         wxStringToString(pCaption, newName);
-        pManager.study()->areaRename(pAttachedArea, newName);
+        UpdateStrategy strategy(*pManager.study());
+        pManager.study()->areaRename(pAttachedArea, newName, &strategy);
         MarkTheStudyAsModified();
         GUIFlagInvalidateAreas = true;
     }

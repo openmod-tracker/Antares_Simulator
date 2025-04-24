@@ -127,16 +127,18 @@ set(SRC_HANDLER
 add_library(antares-action ${SRC_HANDLER})
 
 target_link_libraries(antares-action
-    PUBLIC
+        PUBLIC
         yuni-static-core
         Antares::result_writer #study.h
         Antares::date #parameters
         Antares::inifile #parameters
         Antares::study
+        PRIVATE
+        Antares::ui-update
 )
 
 target_include_directories(antares-action
-                PUBLIC
+        PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 

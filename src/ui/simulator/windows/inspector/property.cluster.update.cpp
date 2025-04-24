@@ -22,6 +22,8 @@
 #include <antares/study/area/constants.h>
 #include <ui/simulator/application/study.h>
 
+#include "update/include/ui/common/update/UpdateStrategy.h"
+
 using namespace Yuni;
 
 #include "accumulator.hxx"
@@ -48,7 +50,8 @@ bool ClusterUpdater::changeName(const wxVariant& value)
 
     Data::Cluster* cluster = *(clusters.begin());
     auto study = GetCurrentStudy();
-    if (!(!study) && study->clusterRename(cluster, name))
+    UpdateStrategy strategy(*study);
+    if (!(!study) && study->clusterRename(cluster, name, &strategy))
     {
         // Notify
         OnStudyClusterRenamed(cluster);

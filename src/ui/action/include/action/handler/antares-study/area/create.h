@@ -24,13 +24,7 @@
 #include <yuni/yuni.h>
 #include <action/action.h>
 
-namespace Antares
-{
-namespace Action
-{
-namespace AntaresStudy
-{
-namespace Area
+namespace Antares::Action::AntaresStudy::Area
 {
 class Create : public IAction
 {
@@ -80,10 +74,10 @@ private:
 
 }; // class IAction
 
-} // namespace Area
-} // namespace AntaresStudy
-} // namespace Action
-} // namespace Antares
+} // namespace Antares::Action::AntaresStudy::Area
+
+
+
 
 #include "create.hxx"
 

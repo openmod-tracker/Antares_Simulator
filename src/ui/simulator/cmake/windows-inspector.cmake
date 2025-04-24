@@ -34,5 +34,6 @@ target_link_libraries(antares-ui-windows-inspector
 		Antares::resources
 		Antares::locator
 		Antares::study
+		Antares::ui-update
 )
 

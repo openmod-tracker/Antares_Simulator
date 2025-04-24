@@ -54,6 +54,7 @@ void initializeStudy(Study& study)
 class PublicStudy: public Study
 {
 public:
+
     bool internalLoadBindingConstraints(const StudyLoadOptions& options) override
     {
         return Study::internalLoadBindingConstraints(options);

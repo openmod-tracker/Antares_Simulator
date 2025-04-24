@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(area_add)
 
 BOOST_FIXTURE_TEST_CASE(area_rename, OneAreaStudy)
 {
-    BOOST_CHECK(study->areaRename(areaA, "B"));
+    BOOST_CHECK(study->areaRename(areaA, "B", nullptr));
     BOOST_CHECK(areaA->name == "B");
     BOOST_CHECK(areaA->id == "b");
 }
@@ -65,7 +65,7 @@ BOOST_FIXTURE_TEST_CASE(area_rename, OneAreaStudy)
 BOOST_FIXTURE_TEST_CASE(area_delete, OneAreaStudy)
 {
     BOOST_CHECK_EQUAL(study->areas.size(), 1);
-    BOOST_CHECK(study->areaDelete(areaA));
+    BOOST_CHECK(study->areaDelete(areaA, nullptr));
     BOOST_CHECK(study->areas.empty());
 }
 
@@ -185,7 +185,7 @@ struct ThermalClusterStudy: public OneAreaStudy
 
 BOOST_FIXTURE_TEST_CASE(thermal_cluster_rename, ThermalClusterStudy)
 {
-    BOOST_CHECK(study->clusterRename(cluster, "Renamed"));
+    BOOST_CHECK(study->clusterRename(cluster, "Renamed", nullptr));
     BOOST_CHECK_EQUAL(cluster->name(), "Renamed");
     BOOST_CHECK_EQUAL(cluster->id(), "renamed");
 }
@@ -268,7 +268,7 @@ struct RenewableClusterStudy: public OneAreaStudy
 
 BOOST_FIXTURE_TEST_CASE(renewable_cluster_rename, RenewableClusterStudy)
 {
-    BOOST_CHECK(study->clusterRename(cluster, "Renamed"));
+    BOOST_CHECK(study->clusterRename(cluster, "Renamed", nullptr));
     BOOST_CHECK(cluster->name() == "Renamed");
     BOOST_CHECK(cluster->id() == "renamed");
 }

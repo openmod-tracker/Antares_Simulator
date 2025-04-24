@@ -1,6 +1,6 @@
 OMESSAGE("Antares UI Framework")
 
-
+add_subdirectory(update)
 # UI Dispatcher
 set(SRC_COMMON_DISPATCHER
 		dispatcher.h

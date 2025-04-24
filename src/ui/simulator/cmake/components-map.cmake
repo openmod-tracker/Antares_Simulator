@@ -59,4 +59,5 @@ target_link_libraries(antares-ui-component-map PRIVATE
 		antares-ui-components
 		Antares::resources
 		Antares::locator
+		Antares::ui-update
 )

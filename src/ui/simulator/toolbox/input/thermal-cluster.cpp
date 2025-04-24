@@ -28,11 +28,11 @@
 #include "../components/button.h"
 #include "../../windows/message.h"
 #include "../../application/menus.h"
-#include <antares/study/scenario-builder/updater.hxx>
 #include <wx/wupdlock.h>
 #include <wx/sizer.h>
 #include "thermal-cluster.h"
 #include "antares/study/ui-runtimeinfos.h"
+#include "update/include/ui/common/update/UpdateStrategy.h"
 
 using namespace Yuni;
 
@@ -219,7 +219,8 @@ void ThermalCluster::renameAggregate(Antares::Data::ThermalCluster* cluster,
         ClusterName newPlantName;
         wxStringToString(newName, newPlantName);
 
-        GetCurrentStudy()->clusterRename(cluster, newPlantName);
+        UpdateStrategy strategy(*GetCurrentStudy());
+        GetCurrentStudy()->clusterRename(cluster, newPlantName, &strategy);
         MarkTheStudyAsModified();
     }
     if (broadcast)

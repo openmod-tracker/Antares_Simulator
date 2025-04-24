@@ -30,6 +30,7 @@
 #include "../../../windows/inspector.h"
 #include "../../clipboard/clipboard.h"
 #include "antares/study/ui-runtimeinfos.h"
+#include "update/include/ui/common/update/UpdateStrategy.h"
 
 using namespace Yuni;
 
@@ -1199,7 +1200,8 @@ void Manager::deleteAllPendingData()
     {
         if (study())
         {
-            study()->areaDelete(pAreasToDelete);
+            UpdateStrategy strategy(*study());
+            study()->areaDelete(pAreasToDelete, &strategy);
             OnStudyAreasChanged();
         }
         pAreasToDelete.clear();

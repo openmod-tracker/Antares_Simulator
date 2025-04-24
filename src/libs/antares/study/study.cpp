@@ -39,10 +39,8 @@
 #include <antares/writer/writer_factory.h>
 #include "antares/antares/antares.h"
 #include "antares/study/area/constants.h"
-#include "antares/study/correlation-updater.hxx"
 #include "antares/study/runtime.h"
 #include "antares/study/scenario-builder/sets.h"
-#include "antares/study/scenario-builder/updater.hxx"
 #include "antares/study/ui-runtimeinfos.h"
 #include "antares/utils/utils.h"
 
@@ -515,7 +513,7 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
 
     // Write the header as a reminder
     {
-        path.clear() << "about-the-study" << SEP << "study.ini";
+        path.clear() << "about-the-study" << fs::path::preferred_separator << "study.ini";
         Antares::IniFile ini;
         header.CopySettingsToIni(ini, false);
 
@@ -526,9 +524,9 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
     // Write parameters.ini
     {
         String dest;
-        dest << "about-the-study" << SEP << "parameters.ini";
+        dest << "about-the-study" << fs::path::preferred_separator << "parameters.ini";
 
-        buffer.clear() << folderSettings << SEP << "generaldata.ini";
+        buffer.clear() << folderSettings << fs::path::preferred_separator << "generaldata.ini";
         resultWriter.addEntryFromFile(dest.c_str(), buffer.c_str());
     }
 
@@ -553,7 +551,7 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
         // Write all available areas as a reminder
         {
             Yuni::Clob buffer;
-            path.clear() << "about-the-study" << SEP << "areas.txt";
+            path.clear() << "about-the-study" << fs::path::preferred_separator << "areas.txt";
             for (auto i = setsOfAreas.begin(); i != setsOfAreas.end(); ++i)
             {
                 if (setsOfAreas.hasOutput(i->first))
@@ -567,7 +565,7 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
 
         // Write all available links as a reminder
         {
-            path.clear() << "about-the-study" << SEP << "links.txt";
+            path.clear() << "about-the-study" << fs::path::preferred_separator << "links.txt";
             Yuni::Clob buffer;
             areas.saveLinkListToBuffer(buffer);
             resultWriter.addEntryFromBuffer(path.c_str(), buffer);
@@ -575,7 +573,7 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
     }
 }
 
-Area* Study::areaAdd(const AreaName& name, bool updateMode)
+Area* Study::areaAdd(const AreaName& name, IUpdateStrategy* strategy)
 {
     if (name.empty())
     {
@@ -595,16 +593,10 @@ Area* Study::areaAdd(const AreaName& name, bool updateMode)
     // and the scenario builder data
     {
         // These are only useful for the GUI, remove afterwards
-        // We need the constructors to be called here, and the destructors
-        // to be called at the end of the scope. Using std::optional is merely
-        // a means to that end.
-        std::optional<CorrelationUpdater> updater;
-        std::optional<ScenarioBuilderUpdater> updaterSB;
-        if (updateMode)
-        {
-            updater.emplace(*this);
-            updaterSB.emplace(*this);
+        if (strategy) {
+            strategy->begin();
         }
+
         // Adding an area
         AreaName newName;
         if (not modifyAreaNameIfAlreadyTaken(newName, name) or newName.empty())
@@ -626,6 +618,9 @@ Area* Study::areaAdd(const AreaName& name, bool updateMode)
         // Default values for the area
         area->createMissingData();
         area->resetToDefaultValues();
+        if (strategy) {
+            strategy->end();
+        }
     }
 
     if (uiinfo)
@@ -636,7 +631,7 @@ Area* Study::areaAdd(const AreaName& name, bool updateMode)
 }
 
 // TODO VP: delete with GUI
-bool Study::areaDelete(Area* area)
+bool Study::areaDelete(Area* area, IUpdateStrategy* strategy)
 {
     if (not area)
     {
@@ -661,8 +656,9 @@ bool Study::areaDelete(Area* area)
         // area must be gone.
         scenarioRulesLoadIfNotAvailable();
 
-        CorrelationUpdater updater(*this);
-        ScenarioBuilderUpdater updaterSB(*this);
+        if (strategy) {
+            strategy->begin();
+        }
 
         // Remove a single area
         // Remove all binding constraints attached to the area
@@ -674,6 +670,9 @@ bool Study::areaDelete(Area* area)
         areas.rebuildIndexes();
 
         // delete updates here
+        if (strategy) {
+            strategy->end();
+        }
     }
 
     if (uiinfo)
@@ -684,7 +683,7 @@ bool Study::areaDelete(Area* area)
 }
 
 // TODO VP: delete with GUI
-void Study::areaDelete(Area::Vector& arealist)
+void Study::areaDelete(Area::Vector& arealist, IUpdateStrategy* strategy)
 {
     if (arealist.empty())
     {
@@ -704,8 +703,9 @@ void Study::areaDelete(Area::Vector& arealist)
         // area must be gone.
         scenarioRulesLoadIfNotAvailable();
 
-        CorrelationUpdater updater(*this);
-        ScenarioBuilderUpdater updaterSB(*this);
+        if (strategy) {
+            strategy->begin();
+        }
 
         // Remove all areas
         {
@@ -732,6 +732,9 @@ void Study::areaDelete(Area::Vector& arealist)
 
             // Rebuild indexes for all areas
             areas.rebuildIndexes();
+        }
+        if (strategy) {
+            strategy->end();
         }
     }
 
@@ -773,7 +776,7 @@ bool Study::linkDelete(AreaLink* lnk)
 }
 
 // TODO VP: delete with GUI
-bool Study::areaRename(Area* area, AreaName newName)
+bool Study::areaRename(Area* area, AreaName newName, IUpdateStrategy* strategy)
 {
     // A name must not be empty
     if (not area or newName.empty())
@@ -826,12 +829,16 @@ bool Study::areaRename(Area* area, AreaName newName)
     areas.each([&oldid, &newid](Data::Area& areait)
                { areait.hydro.allocation.rename(oldid, newid); });
 
-    ScenarioBuilderUpdater updaterSB(*this);
+    if (strategy) {
+        strategy->SBPartBegin();
+    }
     bool ret = true;
 
     // Archiving data
     {
-        CorrelationUpdater updater(*this);
+        if (strategy) {
+            strategy->CorrelationPartBegin();
+        }
 
         // Restoring the old ID
         area->id = oldid;
@@ -842,6 +849,9 @@ bool Study::areaRename(Area* area, AreaName newName)
         areas.rebuildIndexes();
 
         // reloading correlation and scenario builder
+        if (strategy) {
+            strategy->CorrelationPartEnd();
+        }
     }
 
     // ReAdjust all interconnections
@@ -852,11 +862,14 @@ bool Study::areaRename(Area* area, AreaName newName)
         uiinfo->reloadAll();
     }
 
+    if (strategy) {
+        strategy->SBPartEnd();
+    }
     return ret;
 }
 
 // TODO VP: delete with GUI
-bool Study::clusterRename(Cluster* cluster, ClusterName newName)
+bool Study::clusterRename(Cluster* cluster, ClusterName newName, IUpdateStrategy* strategy)
 {
     // A name must not be empty
     if (!cluster or newName.empty())
@@ -946,13 +959,18 @@ bool Study::clusterRename(Cluster* cluster, ClusterName newName)
         break;
     }
 
-    ScenarioBuilderUpdater updaterSB(*this);
+    if (strategy) {
+        strategy->SBPartBegin();
+    }
 
     if (uiinfo)
     {
         uiinfo->reloadAll();
     }
 
+    if (strategy) {
+        strategy->SBPartEnd();
+    }
     return ret;
 }
 
@@ -1236,7 +1254,7 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
           });
 
         String filename;
-        filename << studyfolder << SEP << "output" << SEP;
+        filename << studyfolder << fs::path::preferred_separator << "output" << fs::path::preferred_separator;
 
         if (linkname.empty())
         {
@@ -1249,9 +1267,9 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 // no links : obtained from areas
                 // The maximum filename should be obtained with links :
                 // Adequacy/mc-all/areas/languedocroussillon/without-network-hourly.txt
-                filename << (parameters.economy() ? "economy" : "adequacy") << SEP;
-                filename << "mc-all" << SEP << "areas";
-                filename << SEP << areaname << SEP;
+                filename << (parameters.economy() ? "economy" : "adequacy") << fs::path::preferred_separator;
+                filename << "mc-all" << fs::path::preferred_separator << "areas";
+                filename << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
                 filename << "values-hourly.txt";
             }
         }
@@ -1259,9 +1277,9 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         {
             // The maximum filename should be obtained with links :
             // economy/mc-ind/00001/links/pyrennees\ -\ languedocroussillon/values-hourly.txt
-            filename << (parameters.adequacy() ? "adequacy" : "economy") << SEP;
-            filename << "mc-all" << SEP << "links";
-            filename << SEP << linkname << SEP << "values-hourly.txt";
+            filename << (parameters.adequacy() ? "adequacy" : "economy") << fs::path::preferred_separator;
+            filename << "mc-all" << fs::path::preferred_separator << "links";
+            filename << fs::path::preferred_separator << linkname << fs::path::preferred_separator << "values-hourly.txt";
         }
 
         if (not filename.empty() and filename.size() >= limit)
@@ -1309,9 +1327,9 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         if (not areaname.empty() and not clustername.empty())
         {
             filename.clear();
-            filename << studyfolder << SEP << "input" << SEP;
-            filename << "thermal" << SEP << "series" << SEP << areaname << SEP;
-            filename << clustername << SEP << "series.txt";
+            filename << studyfolder << fs::path::preferred_separator << "input" << fs::path::preferred_separator;
+            filename << "thermal" << fs::path::preferred_separator << "series" << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
+            filename << clustername << fs::path::preferred_separator << "series.txt";
 
             if (filename.size() >= limit)
             {
@@ -1329,8 +1347,8 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         if (not areaname.empty())
         {
             filename.clear();
-            filename << studyfolder << "input" << SEP;
-            filename << "hydro" << SEP << "common" << SEP << "capacity" << SEP;
+            filename << studyfolder << "input" << fs::path::preferred_separator;
+            filename << "hydro" << fs::path::preferred_separator << "common" << fs::path::preferred_separator << "capacity" << fs::path::preferred_separator;
             areaname << "maxcapacityexpectation_" << areaname << ".txt";
 
             if (filename.size() >= limit)
@@ -1346,8 +1364,8 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         // Checking constraints
         filename.clear();
         // /input/bindingconstraints/bindingconstraints.ini
-        filename << studyfolder << "input" << SEP;
-        filename << "bindingconstraints" << SEP << "bindingconstraints.ini";
+        filename << studyfolder << "input" << fs::path::preferred_separator;
+        filename << "bindingconstraints" << fs::path::preferred_separator << "bindingconstraints.ini";
         if (filename.size() >= limit)
         {
             logs.error()
@@ -1368,7 +1386,7 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 auto& constraint = *(*i);
 
                 filename.clear();
-                filename << studyfolder << "input" << SEP << "bindingconstraints" << SEP;
+                filename << studyfolder << "input" << fs::path::preferred_separator << "bindingconstraints" << fs::path::preferred_separator;
                 filename << constraint.id() << ".ini";
 
                 if (filename.size() >= limit)

@@ -52,6 +52,7 @@
 #include "sets.h"
 #include "simulation.h"
 #include "version.h"
+#include "antares/study/IUpdateStrategy.h"
 
 namespace Antares::Data
 {
@@ -221,7 +222,7 @@ public:
     */
     // TODO no need for the 2nd argument, remove it after the GUI has been removed, keeping the
     // default value
-    Area* areaAdd(const AreaName& name, bool update = false);
+    Area* areaAdd(const AreaName& name, IUpdateStrategy* strategy = nullptr);
 
     /*!
     ** \brief Rename an area
@@ -230,7 +231,7 @@ public:
     ** \return True if the operation succeeded, false otherwise
     ** \see BeautifyName()
     */
-    bool areaRename(Area* area, AreaName newName);
+    bool areaRename(Area* area, AreaName newName, IUpdateStrategy* strategy);
 
     /*!
     ** \brief Delete an area _and_ all its dependancies
@@ -239,7 +240,7 @@ public:
     ** \param area The area. The pointer will no longer be valid after the call to this routine
     ** \return True if the operation succeeded, false otherwise
     */
-    bool areaDelete(Area* area);
+    bool areaDelete(Area* area, IUpdateStrategy* strategy);
 
     /*!
     ** \brief Delete an area and all its dependencies
@@ -250,7 +251,7 @@ public:
     ** \param area The area. The pointer will no longer be valid after the call to this routine
     ** \return True if the operation succeeded, false otherwise
     */
-    void areaDelete(Area::Vector& area);
+    void areaDelete(Area::Vector& area, IUpdateStrategy* strategy);
     //@}
 
     //! \name Links
@@ -274,7 +275,7 @@ public:
     ** \param cluster The cluster
     ** \return True if the operation succeeded, false otherwise
     */
-    bool clusterRename(Cluster* cluster, ClusterName newName);
+    bool clusterRename(Cluster* cluster, ClusterName newName, IUpdateStrategy* strategy);
     //@}
 
     //! \name Read-only

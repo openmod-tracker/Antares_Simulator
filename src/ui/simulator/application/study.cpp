@@ -53,6 +53,8 @@
 
 #include <atomic>
 
+#include "update/include/ui/common/update/UpdateStrategy.h"
+
 using namespace Yuni;
 
 #define SEP IO::Separator
@@ -1305,7 +1307,8 @@ bool StudyRenameArea(Data::Area* area, const AnyString& newname, Data::Study* st
     {
         wxBusyInfo wait(wxT("renaming area..."));
         OnStudyBeginUpdate();
-        if (study->areaRename(area, newname))
+        UpdateStrategy strategy(*study);
+        if (study->areaRename(area, newname, &strategy))
         {
             auto& mainFrm = *Antares::Forms::ApplWnd::Instance();
             auto& map = *mainFrm.map();
@@ -1333,7 +1336,8 @@ bool StudyRenameArea(Data::Area* area, const AnyString& newname, Data::Study* st
     }
     else
     {
-        if (study->areaRename(area, newname))
+        UpdateStrategy strategy(*study);
+        if (study->areaRename(area, newname, &strategy))
             return true;
     }
     return false;
