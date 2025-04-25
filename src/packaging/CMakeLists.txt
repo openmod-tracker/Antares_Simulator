@@ -24,7 +24,7 @@ set(TARGET_LIBS #No alias
         inifile
         stdcxx
         StudyUtils
-        utils
+        antares_utils
         correlation
         path
         mersenne
