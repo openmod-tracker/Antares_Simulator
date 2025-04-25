@@ -260,7 +260,38 @@ void handleInteriorPointError([[maybe_unused]] PROBLEME_ANTARES_A_RESOUDRE& Prob
 #endif
 }
 
-bool Solve(const SingleOptimOptions& options, PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre);
+namespace {
+    // TODO : there are 2 SolveWithSirius(...) solving a quadratic problem by interior point.
+    // TODO : we should try to avoid code duplications.
+    bool SolveWithSirius(const SingleOptimOptions& options,
+                         PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+    {
+        if (!options.solverParameters.empty())
+        {
+            logs.warning()
+              << "Quadratic solver parameters are not supported by SIRIUS; they will be ignored.";
+        }
+        auto interiorPointProblem = buildInteriorPointProblem(ProblemeAResoudre);
+        PI_Quamin(interiorPointProblem.get()); // resolution
+        return interiorPointProblem->ExistenceDUneSolution == OUI_PI;
+    }
+
+    bool SolveWithOrtools(const SingleOptimOptions& options,
+                          PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+    {
+        Solver::Utils::SolveQuadraticProblemWithOrtools(options, &ProblemeAResoudre);
+        return ProblemeAResoudre.ExistenceDUneSolution == OUI_PI;
+    }
+
+    bool Solve(const SingleOptimOptions& options, PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+    {
+        if (options.solverName == "sirius")
+        {
+            return SolveWithSirius(options, ProblemeAResoudre);
+        }
+        return SolveWithOrtools(options, ProblemeAResoudre);
+    }
+}
 
 bool ADQ_PATCH_CSR(const SingleOptimOptions& options,
                    PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre,
@@ -270,8 +301,7 @@ bool ADQ_PATCH_CSR(const SingleOptimOptions& options,
                    int yearNb)
 {
     double costPriorToCsr = calculateCSRcost(ProblemeAResoudre, hourlyCsrProblem, adqPatchParams);
-    bool feasible = Solve(options, ProblemeAResoudre);
-    if (feasible)
+    if (Solve(options, ProblemeAResoudre))
     {
         setToZeroIfBelowThreshold(ProblemeAResoudre, hourlyCsrProblem);
         double costAfterCsr = calculateCSRcost(ProblemeAResoudre, hourlyCsrProblem, adqPatchParams);
@@ -289,35 +319,4 @@ bool ADQ_PATCH_CSR(const SingleOptimOptions& options,
         handleInteriorPointError(ProblemeAResoudre, hourlyCsrProblem.triggeredHour, weekNb, yearNb);
         return false;
     }
-}
-
-// TODO : there are 2 SolveWithSirius(...) solving a quadratic problem by interior point.
-// TODO : we should try to avoid code duplications.
-bool SolveWithSirius(const SingleOptimOptions& options,
-                     PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
-{
-    if (!options.solverParameters.empty())
-    {
-        logs.warning()
-          << "Quadratic solver parameters are not supported by SIRIUS; they will be ignored.";
-    }
-    auto interiorPointProblem = buildInteriorPointProblem(ProblemeAResoudre);
-    PI_Quamin(interiorPointProblem.get()); // resolution
-    return interiorPointProblem->ExistenceDUneSolution == OUI_PI;
-}
-
-bool SolveWithOrtools(const SingleOptimOptions& options,
-                      PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
-{
-    SolveQuadraticProblemWithOrtools(options, &ProblemeAResoudre);
-    return ProblemeAResoudre.ExistenceDUneSolution == OUI_PI;
-}
-
-bool Solve(const SingleOptimOptions& options, PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
-{
-    if (options.solverName.compare("sirius") == 0)
-    {
-        return SolveWithSirius(options, ProblemeAResoudre);
-    }
-    return SolveWithOrtools(options, ProblemeAResoudre);
 }

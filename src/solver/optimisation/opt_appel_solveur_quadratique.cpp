@@ -182,13 +182,13 @@ bool OPT_AppelDuSolveurQuadratique(const Solver::Optimization::SingleOptimOption
 {
     // as long as sirius quadratic optimization is not supported through or-tools, we have to keep
     // this code separate
-    if (options.solverName.compare("sirius") == 0)
+    if (options.solverName == "sirius")
     {
         SolveWithSirius(options, ProblemeAResoudre);
     }
     else
     {
-        SolveQuadraticProblemWithOrtools(options, ProblemeAResoudre);
+        Solver::Utils::SolveQuadraticProblemWithOrtools(options, ProblemeAResoudre);
     }
     ProcessResult(ProblemeAResoudre);
     return ProblemeAResoudre->ExistenceDUneSolution == OUI_PI;
