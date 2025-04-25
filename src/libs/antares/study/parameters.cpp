@@ -384,7 +384,7 @@ void Parameters::reset()
     // Initialize all seeds
     resetSeeds();
 
-    optOptions = Antares::Solver::Optimization::OptimizationOptions();
+    optOptions = OptimizationOptions::OptimizationOptions();
 }
 
 bool Parameters::isTSGeneratedByPrepro(const TimeSeriesType ts) const

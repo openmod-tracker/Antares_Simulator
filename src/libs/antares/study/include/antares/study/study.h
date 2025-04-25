@@ -38,6 +38,7 @@
 #include <antares/writer/i_writer.h>
 #include "antares/antares/antares.h"
 #include "antares/solver/modeler/loadFiles/data.h"
+#include "antares/study/IUpdateStrategy.h"
 #include "antares/study/binding_constraint/BindingConstraintGroupRepository.h"
 #include "antares/study/binding_constraint/BindingConstraintsRepository.h"
 
@@ -52,7 +53,6 @@
 #include "sets.h"
 #include "simulation.h"
 #include "version.h"
-#include "antares/study/IUpdateStrategy.h"
 
 namespace Antares::Data
 {

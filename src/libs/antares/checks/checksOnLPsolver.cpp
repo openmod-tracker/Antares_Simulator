@@ -2,15 +2,13 @@
 
 #include <antares/exception/LoadingError.hpp>
 #include <antares/logs/logs.h>
-#include "antares/solver/utils/ortools_utils.h"
+#include "../../../solver/utils/include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares;
-using namespace Antares::Solver::Optimization;
-
 namespace Antares::Check
 {
-static void checkSolverExists(const std::string solverName,
-                              const std::list<std::string> availableSolversList)
+static void checkSolverExists(const std::string &solverName,
+                              const std::list<std::string> &availableSolversList)
 {
     bool found = std::ranges::find(availableSolversList, solverName) != availableSolversList.end();
     if (!found)
@@ -19,13 +17,13 @@ static void checkSolverExists(const std::string solverName,
     }
 }
 
-static void checkForSolversExistence(const CmdLineOptimOptions& solverOptions)
+static void checkForSolversExistence(const OptimizationOptions::CmdLineOptimOptions& solverOptions)
 {
     checkSolverExists(solverOptions.linearSolver, availableLinearSolversList());
     checkSolverExists(solverOptions.quadraticSolver, availableQuadraticSolversList());
 }
 
-static void checkSolverMILPoptionsConsistency(const CmdLineOptimOptions& solverOptions)
+static void checkSolverMILPoptionsConsistency(const OptimizationOptions::CmdLineOptimOptions& solverOptions)
 {
     if (solverOptions.linearSolver == "sirius")
     {
@@ -40,7 +38,7 @@ static void checkSolverMILPoptionsConsistency(const CmdLineOptimOptions& solverO
     }
 }
 
-static void checkForSolverOptionsConsistency(const CmdLineOptimOptions& solverOptions)
+static void checkForSolverOptionsConsistency(const OptimizationOptions::CmdLineOptimOptions& solverOptions)
 {
     bool UserSuppliedParamsBothOptims = !solverOptions.linearSolverParameters.empty();
     bool UserSuppliedParamsOptim1 = !solverOptions.lpSolverParamOptim1.empty();
@@ -52,7 +50,7 @@ static void checkForSolverOptionsConsistency(const CmdLineOptimOptions& solverOp
     }
 }
 
-void checkSolverOptions(const CmdLineOptimOptions& solverOptions, bool milpRequired)
+void checkSolverOptions(const OptimizationOptions::CmdLineOptimOptions& solverOptions, bool milpRequired)
 {
     checkForSolversExistence(solverOptions);
     checkForSolverOptionsConsistency(solverOptions);

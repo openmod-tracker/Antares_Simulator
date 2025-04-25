@@ -31,7 +31,6 @@
 #include "antares/solver/utils/filename.h"
 
 using namespace Antares::Solver;
-using Antares::Solver::Optimization::OptimizationOptions;
 
 std::once_flag export_once;
 
@@ -116,7 +115,7 @@ void notifyProblemHebdo(const PROBLEME_HEBDO* problemeHebdo,
 }
 } // namespace
 
-bool runWeeklyOptimization(const SingleOptimOptions& options,
+bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& options,
                            PROBLEME_HEBDO* problemeHebdo,
                            Solver::IResultWriter& writer,
                            int optimizationNumber,
@@ -231,7 +230,7 @@ void resizeProbleme(PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre,
 }
 } // namespace
 
-bool OPT_OptimisationLineaire(const OptimizationOptions& options,
+bool OPT_OptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                               PROBLEME_HEBDO* problemeHebdo,
                               Solver::IResultWriter& writer,
                               Solver::Simulation::ISimulationObserver& simulationObserver)

@@ -24,7 +24,6 @@
 #include <antares/exception/AssertionError.hpp>
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/solver/optimisation/opt_fonctions.h>
-
 #include "antares/solver/optimisation/opt_optimisation_hebdo.h"
 
 using namespace Yuni;
@@ -206,7 +205,7 @@ bool Adequacy::year(Progression::Task& progression,
 
             try
             {
-                OPT_OptimisationHebdomadaire(study.parameters.optOptions,
+                Optimization::OPT_OptimisationHebdomadaire(study.parameters.optOptions,
                                                            &currentProblem,
                                                            resultWriter,
                                                            simulationObserver_.get());

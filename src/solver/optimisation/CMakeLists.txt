@@ -136,6 +136,8 @@ set(RTESOLVER_OPT
         include/antares/solver/optimisation/optim_post_process_list.h
         include/antares/solver/optimisation/post_process_commands.h
         include/antares/solver/optimisation/weekly_optimization.h
+        include/antares/solver/optimisation/ortools_simplexe.h
+        include/antares/solver/optimisation/ortools_quadratic_wrapper.h
         opt_alloc_probleme_a_optimiser.cpp
         opt_appel_solveur_lineaire.cpp
         opt_appel_solveur_quadratique.cpp
@@ -173,6 +175,8 @@ set(RTESOLVER_OPT
         opt_restaurer_les_donnees.cpp
         opt_verification_presence_reserve_jmoins1.cpp
         optim_post_process_list.cpp
+        ortools_simplexe.cpp
+        ortools_quadratic_wrapper.cpp
         post_process_commands.cpp
         variables/VariableManagement.cpp
         variables/VariableManagement.h

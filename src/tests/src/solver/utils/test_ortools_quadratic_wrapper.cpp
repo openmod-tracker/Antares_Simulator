@@ -26,7 +26,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <antares/solver/utils/ortools_quadratic_wrapper.h>
+#include <../../../../solver/optimisation/include/antares/solver/optimisation/ortools_quadratic_wrapper.h>
 
 #include "spx_constantes_externes.h"
 static double tolerance = 1e-5;
@@ -49,7 +49,7 @@ struct QpFixture
     std::vector<double> primals;
     std::vector<double> duals;
     std::vector<double> reducedCosts;
-    Antares::Solver::Optimization::SingleOptimOptions options;
+    Antares::OptimizationOptions::SingleOptimOptions options;
 
     void solve()
     {
@@ -70,7 +70,7 @@ struct QpFixture
         {
             problemeAResoudre.AdresseOuPlacerLaValeurDesCoutsMarginaux.emplace_back(&duals[i]);
         }
-        SolveQuadraticProblemWithOrtools(options, &problemeAResoudre);
+        Antares::Optimization::SolveQuadraticProblemWithOrtools(options, &problemeAResoudre);
     }
 
     void addVar(const std::string& name, double lb, double ub, double linObj, double quadObj)

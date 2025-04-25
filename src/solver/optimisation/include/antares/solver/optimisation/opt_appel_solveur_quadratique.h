@@ -20,14 +20,14 @@
  */
 #pragma once
 
-#include <antares/optimization-options/options.h>
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
+struct PROBLEME_ANTARES_A_RESOUDRE;
 
 void OPT_ConstruireLaListeDesVariablesOptimiseesDuProblemeQuadratique(PROBLEME_HEBDO*);
 void OPT_InitialiserLesBornesDesVariablesDuProblemeQuadratique(PROBLEME_HEBDO*, int);
 void OPT_InitialiserLeSecondMembreDuProblemeQuadratique(PROBLEME_HEBDO*, int);
 void OPT_InitialiserLesCoutsQuadratiques(PROBLEME_HEBDO*, int);
-bool OPT_AppelDuSolveurQuadratique(const Solver::Optimization::SingleOptimOptions& options,
+bool OPT_AppelDuSolveurQuadratique(const Antares::OptimizationOptions::SingleOptimOptions& options,
                                    PROBLEME_ANTARES_A_RESOUDRE*);
-bool OPT_PilotageOptimisationQuadratique(const Solver::Optimization::SingleOptimOptions& options,
-                                         PROBLEME_HEBDO*);
+bool OPT_PilotageOptimisationQuadratique(
+  const Antares::OptimizationOptions::SingleOptimOptions& options,
+  PROBLEME_HEBDO*);

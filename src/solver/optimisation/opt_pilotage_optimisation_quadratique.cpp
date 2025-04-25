@@ -23,7 +23,7 @@
 #include "antares/solver/optimisation/constraints/constraint_builder_utils.h"
 #include "antares/solver/optimisation/opt_appel_solveur_quadratique.h"
 
-bool OPT_PilotageOptimisationQuadratique(const SingleOptimOptions& options,
+bool OPT_PilotageOptimisationQuadratique(const OptimizationOptions::SingleOptimOptions& options,
                                          PROBLEME_HEBDO* problemeHebdo)
 {
     if (!problemeHebdo->LeProblemeADejaEteInstancie)

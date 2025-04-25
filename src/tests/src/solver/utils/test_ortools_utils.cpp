@@ -24,9 +24,10 @@
 #include <boost/test/data/test_case.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "antares/solver/utils/ortools_utils.h"
+#include "../../../../solver/utils/include/antares/solver/utils/ortools_utils.h"
 
 namespace bdata = boost::unit_test::data;
+using namespace operations_research;
 using SolverType = MPSolver::OptimizationProblemType;
 
 struct SolverTestData

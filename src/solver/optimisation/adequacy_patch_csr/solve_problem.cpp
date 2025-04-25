@@ -31,7 +31,7 @@
 */
 #include <setjmp.h>
 
-#include "antares/solver/utils/ortools_quadratic_wrapper.h"
+#include "../include/antares/solver/optimisation/ortools_quadratic_wrapper.h"
 
 extern "C"
 {
@@ -117,7 +117,7 @@ void storeInteriorPointResults(const PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResou
 
 void storeOrDisregardInteriorPointResults(const PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre,
                                           const HourlyCSRProblem& hourlyCsrProblem,
-                                          const AdqPatchParams& adqPatchParams,
+                                          const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
                                           uint weekNb,
                                           int yearNb,
                                           double costPriorToCsr,
@@ -149,7 +149,7 @@ void storeOrDisregardInteriorPointResults(const PROBLEME_ANTARES_A_RESOUDRE& Pro
 
 double calculateCSRcost(const PROBLEME_ANTARES_A_RESOUDRE& Probleme,
                         const HourlyCSRProblem& hourlyCsrProblem,
-                        const AdqPatchParams& adqPatchParams)
+                        const Data::AdequacyPatch::AdqPatchParams& adqPatchParams)
 {
     logs.debug() << "calculate CSR cost : ";
     double cost = 0.0;
@@ -260,43 +260,45 @@ void handleInteriorPointError([[maybe_unused]] PROBLEME_ANTARES_A_RESOUDRE& Prob
 #endif
 }
 
-namespace {
-    // TODO : there are 2 SolveWithSirius(...) solving a quadratic problem by interior point.
-    // TODO : we should try to avoid code duplications.
-    bool SolveWithSirius(const SingleOptimOptions& options,
-                         PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+namespace
+{
+// TODO : there are 2 SolveWithSirius(...) solving a quadratic problem by interior point.
+// TODO : we should try to avoid code duplications.
+bool SolveWithSirius(const OptimizationOptions::SingleOptimOptions& options,
+                     PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+{
+    if (!options.solverParameters.empty())
     {
-        if (!options.solverParameters.empty())
-        {
-            logs.warning()
-              << "Quadratic solver parameters are not supported by SIRIUS; they will be ignored.";
-        }
-        auto interiorPointProblem = buildInteriorPointProblem(ProblemeAResoudre);
-        PI_Quamin(interiorPointProblem.get()); // resolution
-        return interiorPointProblem->ExistenceDUneSolution == OUI_PI;
+        logs.warning()
+          << "Quadratic solver parameters are not supported by SIRIUS; they will be ignored.";
     }
-
-    bool SolveWithOrtools(const SingleOptimOptions& options,
-                          PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
-    {
-        Solver::Utils::SolveQuadraticProblemWithOrtools(options, &ProblemeAResoudre);
-        return ProblemeAResoudre.ExistenceDUneSolution == OUI_PI;
-    }
-
-    bool Solve(const SingleOptimOptions& options, PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
-    {
-        if (options.solverName == "sirius")
-        {
-            return SolveWithSirius(options, ProblemeAResoudre);
-        }
-        return SolveWithOrtools(options, ProblemeAResoudre);
-    }
+    auto interiorPointProblem = buildInteriorPointProblem(ProblemeAResoudre);
+    PI_Quamin(interiorPointProblem.get()); // resolution
+    return interiorPointProblem->ExistenceDUneSolution == OUI_PI;
 }
 
-bool ADQ_PATCH_CSR(const SingleOptimOptions& options,
+bool SolveWithOrtools(const OptimizationOptions::SingleOptimOptions& options,
+                      PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+{
+    Optimization::SolveQuadraticProblemWithOrtools(options, &ProblemeAResoudre);
+    return ProblemeAResoudre.ExistenceDUneSolution == OUI_PI;
+}
+
+bool Solve(const OptimizationOptions::SingleOptimOptions& options,
+           PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre)
+{
+    if (options.solverName == "sirius")
+    {
+        return SolveWithSirius(options, ProblemeAResoudre);
+    }
+    return SolveWithOrtools(options, ProblemeAResoudre);
+}
+} // namespace
+
+bool ADQ_PATCH_CSR(const OptimizationOptions::SingleOptimOptions& options,
                    PROBLEME_ANTARES_A_RESOUDRE& ProblemeAResoudre,
                    HourlyCSRProblem& hourlyCsrProblem,
-                   const AdqPatchParams& adqPatchParams,
+                   const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
                    uint weekNb,
                    int yearNb)
 {

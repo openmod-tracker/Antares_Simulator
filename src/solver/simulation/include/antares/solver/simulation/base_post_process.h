@@ -78,7 +78,7 @@ public:
       SheddingPolicy sheddingPolicy,
       SimplexOptimization splxOptimization,
       Calendar& calendar,
-      const OptimizationOptions& solverOptions);
+      const OptimizationOptions::OptimizationOptions& solverOptions);
     void runAll(const optRuntimeData& opt_runtime_data);
 
 protected:

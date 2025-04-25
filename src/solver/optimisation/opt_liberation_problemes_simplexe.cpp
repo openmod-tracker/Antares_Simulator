@@ -19,12 +19,10 @@
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
 
-#include <spx_fonctions.h>
-
 #include "antares/solver/simulation/sim_structure_probleme_economique.h"
-#include "antares/solver/utils/ortools_utils.h"
+#include "antares/solver/utils/ortools_wrapper.h"
 
-using namespace Antares::Solver::Optimization;
+using namespace Antares::OptimizationOptions;
 
 void OPT_LiberationProblemesSimplexe(const PROBLEME_HEBDO* problemeHebdo)
 {
@@ -54,7 +52,7 @@ void OPT_LiberationProblemesSimplexe(const PROBLEME_HEBDO* problemeHebdo)
 
             if (solver)
             {
-                ORTOOLS_LibererProbleme(solver);
+                Solver::Utils::ORTOOLS_LibererProbleme(solver);
                 solver = nullptr;
             }
         }

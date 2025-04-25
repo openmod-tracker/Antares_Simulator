@@ -26,7 +26,7 @@
 
 #include <antares/logs/logs.h>
 #include <antares/optimisation/linear-problem-mpsolver-impl/linearProblem.h>
-#include <antares/solver/utils/ortools_utils.h>
+#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 
 namespace Antares::Optimisation::LinearProblemMpsolverImpl
 {
@@ -179,7 +179,7 @@ void OrtoolsLinearProblem::WriteLP(const std::string& filename)
     of << out;
 }
 
-MPSolver* OrtoolsLinearProblem::MpSolver() const
+operations_research::MPSolver* OrtoolsLinearProblem::MpSolver() const
 {
     return mpSolver_;
 }
@@ -199,7 +199,7 @@ OrtoolsMipSolution* OrtoolsLinearProblem::solve(bool verboseSolver)
 
 double OrtoolsLinearProblem::infinity() const
 {
-    return MPSolver::infinity();
+    return operations_research::MPSolver::infinity();
 }
 
 } // namespace Antares::Optimisation::LinearProblemMpsolverImpl

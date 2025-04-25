@@ -22,7 +22,7 @@
 
 #include <antares/study/study.h>
 #include "antares/solver/simulation/simulation.h"
-#include "antares/solver/utils/ortools_utils.h"
+#include "include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares;
 using namespace Antares::Data;
@@ -66,7 +66,7 @@ class ProblemConverter
 {
 public:
     void copyProbSimplexeToProbMps(PROBLEME_MPS* dest,
-                                   PROBLEME_SIMPLEXE_NOMME* src,
+                                   Optimization::PROBLEME_SIMPLEXE_NOMME* src,
                                    NameTranslator& nameTranslator)
     {
         // Variables
@@ -109,7 +109,7 @@ private:
     std::vector<char*> mConstraintNames;
 };
 
-void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(PROBLEME_SIMPLEXE_NOMME* Prob,
+void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(Optimization::PROBLEME_SIMPLEXE_NOMME* Prob,
                                                Solver::IResultWriter& writer,
                                                const std::string& filename)
 {
@@ -134,7 +134,8 @@ void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(PROBLEME_SIMPLEXE_NOMME* Prob,
 // --------------------
 // Full mps writing
 // --------------------
-fullMPSwriter::fullMPSwriter(PROBLEME_SIMPLEXE_NOMME* named_splx_problem, uint optNumber):
+fullMPSwriter::fullMPSwriter(Optimization::PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
+                             uint optNumber):
     I_MPS_writer(optNumber),
     named_splx_problem_(named_splx_problem)
 {
@@ -148,7 +149,7 @@ void fullMPSwriter::runIfNeeded(Solver::IResultWriter& writer, const std::string
 // ---------------------------------
 // Full mps writing by or-tools
 // ---------------------------------
-fullOrToolsMPSwriter::fullOrToolsMPSwriter(MPSolver* solver, uint optNumber):
+fullOrToolsMPSwriter::fullOrToolsMPSwriter(operations_research::MPSolver* solver, uint optNumber):
     I_MPS_writer(optNumber),
     solver_(solver)
 {
@@ -162,7 +163,7 @@ void fullOrToolsMPSwriter::runIfNeeded(Solver::IResultWriter& writer, const std:
 mpsWriterFactory::mpsWriterFactory(Data::mpsExportStatus exportMPS,
                                    bool exportMPSOnError,
                                    const int current_optim_number,
-                                   MPSolver* solver):
+                                   operations_research::MPSolver* solver):
     export_mps_(exportMPS),
     export_mps_on_error_(exportMPSOnError),
     solver_(solver),

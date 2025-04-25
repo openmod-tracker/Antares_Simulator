@@ -25,14 +25,15 @@
 
 namespace Antares::Solver::Simulation
 {
-AdqPatchPostProcessList::AdqPatchPostProcessList(const AdqPatchParams& adqPatchParams,
-                                                 PROBLEME_HEBDO* problemeHebdo,
-                                                 uint numSpace,
-                                                 AreaList& areas,
-                                                 SheddingPolicy sheddingPolicy,
-                                                 SimplexOptimization splxOptimization,
-                                                 Calendar& calendar,
-                                                 const OptimizationOptions& solverOptions):
+AdqPatchPostProcessList::AdqPatchPostProcessList(
+  const AdqPatchParams& adqPatchParams,
+  PROBLEME_HEBDO* problemeHebdo,
+  uint numSpace,
+  AreaList& areas,
+  SheddingPolicy sheddingPolicy,
+  SimplexOptimization splxOptimization,
+  Calendar& calendar,
+  const OptimizationOptions::OptimizationOptions& solverOptions):
     interfacePostProcessList(problemeHebdo, numSpace)
 {
     post_process_list.push_back(

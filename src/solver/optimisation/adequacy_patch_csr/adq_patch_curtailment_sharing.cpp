@@ -198,7 +198,9 @@ void HourlyCSRProblem::setProblemCost()
     }
 }
 
-void HourlyCSRProblem::solveProblem(uint week, int year, const OptimizationOptions& options)
+void HourlyCSRProblem::solveProblem(uint week,
+                                    int year,
+                                    const OptimizationOptions::OptimizationOptions& options)
 {
     ADQ_PATCH_CSR(options.quadraticOptimOptions,
                   problemeAResoudre_,

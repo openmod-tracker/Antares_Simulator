@@ -33,7 +33,7 @@
 #include <antares/logs/logs.h>
 #include <antares/resources/resources.h>
 #include <antares/solver/simulation/solver.h>
-#include <antares/solver/utils/ortools_utils.h>
+#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 #include <antares/study/finder/finder.h>
 #include "antares/antares/antares.h"
 #include "antares/locator/locator.h"

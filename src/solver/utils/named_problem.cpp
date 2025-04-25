@@ -21,6 +21,7 @@
 #include "antares/solver/utils/named_problem.h"
 
 #include <algorithm>
+#include <spx_constantes_externes.h>
 
 #include "antares/solver/utils/basis_status.h"
 
@@ -32,6 +33,7 @@ PROBLEME_SIMPLEXE_NOMME::PROBLEME_SIMPLEXE_NOMME(const std::vector<std::string>&
                                                  BasisStatus& basisStatus,
                                                  bool UseNamedProblems,
                                                  bool SolverLogs):
+    PROBLEME_SIMPLEXE(),
     NomDesVariables(NomDesVariables),
     NomDesContraintes(NomDesContraintes),
     useNamedProblems_(UseNamedProblems),

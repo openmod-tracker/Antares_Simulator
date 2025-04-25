@@ -20,48 +20,46 @@
  */
 
 #include "antares/solver/optimisation/opt_optimisation_hebdo.h"
+
 #include <antares/antares/fatal-error.h>
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/logs/logs.h>
-
-#include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/optimization-options/options.h"
 #include "antares/solver/optimisation/opt_appel_solveur_quadratique.h"
+#include "antares/solver/optimisation/opt_fonctions.h"
+#include "antares/solver/simulation/sim_structure_probleme_economique.h"
 
 using namespace Antares::Data;
 
-using Solver::Optimization::OptimizationOptions;
-using Solver::Optimization::SingleOptimOptions;
-
-namespace Antares::Solver::Optimization {
-    void OPT_OptimisationHebdomadaire(const OptimizationOptions& options,
-                                      PROBLEME_HEBDO* pProblemeHebdo,
-                                      IResultWriter& writer,
-                                      Simulation::ISimulationObserver& simulationObserver)
+namespace Antares::Optimization
+{
+void OPT_OptimisationHebdomadaire(const OptimizationOptions::OptimizationOptions& options,
+                                  PROBLEME_HEBDO* pProblemeHebdo,
+                                  Solver::IResultWriter& writer,
+                                  Solver::Simulation::ISimulationObserver& simulationObserver)
+{
+    if (pProblemeHebdo->TypeDOptimisation == OPTIMISATION_LINEAIRE)
     {
-        if (pProblemeHebdo->TypeDOptimisation == OPTIMISATION_LINEAIRE)
+        if (!OPT_PilotageOptimisationLineaire(options, pProblemeHebdo, writer, simulationObserver))
         {
-            if (!OPT_PilotageOptimisationLineaire(options, pProblemeHebdo, writer, simulationObserver))
-            {
-                logs.error() << "Linear optimization failed";
-                throw UnfeasibleProblemError("Linear optimization failed");
-            }
-        }
-        else if (pProblemeHebdo->TypeDOptimisation == OPTIMISATION_QUADRATIQUE)
-        {
-            OPT_LiberationProblemesSimplexe(pProblemeHebdo);
-            if (!OPT_PilotageOptimisationQuadratique(options.quadraticOptimOptions, pProblemeHebdo))
-            {
-                logs.error() << "Quadratic optimization failed";
-                throw UnfeasibleProblemError("Quadratic optimization failed");
-            }
-        }
-        else
-        {
-            throw FatalError(
-              "Bug: TypeDOptimisation, OPTIMISATION_LINEAIRE ou OPTIMISATION_QUADRATIQUE "
-              "non initialise");
+            logs.error() << "Linear optimization failed";
+            throw UnfeasibleProblemError("Linear optimization failed");
         }
     }
+    else if (pProblemeHebdo->TypeDOptimisation == OPTIMISATION_QUADRATIQUE)
+    {
+        OPT_LiberationProblemesSimplexe(pProblemeHebdo);
+        if (!OPT_PilotageOptimisationQuadratique(options.quadraticOptimOptions, pProblemeHebdo))
+        {
+            logs.error() << "Quadratic optimization failed";
+            throw UnfeasibleProblemError("Quadratic optimization failed");
+        }
+    }
+    else
+    {
+        throw FatalError(
+          "Bug: TypeDOptimisation, OPTIMISATION_LINEAIRE ou OPTIMISATION_QUADRATIQUE "
+          "non initialise");
+    }
 }
+} // namespace Antares::Optimization

@@ -20,7 +20,7 @@
 */
 #include "antares/optimization-options/options.h"
 
-namespace Antares::Solver::Optimization
+namespace Antares::OptimizationOptions
 {
 void OptimizationOptions::initializeWith(const CmdLineOptimOptions& cmdLineOptimOptions)
 {
@@ -56,4 +56,4 @@ void OptimizationOptions::initializeWith(const CmdLineOptimOptions& cmdLineOptim
     // Quadratic solver parameters
     quadraticOptimOptions.solverParameters = cmdLineOptimOptions.quadraticSolverParameters;
 }
-} // namespace Antares::Solver::Optimization
+} // namespace Antares::OptimizationOptions

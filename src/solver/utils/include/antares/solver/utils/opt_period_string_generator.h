@@ -39,7 +39,7 @@
 class OptPeriodStringGenerator
 {
 public:
-    virtual std::string to_string() const = 0;
+    [[nodiscard]] virtual std::string to_string() const = 0;
     virtual ~OptPeriodStringGenerator() = default;
 };
 
@@ -50,7 +50,7 @@ class OptDailyStringGenerator final: public OptPeriodStringGenerator
 {
 public:
     OptDailyStringGenerator(unsigned int day, unsigned int week, unsigned int year);
-    std::string to_string() const override;
+    [[nodiscard]] std::string to_string() const override;
 
 private:
     unsigned int day_ = 0;
@@ -65,7 +65,7 @@ class OptWeeklyStringGenerator final: public OptPeriodStringGenerator
 {
 public:
     OptWeeklyStringGenerator(unsigned int week, unsigned int year);
-    std::string to_string() const override;
+    [[nodiscard]] std::string to_string() const override;
 
 private:
     unsigned int week_ = 0;

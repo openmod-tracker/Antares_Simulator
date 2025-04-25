@@ -31,7 +31,7 @@ namespace Antares::API
 SimulationResults PerformSimulation(
   const std::filesystem::path& study_path,
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions) noexcept
+  const OptimizationOptions::OptimizationOptions& optOptions) noexcept
 {
     try
     {
@@ -41,7 +41,7 @@ SimulationResults PerformSimulation(
     }
     catch (const std::exception& e)
     {
-        Antares::API::Error err{.reason = e.what()};
+        Error err{.reason = e.what()};
         return SimulationResults{.antares_problems{}, .error = err};
     }
 }

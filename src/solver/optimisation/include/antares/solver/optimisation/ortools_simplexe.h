@@ -20,17 +20,25 @@
 
 #pragma once
 
-namespace Antares
+namespace operations_research
 {
-class IUpdateStrategy
+class MPSolver;
+}
+
+namespace Antares::Optimization
 {
-public:
-    virtual ~IUpdateStrategy() = default;
-    virtual void begin() = 0;
-    virtual void end() = 0;
-    virtual void SBPartBegin() = 0;
-    virtual void SBPartEnd() = 0;
-    virtual void CorrelationPartBegin() = 0;
-    virtual void CorrelationPartEnd() = 0;
-};
-} // namespace Antares
+struct PROBLEME_SIMPLEXE_NOMME;
+}
+
+namespace Antares::OptimizationOptions
+{
+struct SingleOptimOptions;
+}
+
+namespace Antares::Optimization
+{
+operations_research::MPSolver* ORTOOLS_Simplexe(
+  Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* Probleme,
+  operations_research::MPSolver* solver,
+  const OptimizationOptions::SingleOptimOptions& options);
+}

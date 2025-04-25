@@ -1,23 +1,21 @@
-/*
-** Copyright 2007-2024, RTE (https://www.rte-france.com)
-** See AUTHORS.txt
-** SPDX-License-Identifier: MPL-2.0
-** This file is part of Antares-Simulator,
-** Adequacy and Performance assessment for interconnected energy networks.
-**
-** Antares_Simulator is free software: you can redistribute it and/or modify
-** it under the terms of the Mozilla Public Licence 2.0 as published by
-** the Mozilla Foundation, either version 2 of the License, or
-** (at your option) any later version.
-**
-** Antares_Simulator is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** Mozilla Public Licence 2.0 for more details.
-**
-** You should have received a copy of the Mozilla Public Licence 2.0
-** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
-*/
+// Copyright 2007-2025, RTE (https://www.rte-france.com)
+// See AUTHORS.txt
+// SPDX-License-Identifier: MPL-2.0
+// This file is part of Antares-Simulator,
+// Adequacy and Performance assessment for interconnected energy networks.
+//
+// Antares_Simulator is free software: you can redistribute it and/or modify
+// it under the terms of the Mozilla Public Licence 2.0 as published by
+// the Mozilla Foundation, either version 2 of the License, or
+// (at your option) any later version.
+//
+// Antares_Simulator is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// Mozilla Public Licence 2.0 for more details.
+//
+// You should have received a copy of the Mozilla Public Licence 2.0
+// along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 #pragma once
 
 #include <map>
@@ -31,16 +29,12 @@
 #include "ortools/linear_solver/linear_solver.h"
 #pragma GCC diagnostic pop
 
-#include "ortools_wrapper.h"
-
 namespace operations_research::math_opt
 {
 enum class SolverType;
 }
 
-using namespace operations_research;
-
-void ORTOOLS_EcrireJeuDeDonneesLineaireAuFormatMPS(MPSolver* solver,
+void ORTOOLS_EcrireJeuDeDonneesLineaireAuFormatMPS(operations_research::MPSolver* solver,
                                                    Antares::Solver::IResultWriter& writer,
                                                    const std::string& filename);
 
@@ -70,7 +64,7 @@ std::list<std::string> availableQuadraticSolversList();
  *
  *  \return MPSolver
  */
-MPSolver* MPSolverFactory(const bool isMip, const std::string& solverName);
+operations_research::MPSolver* MPSolverFactory(bool isMip, const std::string& solverName);
 
 std::string generateTempPath(const std::string& filename);
 void removeTemporaryFile(const std::string& tmpPath);
@@ -84,5 +78,5 @@ public:
     };
 
     static const std::map<std::string, SolverNames> mpSolverMap;
-    static const std::map<std::string, math_opt::SolverType> mathoptSolverMap;
+    static const std::map<std::string, operations_research::math_opt::SolverType> mathoptSolverMap;
 };

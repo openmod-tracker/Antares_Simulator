@@ -110,7 +110,7 @@ public:
                                      PROBLEME_HEBDO* problemeHebdo,
                                      AreaList& areas,
                                      unsigned int numSpace,
-                                     const OptimizationOptions& solverOptions);
+                                     const OptimizationOptions::OptimizationOptions& solverOptions);
 
     void execute(const optRuntimeData& opt_runtime_data) override;
 
@@ -124,7 +124,7 @@ private:
     const AreaList& area_list_;
     const AdqPatchParams& adqPatchParams_;
     unsigned int numSpace_ = 0;
-    const OptimizationOptions& solverOptions_;
+    const OptimizationOptions::OptimizationOptions& solverOptions_;
 };
 
 } // namespace Antares::Solver::Simulation

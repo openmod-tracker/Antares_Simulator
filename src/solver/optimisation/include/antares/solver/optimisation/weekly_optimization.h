@@ -30,7 +30,7 @@ namespace Antares::Solver::Optimization
 class WeeklyOptimization
 {
 public:
-    WeeklyOptimization(const OptimizationOptions& options,
+    WeeklyOptimization(OptimizationOptions::OptimizationOptions options,
                        PROBLEME_HEBDO* problemeHebdo,
                        IResultWriter& writer,
                        Simulation::ISimulationObserver& simulationObserver);
@@ -38,7 +38,7 @@ public:
     void solve() const;
 
 private:
-    Antares::Solver::Optimization::OptimizationOptions options_;
+    OptimizationOptions::OptimizationOptions options_;
     PROBLEME_HEBDO* const problemeHebdo_ = nullptr;
     IResultWriter& writer_;
     std::reference_wrapper<Simulation::ISimulationObserver> simulationObserver_;

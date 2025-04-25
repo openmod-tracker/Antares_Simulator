@@ -5,11 +5,9 @@
 #include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
 #include "antares/study/parameters/adq-patch-params.h"
 
-using namespace Antares::Data::AdequacyPatch;
-
-bool ADQ_PATCH_CSR(const SingleOptimOptions& options,
+bool ADQ_PATCH_CSR(const OptimizationOptions::SingleOptimOptions& options,
                    PROBLEME_ANTARES_A_RESOUDRE&,
                    HourlyCSRProblem&,
-                   const AdqPatchParams&,
+                   const Data::AdequacyPatch::AdqPatchParams&,
                    unsigned int week,
                    int year);

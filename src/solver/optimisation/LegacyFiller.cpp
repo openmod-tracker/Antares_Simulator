@@ -1,5 +1,7 @@
 #include "antares/solver/optimisation/LegacyFiller.h"
 
+#include <pi_constantes_externes.h>
+
 using namespace Antares::Optimisation::LinearProblemApi;
 
 namespace Antares::Optimization

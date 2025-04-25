@@ -235,7 +235,7 @@ CurtailmentSharingPostProcessCmd::CurtailmentSharingPostProcessCmd(
   PROBLEME_HEBDO* problemeHebdo,
   AreaList& areas,
   unsigned int numSpace,
-  const OptimizationOptions& solverOptions):
+  const OptimizationOptions::OptimizationOptions& solverOptions):
     basePostProcessCommand(problemeHebdo),
     area_list_(areas),
     adqPatchParams_(adqPatchParams),

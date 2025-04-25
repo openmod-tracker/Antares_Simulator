@@ -25,7 +25,7 @@
 
 #include <antares/exception/LoadingError.hpp>
 #include "antares/config/config.h"
-#include "antares/solver/utils/ortools_utils.h"
+#include "../utils/include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares;
 using namespace Antares::Data;

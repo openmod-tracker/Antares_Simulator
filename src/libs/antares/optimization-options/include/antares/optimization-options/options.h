@@ -22,7 +22,7 @@
 #pragma once
 #include <string>
 
-namespace Antares::Solver::Optimization
+namespace Antares::OptimizationOptions
 {
 struct SingleOptimOptions
 {
@@ -60,4 +60,4 @@ public:
     SingleOptimOptions quadraticOptimOptions;
     bool solverLogs = false;
 };
-} // namespace Antares::Solver::Optimization
+} // namespace Antares::OptimizationOptions

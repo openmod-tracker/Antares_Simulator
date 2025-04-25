@@ -27,11 +27,10 @@
 #include "antares/exception/LoadingError.hpp"
 
 using namespace Antares;
-using namespace Antares::Solver::Optimization;
 
 struct CmdLineOptionsFixture
 {
-    CmdLineOptimOptions cmdLineOptions;
+    OptimizationOptions::CmdLineOptimOptions cmdLineOptions;
 };
 
 BOOST_FIXTURE_TEST_SUITE(OptimizationOptionsTests, CmdLineOptionsFixture)
@@ -83,7 +82,7 @@ BOOST_AUTO_TEST_CASE(initializing_options_from_cmd_line_options)
     cmdLineOptions.linearSolverParameters = "opt1 5";
     cmdLineOptions.quadraticSolverParameters = "opt6 7";
 
-    OptimizationOptions options;
+    OptimizationOptions::OptimizationOptions options;
     options.firstOptimOptions.solverName = "scip";
     options.quadraticOptimOptions.solverName = "xpress";
     options.firstOptimOptions.solverParameters = "opt2 52";

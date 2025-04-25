@@ -20,31 +20,31 @@
 
 #pragma once
 
-namespace Antares::Data::AdequacyPatch {
-    struct AdqPatchParams;
+namespace Antares::OptimizationOptions
+{
+class OptimizationOptions;
 }
 
-namespace Antares::Solver {
-    namespace Optimization {
-        struct SingleOptimOptions;
-        class OptimizationOptions;
-    }
-
-    namespace Simulation {
-        class ISimulationObserver;
-    }
-
-    class IResultWriter;
+namespace Antares::Data::AdequacyPatch
+{
+struct AdqPatchParams;
 }
+
+namespace Antares::Solver
+{
+namespace Simulation
+{
+class ISimulationObserver;
+}
+
+class IResultWriter;
+} // namespace Antares::Solver
 
 struct PROBLEME_HEBDO;
-using AdqPatchParams = Antares::Data::AdequacyPatch::AdqPatchParams;
-using OptimizationOptions = Antares::Solver::Optimization::OptimizationOptions;
-using SingleOptimOptions = Antares::Solver::Optimization::SingleOptimOptions;
 
-namespace Antares::Solver::Optimization
+namespace Antares::Optimization
 {
-void OPT_OptimisationHebdomadaire(const OptimizationOptions& options,
+void OPT_OptimisationHebdomadaire(const OptimizationOptions::OptimizationOptions& options,
                                   PROBLEME_HEBDO* pProblemeHebdo,
                                   Solver::IResultWriter& writer,
                                   Solver::Simulation::ISimulationObserver& simulationObserver);

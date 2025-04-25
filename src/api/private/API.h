@@ -49,13 +49,13 @@ public:
      */
     SimulationResults run(const IStudyLoader& study_loader,
                           const std::filesystem::path& output,
-                          const Antares::Solver::Optimization::OptimizationOptions& optOptions);
+                          const OptimizationOptions::OptimizationOptions& optOptions);
 
 private:
-    std::shared_ptr<Antares::Data::Study> study_;
+    std::shared_ptr<Data::Study> study_;
     SimulationResults execute(
       const std::filesystem::path& output,
-      const Antares::Solver::Optimization::OptimizationOptions& optOptions) const;
+      const OptimizationOptions::OptimizationOptions& optOptions) const;
 };
 
 } // namespace Antares::API

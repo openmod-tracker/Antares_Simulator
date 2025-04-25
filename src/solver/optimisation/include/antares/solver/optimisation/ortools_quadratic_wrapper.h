@@ -1,4 +1,3 @@
-
 // Copyright 2007-2025, RTE (https://www.rte-france.com)
 // See AUTHORS.txt
 // SPDX-License-Identifier: MPL-2.0
@@ -20,17 +19,17 @@
 
 #pragma once
 
-namespace Antares
+#include <antares/optimization-options/options.h>
+#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
+
+namespace Antares::Optimization
 {
-class IUpdateStrategy
-{
-public:
-    virtual ~IUpdateStrategy() = default;
-    virtual void begin() = 0;
-    virtual void end() = 0;
-    virtual void SBPartBegin() = 0;
-    virtual void SBPartEnd() = 0;
-    virtual void CorrelationPartBegin() = 0;
-    virtual void CorrelationPartEnd() = 0;
-};
-} // namespace Antares
+/**
+ * This wrapper is an adapter that solves a QP stored in a PROBLEME_ANTARES_A_RESOUDRE
+ * using OR-Tools MathOpt API & solvers.
+ * Currently, QP support in MathOpt is implemented for Gurobi and SIP (though SCIP in OR-Tools
+ * has compilation issues), and under development for XPRESS.
+ */
+void SolveQuadraticProblemWithOrtools(const OptimizationOptions::SingleOptimOptions& options,
+                                      PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre);
+} // namespace Antares::Solver::Utils

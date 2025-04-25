@@ -48,7 +48,7 @@ std::unique_ptr<interfacePostProcessList> interfacePostProcessList::create(
   SheddingPolicy sheddingPolicy,
   SimplexOptimization splxOptimization,
   Calendar& calendar,
-  const OptimizationOptions& solverOptions)
+  const OptimizationOptions::OptimizationOptions& solverOptions)
 {
     if (adqPatchParams.enabled)
     {

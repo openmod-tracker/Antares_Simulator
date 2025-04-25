@@ -45,7 +45,7 @@ struct LinkVariable
     {
     }
 
-    inline bool check() const
+    bool check() const
     {
         if (directVar < 0)
         {
@@ -72,7 +72,7 @@ class HourlyCSRProblem
 public:
     explicit HourlyCSRProblem(const AdqPatchParams& adqPatchParams,
                               PROBLEME_HEBDO* p,
-                              const Solver::Optimization::OptimizationOptions& solverOptions):
+                              const OptimizationOptions::OptimizationOptions& solverOptions):
         solverOptions_(solverOptions),
         adqPatchParams_(adqPatchParams),
         variableManager_(p->CorrespondanceVarNativesVarOptim,
@@ -90,7 +90,7 @@ public:
     HourlyCSRProblem(const HourlyCSRProblem&) = delete;
     HourlyCSRProblem& operator=(const HourlyCSRProblem&) = delete;
 
-    inline void setHour(int hour)
+    void setHour(int hour)
     {
         triggeredHour = hour;
     }
@@ -107,7 +107,7 @@ private:
     void setProblemCost();
     void solveProblem(unsigned int week,
                       int year,
-                      const Antares::Solver::Optimization::OptimizationOptions& options);
+                      const OptimizationOptions::OptimizationOptions& options);
     void allocateProblem();
 
     // variable construction
@@ -129,7 +129,7 @@ private:
     void setQuadraticCost();
     void setLinearCost();
 
-    const Solver::Optimization::OptimizationOptions& solverOptions_;
+    const OptimizationOptions::OptimizationOptions& solverOptions_;
 
 public:
     // TODO [gp] : try to make these members private
@@ -137,7 +137,7 @@ public:
     std::map<int, int> numberOfConstraintCsrAreaBalance;
     std::set<int> ensVariablesInsideAdqPatch;       // place inside only ENS inside adq-patch
     std::set<int> varToBeSetToZeroIfBelowThreshold; // place inside only ENS and Spillage variable
-    int triggeredHour;
+    int triggeredHour{};
 
     const AdqPatchParams& adqPatchParams_;
     VariableManagement::VariableManager variableManager_;

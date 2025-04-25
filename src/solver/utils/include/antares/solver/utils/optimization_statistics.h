@@ -48,7 +48,7 @@ public:
         this->reset();
     }
 
-    OptimizationStatistics(OptimizationStatistics&& rhs):
+    OptimizationStatistics(OptimizationStatistics&& rhs) noexcept:
         totalSolveTime(rhs.totalSolveTime.load()),
         nbSolve(rhs.nbSolve.load()),
         totalUpdateTime(rhs.totalUpdateTime.load()),
@@ -80,22 +80,22 @@ public:
         nbSolve++;
     }
 
-    unsigned int getNbUpdate() const
+    [[nodiscard]] unsigned int getNbUpdate() const
     {
         return nbUpdate;
     }
 
-    long long getTotalSolveTime() const
+    [[nodiscard]] long long getTotalSolveTime() const
     {
         return totalSolveTime;
     }
 
-    long long getTotalUpdateTime() const
+    [[nodiscard]] long long getTotalUpdateTime() const
     {
         return totalUpdateTime;
     }
 
-    double getAverageUpdateTime() const
+    [[nodiscard]] double getAverageUpdateTime() const
     {
         if (nbUpdate == 0)
         {
@@ -104,7 +104,7 @@ public:
         return ((double)totalUpdateTime) / nbUpdate;
     }
 
-    double getAverageSolveTime() const
+    [[nodiscard]] double getAverageSolveTime() const
     {
         if (nbSolve == 0)
         {
@@ -113,7 +113,7 @@ public:
         return ((double)totalSolveTime) / nbSolve;
     }
 
-    std::string toString() const
+    [[nodiscard]] std::string toString() const
     {
         return "Average solve time: " + std::to_string(std::lround(getAverageSolveTime())) + " ms, "
                + "average update time: " + std::to_string(std::lround(getAverageUpdateTime()))

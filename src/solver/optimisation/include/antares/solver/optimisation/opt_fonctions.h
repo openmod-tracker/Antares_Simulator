@@ -30,24 +30,17 @@
 
 #include "adequacy_patch_csr/hourly_csr_problem.h"
 
-using AdqPatchParams = Antares::Data::AdequacyPatch::AdqPatchParams;
-using OptimizationOptions = Antares::Solver::Optimization::OptimizationOptions;
-using SingleOptimOptions = Antares::Solver::Optimization::SingleOptimOptions;
-
 void OPT_NumeroDeJourDuPasDeTemps(PROBLEME_HEBDO*);
 void OPT_NumeroDIntervalleOptimiseDuPasDeTemps(PROBLEME_HEBDO*);
 void OPT_ConstruireLaListeDesVariablesOptimiseesDuProblemeLineaire(PROBLEME_HEBDO*);
 void OPT_InitialiserLesPminHebdo(PROBLEME_HEBDO*);
 void OPT_InitialiserLesContrainteDEnergieHydrauliqueParIntervalleOptimise(PROBLEME_HEBDO*);
 void OPT_MaxDesPmaxHydrauliques(PROBLEME_HEBDO*);
-void OPT_InitialiserLesBornesDesVariablesDuProblemeLineaire(PROBLEME_HEBDO*,
-                                                            const int,
-                                                            const int,
-                                                            const int);
-void OPT_InitialiserLeSecondMembreDuProblemeLineaire(PROBLEME_HEBDO*, int, int, int, const int);
-void OPT_InitialiserLesCoutsLineaire(PROBLEME_HEBDO*, const int, const int);
+void OPT_InitialiserLesBornesDesVariablesDuProblemeLineaire(PROBLEME_HEBDO*, int, int, int);
+void OPT_InitialiserLeSecondMembreDuProblemeLineaire(PROBLEME_HEBDO*, int, int, int, int);
+void OPT_InitialiserLesCoutsLineaire(PROBLEME_HEBDO*, int, int);
 
-bool OPT_PilotageOptimisationLineaire(const OptimizationOptions& options,
+bool OPT_PilotageOptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                                       PROBLEME_HEBDO* problemeHebdo,
                                       Solver::IResultWriter& writer,
                                       Solver::Simulation::ISimulationObserver& simulationObserver);
@@ -58,15 +51,15 @@ void OPT_VerifierPresenceReserveJmoins1(PROBLEME_HEBDO*);
 **
 ** \return True si l'operation s'est bien deroulee, false si le probleme n'a pas de solution
 */
-bool OPT_AppelDuSimplexe(const SingleOptimOptions& options,
+bool OPT_AppelDuSimplexe(const OptimizationOptions::SingleOptimOptions& options,
                          PROBLEME_HEBDO*,
                          int,
-                         const int,
+                         int,
                          const OptPeriodStringGenerator&,
                          Antares::Solver::IResultWriter& writer);
 void OPT_LiberationProblemesSimplexe(const PROBLEME_HEBDO*);
 
-bool OPT_OptimisationLineaire(const OptimizationOptions& options,
+bool OPT_OptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                               PROBLEME_HEBDO* problemeHebdo,
                               Solver::IResultWriter& writer,
                               Solver::Simulation::ISimulationObserver& simulationObserver);
@@ -87,9 +80,9 @@ int OPT_DecompteDesVariablesEtDesContraintesDuProblemeAOptimiser(PROBLEME_HEBDO*
 void OPT_ConstruireLaListeDesVariablesOptimiseesDuProblemeLineaireCoutsDeDemarrage(PROBLEME_HEBDO*,
                                                                                    bool);
 void OPT_InitialiserLesBornesDesVariablesDuProblemeLineaireCoutsDeDemarrage(PROBLEME_HEBDO*,
-                                                                            const int,
-                                                                            const int);
-void OPT_InitialiserLesCoutsLineaireCoutsDeDemarrage(PROBLEME_HEBDO*, const int, const int);
+                                                                            int,
+                                                                            int);
+void OPT_InitialiserLesCoutsLineaireCoutsDeDemarrage(PROBLEME_HEBDO*, int, int);
 void OPT_InitialiserLeSecondMembreDuProblemeLineaireCoutsDeDemarrage(PROBLEME_HEBDO*, int, int);
 void OPT_DecompteDesVariablesEtDesContraintesCoutsDeDemarrage(PROBLEME_HEBDO*);
 void OPT_InitialiserNombreMinEtMaxDeGroupesCoutsDeDemarrage(PROBLEME_HEBDO*);

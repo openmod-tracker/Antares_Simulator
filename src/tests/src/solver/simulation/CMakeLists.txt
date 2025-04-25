@@ -5,13 +5,6 @@ set(src_solver_simulation "${CMAKE_SOURCE_DIR}/solver/simulation")
 set(src_solver_hydro "${CMAKE_SOURCE_DIR}/solver/hydro")
 set(src_libs_antares_study "${CMAKE_SOURCE_DIR}/libs/antares/study")
 
-set(SRC_TS_NUMBERS
-        # For confort in IDE, but not necessary
-        ${src_solver_simulation}/include/antares/solver/simulation/timeseries-numbers.h
-        # Necessary cpp files
-        ${src_solver_simulation}/timeseries-numbers.cpp
-        ${src_solver_simulation}/include/antares/solver/simulation/ITimeSeriesNumbersWriter.h)
-
 add_boost_test(tests-ts-numbers
         SRC tests-ts-numbers.cpp
         LIBS
@@ -48,13 +41,10 @@ add_boost_test(test-time_series
 add_boost_test(test-hydro_final
         SRC
         test-hydro-final-reservoir-level-functions.cpp
-        INCLUDE
-        "${src_solver_simulation}"
-        "${src_libs_antares_study}"
-        "${src_solver_hydro}"
         LIBS
         Antares::study
         antares-solver-simulation
+        Antares::hydro
         Antares::array)
 
 # ===================================

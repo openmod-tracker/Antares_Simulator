@@ -21,28 +21,27 @@
 #ifndef __ORTOOLS_WRAPPER__
 #define __ORTOOLS_WRAPPER__
 
+#include <ortools/linear_solver/linear_solver.h>
 #include <string>
 
 #include <antares/optimization-options/options.h>
 
 #include "named_problem.h"
 
-using namespace operations_research;
-
-MPSolver* ORTOOLS_Simplexe(Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* Probleme,
-                           MPSolver* ProbSpx,
-                           const Antares::Solver::Optimization::SingleOptimOptions& options);
-
-void ORTOOLS_ModifierLeVecteurCouts(MPSolver* ProbSpx, const double* costs, int nbVar);
-void ORTOOLS_ModifierLeVecteurSecondMembre(MPSolver* ProbSpx,
+namespace Antares::Solver::Utils
+{
+void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* ProbSpx,
+                                    const double* costs,
+                                    int nbVar);
+void ORTOOLS_ModifierLeVecteurSecondMembre(operations_research::MPSolver* ProbSpx,
                                            const double* rhs,
                                            const char* sens,
                                            int nbRow);
-void ORTOOLS_CorrigerLesBornes(MPSolver* ProbSpx,
+void ORTOOLS_CorrigerLesBornes(operations_research::MPSolver* ProbSpx,
                                const double* bMin,
                                const double* bMax,
                                const int* typeVar,
                                int nbVar);
-void ORTOOLS_LibererProbleme(MPSolver* ProbSpx);
-
+void ORTOOLS_LibererProbleme(operations_research::MPSolver* ProbSpx);
+} // namespace Antares::Solver::Utils
 #endif

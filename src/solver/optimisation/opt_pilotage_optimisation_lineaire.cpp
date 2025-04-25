@@ -24,9 +24,7 @@
 #include "antares/solver/simulation/ISimulationObserver.h"
 #include "antares/solver/simulation/sim_structure_probleme_economique.h"
 
-using Antares::Solver::Optimization::OptimizationOptions;
-
-bool OPT_PilotageOptimisationLineaire(const OptimizationOptions& options,
+bool OPT_PilotageOptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                                       PROBLEME_HEBDO* problemeHebdo,
                                       Solver::IResultWriter& writer,
                                       Solver::Simulation::ISimulationObserver& simulationObserver)

@@ -39,7 +39,7 @@ public:
                             SheddingPolicy sheddingPolicy,
                             SimplexOptimization splxOptimization,
                             Calendar& calendar,
-                            const OptimizationOptions& solverOptions);
+                            const OptimizationOptions::OptimizationOptions& solverOptions);
 
     virtual ~AdqPatchPostProcessList() = default;
 };

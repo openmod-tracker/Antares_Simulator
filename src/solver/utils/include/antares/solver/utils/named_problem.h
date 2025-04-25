@@ -20,23 +20,17 @@
 */
 #pragma once
 
-#include <algorithm>
-#include <iterator>
 #include <string>
 #include <vector>
 
 #include "spx_definition_arguments.h"
-#include "spx_fonctions.h"
 
-namespace Antares
-{
-namespace Optimization
+namespace Antares::Optimization
 {
 class BasisStatus;
 
-struct PROBLEME_SIMPLEXE_NOMME: public PROBLEME_SIMPLEXE
+struct PROBLEME_SIMPLEXE_NOMME: PROBLEME_SIMPLEXE
 {
-public:
     PROBLEME_SIMPLEXE_NOMME(const std::vector<std::string>& NomDesVariables,
                             const std::vector<std::string>& NomDesContraintes,
                             const std::vector<bool>& VariablesEntieres,
@@ -53,10 +47,10 @@ public:
     const std::vector<bool>& VariablesEntieres;
     BasisStatus& basisStatus;
 
-    bool isMIP() const;
-    bool basisExists() const;
+    [[nodiscard]] bool isMIP() const;
+    [[nodiscard]] bool basisExists() const;
 
-    bool UseNamedProblems() const
+    [[nodiscard]] bool UseNamedProblems() const
     {
         return useNamedProblems_;
     }
@@ -66,20 +60,19 @@ public:
         useNamedProblems_ = useNamedProblems;
     }
 
-    const std::vector<std::string>& VariableNames() const
+    [[nodiscard]] const std::vector<std::string>& VariableNames() const
     {
         return NomDesVariables;
     }
 
-    const std::vector<std::string>& ConstraintNames() const
+    [[nodiscard]] const std::vector<std::string>& ConstraintNames() const
     {
         return NomDesContraintes;
     }
 
-    bool IntegerVariable(size_t idx) const
+    [[nodiscard]] bool IntegerVariable(size_t idx) const
     {
         return VariablesEntieres[idx];
     }
 };
-} // namespace Optimization
-} // namespace Antares
+} // namespace Antares::Optimization

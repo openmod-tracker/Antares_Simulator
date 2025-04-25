@@ -593,7 +593,8 @@ Area* Study::areaAdd(const AreaName& name, IUpdateStrategy* strategy)
     // and the scenario builder data
     {
         // These are only useful for the GUI, remove afterwards
-        if (strategy) {
+        if (strategy)
+        {
             strategy->begin();
         }
 
@@ -618,7 +619,8 @@ Area* Study::areaAdd(const AreaName& name, IUpdateStrategy* strategy)
         // Default values for the area
         area->createMissingData();
         area->resetToDefaultValues();
-        if (strategy) {
+        if (strategy)
+        {
             strategy->end();
         }
     }
@@ -656,7 +658,8 @@ bool Study::areaDelete(Area* area, IUpdateStrategy* strategy)
         // area must be gone.
         scenarioRulesLoadIfNotAvailable();
 
-        if (strategy) {
+        if (strategy)
+        {
             strategy->begin();
         }
 
@@ -670,7 +673,8 @@ bool Study::areaDelete(Area* area, IUpdateStrategy* strategy)
         areas.rebuildIndexes();
 
         // delete updates here
-        if (strategy) {
+        if (strategy)
+        {
             strategy->end();
         }
     }
@@ -703,7 +707,8 @@ void Study::areaDelete(Area::Vector& arealist, IUpdateStrategy* strategy)
         // area must be gone.
         scenarioRulesLoadIfNotAvailable();
 
-        if (strategy) {
+        if (strategy)
+        {
             strategy->begin();
         }
 
@@ -733,7 +738,8 @@ void Study::areaDelete(Area::Vector& arealist, IUpdateStrategy* strategy)
             // Rebuild indexes for all areas
             areas.rebuildIndexes();
         }
-        if (strategy) {
+        if (strategy)
+        {
             strategy->end();
         }
     }
@@ -829,14 +835,16 @@ bool Study::areaRename(Area* area, AreaName newName, IUpdateStrategy* strategy)
     areas.each([&oldid, &newid](Data::Area& areait)
                { areait.hydro.allocation.rename(oldid, newid); });
 
-    if (strategy) {
+    if (strategy)
+    {
         strategy->SBPartBegin();
     }
     bool ret = true;
 
     // Archiving data
     {
-        if (strategy) {
+        if (strategy)
+        {
             strategy->CorrelationPartBegin();
         }
 
@@ -849,7 +857,8 @@ bool Study::areaRename(Area* area, AreaName newName, IUpdateStrategy* strategy)
         areas.rebuildIndexes();
 
         // reloading correlation and scenario builder
-        if (strategy) {
+        if (strategy)
+        {
             strategy->CorrelationPartEnd();
         }
     }
@@ -862,7 +871,8 @@ bool Study::areaRename(Area* area, AreaName newName, IUpdateStrategy* strategy)
         uiinfo->reloadAll();
     }
 
-    if (strategy) {
+    if (strategy)
+    {
         strategy->SBPartEnd();
     }
     return ret;
@@ -959,7 +969,8 @@ bool Study::clusterRename(Cluster* cluster, ClusterName newName, IUpdateStrategy
         break;
     }
 
-    if (strategy) {
+    if (strategy)
+    {
         strategy->SBPartBegin();
     }
 
@@ -968,7 +979,8 @@ bool Study::clusterRename(Cluster* cluster, ClusterName newName, IUpdateStrategy
         uiinfo->reloadAll();
     }
 
-    if (strategy) {
+    if (strategy)
+    {
         strategy->SBPartEnd();
     }
     return ret;
@@ -1254,7 +1266,8 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
           });
 
         String filename;
-        filename << studyfolder << fs::path::preferred_separator << "output" << fs::path::preferred_separator;
+        filename << studyfolder << fs::path::preferred_separator << "output"
+                 << fs::path::preferred_separator;
 
         if (linkname.empty())
         {
@@ -1267,9 +1280,11 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 // no links : obtained from areas
                 // The maximum filename should be obtained with links :
                 // Adequacy/mc-all/areas/languedocroussillon/without-network-hourly.txt
-                filename << (parameters.economy() ? "economy" : "adequacy") << fs::path::preferred_separator;
+                filename << (parameters.economy() ? "economy" : "adequacy")
+                         << fs::path::preferred_separator;
                 filename << "mc-all" << fs::path::preferred_separator << "areas";
-                filename << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
+                filename << fs::path::preferred_separator << areaname
+                         << fs::path::preferred_separator;
                 filename << "values-hourly.txt";
             }
         }
@@ -1277,9 +1292,11 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         {
             // The maximum filename should be obtained with links :
             // economy/mc-ind/00001/links/pyrennees\ -\ languedocroussillon/values-hourly.txt
-            filename << (parameters.adequacy() ? "adequacy" : "economy") << fs::path::preferred_separator;
+            filename << (parameters.adequacy() ? "adequacy" : "economy")
+                     << fs::path::preferred_separator;
             filename << "mc-all" << fs::path::preferred_separator << "links";
-            filename << fs::path::preferred_separator << linkname << fs::path::preferred_separator << "values-hourly.txt";
+            filename << fs::path::preferred_separator << linkname << fs::path::preferred_separator
+                     << "values-hourly.txt";
         }
 
         if (not filename.empty() and filename.size() >= limit)
@@ -1327,8 +1344,10 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         if (not areaname.empty() and not clustername.empty())
         {
             filename.clear();
-            filename << studyfolder << fs::path::preferred_separator << "input" << fs::path::preferred_separator;
-            filename << "thermal" << fs::path::preferred_separator << "series" << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
+            filename << studyfolder << fs::path::preferred_separator << "input"
+                     << fs::path::preferred_separator;
+            filename << "thermal" << fs::path::preferred_separator << "series"
+                     << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
             filename << clustername << fs::path::preferred_separator << "series.txt";
 
             if (filename.size() >= limit)
@@ -1348,7 +1367,9 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         {
             filename.clear();
             filename << studyfolder << "input" << fs::path::preferred_separator;
-            filename << "hydro" << fs::path::preferred_separator << "common" << fs::path::preferred_separator << "capacity" << fs::path::preferred_separator;
+            filename << "hydro" << fs::path::preferred_separator << "common"
+                     << fs::path::preferred_separator << "capacity"
+                     << fs::path::preferred_separator;
             areaname << "maxcapacityexpectation_" << areaname << ".txt";
 
             if (filename.size() >= limit)
@@ -1365,7 +1386,8 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         filename.clear();
         // /input/bindingconstraints/bindingconstraints.ini
         filename << studyfolder << "input" << fs::path::preferred_separator;
-        filename << "bindingconstraints" << fs::path::preferred_separator << "bindingconstraints.ini";
+        filename << "bindingconstraints" << fs::path::preferred_separator
+                 << "bindingconstraints.ini";
         if (filename.size() >= limit)
         {
             logs.error()
@@ -1386,7 +1408,8 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 auto& constraint = *(*i);
 
                 filename.clear();
-                filename << studyfolder << "input" << fs::path::preferred_separator << "bindingconstraints" << fs::path::preferred_separator;
+                filename << studyfolder << "input" << fs::path::preferred_separator
+                         << "bindingconstraints" << fs::path::preferred_separator;
                 filename << constraint.id() << ".ini";
 
                 if (filename.size() >= limit)

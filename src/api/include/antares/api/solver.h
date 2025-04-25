@@ -37,5 +37,5 @@ namespace Antares::API
 SimulationResults PerformSimulation(
   const std::filesystem::path& study_path,
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions) noexcept;
+  const OptimizationOptions::OptimizationOptions& optOptions) noexcept;
 } // namespace Antares::API
