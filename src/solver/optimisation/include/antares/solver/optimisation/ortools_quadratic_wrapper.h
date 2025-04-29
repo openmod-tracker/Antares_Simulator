@@ -20,7 +20,7 @@
 #pragma once
 
 #include <antares/optimization-options/options.h>
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
 
 namespace Antares::Optimization
 {

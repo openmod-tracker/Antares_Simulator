@@ -80,7 +80,6 @@ set(ANTARES_SOLVER_LIBS ${ANTARES_SOLVER_LIBS}
         antares-solver-variable
         antares-solver-simulation
         antares-solver-ts-generator
-        model_antares
         antares-core
 )
 

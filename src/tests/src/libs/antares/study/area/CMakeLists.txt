@@ -14,7 +14,8 @@ set(SRC_LINK_PROPERTIES
 add_boost_test(test-save-link-properties
   SRC ${SRC_LINK_PROPERTIES}
   INCLUDE "${src_libs_antares_study}/include"
-  LIBS model_antares)
+  LIBS Antares::optimisation
+)
 
 # ===================================
 # Tests on area's optimization.ini
@@ -27,4 +28,5 @@ set(SRC_AREA_OPTIMIZATION
 add_boost_test(test-save-area-optimization-ini
   SRC ${SRC_AREA_OPTIMIZATION}
   INCLUDE "${src_libs_antares_study}/include"
-  LIBS model_antares)
+  LIBS Antares::optimisation
+)

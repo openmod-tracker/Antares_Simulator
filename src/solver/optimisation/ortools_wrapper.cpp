@@ -17,24 +17,21 @@
 // You should have received a copy of the Mozilla Public Licence 2.0
 // along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 
-#include "antares/solver/utils/ortools_wrapper.h"
-
-#include "antares/exception/LoadingError.hpp"
+#include "antares/solver/optimisation/ortools_wrapper.h"
 
 #include "pi_constantes_externes.h"
 #include "spx_constantes_externes.h"
-
-using namespace operations_research;
+#include <ortools/linear_solver/linear_solver.h>
 
 namespace Antares::Solver::Utils
 {
 
-void ORTOOLS_LibererProbleme(MPSolver* solver)
+void ORTOOLS_LibererProbleme(operations_research::MPSolver* solver)
 {
     delete solver;
 }
 
-void ORTOOLS_CorrigerLesBornes(MPSolver* solver,
+void ORTOOLS_CorrigerLesBornes(operations_research::MPSolver* solver,
                                const double* bMin,
                                const double* bMax,
                                const int* typeVar,
@@ -45,18 +42,18 @@ void ORTOOLS_CorrigerLesBornes(MPSolver* solver,
     {
         double min_l = ((typeVar[idxVar] == VARIABLE_NON_BORNEE)
                             || (typeVar[idxVar] == VARIABLE_BORNEE_SUPERIEUREMENT)
-                          ? -MPSolver::infinity()
+                          ? -operations_research::MPSolver::infinity()
                           : bMin[idxVar]);
         double max_l = ((typeVar[idxVar] == VARIABLE_NON_BORNEE)
                             || (typeVar[idxVar] == VARIABLE_BORNEE_INFERIEUREMENT)
-                          ? MPSolver::infinity()
+                          ? operations_research::MPSolver::infinity()
                           : bMax[idxVar]);
         auto& var = variables[idxVar];
         var->SetBounds(min_l, max_l);
     }
 }
 
-void ORTOOLS_ModifierLeVecteurCouts(MPSolver* solver, const double* costs, int nbVar)
+void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* solver, const double* costs, int nbVar)
 {
     auto& variables = solver->variables();
     for (int idxVar = 0; idxVar < nbVar; ++idxVar)
@@ -66,7 +63,7 @@ void ORTOOLS_ModifierLeVecteurCouts(MPSolver* solver, const double* costs, int n
     }
 }
 
-void ORTOOLS_ModifierLeVecteurSecondMembre(MPSolver* solver,
+void ORTOOLS_ModifierLeVecteurSecondMembre(operations_research::MPSolver* solver,
                                            const double* rhs,
                                            const char* sens,
                                            int nbRow)
@@ -80,11 +77,11 @@ void ORTOOLS_ModifierLeVecteurSecondMembre(MPSolver* solver,
         }
         else if (sens[idxRow] == '<')
         {
-            constraints[idxRow]->SetBounds(-MPSolver::infinity(), rhs[idxRow]);
+            constraints[idxRow]->SetBounds(-operations_research::MPSolver::infinity(), rhs[idxRow]);
         }
         else if (sens[idxRow] == '>')
         {
-            constraints[idxRow]->SetBounds(rhs[idxRow], MPSolver::infinity());
+            constraints[idxRow]->SetBounds(rhs[idxRow], operations_research::MPSolver::infinity());
         }
     }
 }

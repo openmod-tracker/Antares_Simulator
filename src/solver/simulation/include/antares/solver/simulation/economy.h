@@ -29,7 +29,7 @@
 #include "antares/solver/variable/state.h"
 #include "antares/solver/variable/variable.h"
 
-#include "base_post_process.h"
+#include "antares/solver/optimisation/base_post_process.h"
 
 namespace Antares::Solver::Simulation
 {
@@ -52,7 +52,7 @@ public:
     */
     Economy(Data::Study& study,
             IResultWriter& resultWriter,
-            Simulation::ISimulationObserver& simulationObserver);
+            ISimulationObserver& simulationObserver);
     //! Destructor
     ~Economy() = default;
     //@}
@@ -63,9 +63,9 @@ public:
     //! Current study
     Data::Study& study;
     //! All variables
-    Solver::Variable::Economy::AllVariables variables;
+    Variable::Economy::AllVariables variables{};
     //! Prepro only
-    bool preproOnly;
+    bool preproOnly{false};
 
 protected:
     void setNbPerformedYearsInParallel(uint nbMaxPerformedYearsInParallel);
@@ -79,28 +79,28 @@ protected:
               std::list<uint>& failedWeekList,
               const HYDRO_VENTILATION_RESULTS&,
               OptimizationStatisticsWriter& optWriter,
-              const Antares::Data::Area::ScratchMap& scratchmap);
+              const Data::Area::ScratchMap& scratchmap);
 
-    void incrementProgression(Progression::Task& progression);
+    void incrementProgression(Progression::Task& progression) const;
 
     void simulationEnd();
 
     /*!
     ** \brief Prepare clusters in 'must-run' mode
     */
-    void prepareClustersInMustRunMode(Data::Area::ScratchMap& scratchmap, uint year);
+    void prepareClustersInMustRunMode(Data::Area::ScratchMap& scratchmap, uint year) const;
 
     void initializeState(Variable::State& state, uint numSpace);
 
 private:
-    uint pNbWeeks;
-    uint pStartTime;
-    uint pNbMaxPerformedYearsInParallel;
+    uint pNbWeeks{0};
+    uint pStartTime{0};
+    uint pNbMaxPerformedYearsInParallel{0};
     std::vector<PROBLEME_HEBDO> pProblemesHebdo;
     std::vector<Optimization::WeeklyOptimization> weeklyOptProblems_;
     std::vector<std::unique_ptr<interfacePostProcessList>> postProcessesList_;
     IResultWriter& resultWriter;
-    std::reference_wrapper<Simulation::ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<ISimulationObserver> simulationObserver_;
 }; // class Economy
 
 } // namespace Antares::Solver::Simulation

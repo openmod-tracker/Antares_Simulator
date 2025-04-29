@@ -22,6 +22,7 @@
 #include <cmath>
 #include <fmt/format.h>
 
+#include "antares/solver/ts-generator/hydro.h"
 #include <antares/antares/fatal-error.h>
 #include <antares/study/study.h>
 #include <antares/utils/utils.h>

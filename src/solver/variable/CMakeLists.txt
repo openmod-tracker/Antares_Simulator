@@ -157,7 +157,6 @@ target_include_directories(antares-solver-variable
 target_link_libraries(antares-solver-variable
         PUBLIC
     	Boost::headers
-        antares-solver-simulation
         PRIVATE
         antares-core
         Antares::study
@@ -183,6 +182,7 @@ target_link_libraries(antares-solver-variable-info
         antares-core
         Antares::study
         antares-solver-simulation
+		Antares::data
 )
 
 install(DIRECTORY include/antares

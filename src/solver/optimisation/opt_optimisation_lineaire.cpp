@@ -27,7 +27,8 @@
 #include "antares/solver/optimisation/opt_export_structure.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
 #include "antares/solver/simulation/ISimulationObserver.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_constants.h"
 #include "antares/solver/utils/filename.h"
 
 using namespace Antares::Solver;
@@ -54,10 +55,11 @@ void OPT_EcrireResultatFonctionObjectiveAuFormatTXT(
   double optimalSolutionCost,
   const OptPeriodStringGenerator& optPeriodStringGenerator,
   int optimizationNumber,
-  Solver::IResultWriter& writer)
+  IResultWriter& writer)
 {
     Yuni::Clob buffer;
-    auto filename = createCriterionFilename(optPeriodStringGenerator, optimizationNumber);
+    Solver::Utils::FileNamer fn;
+    auto filename = fn.createCriterionFilename(optPeriodStringGenerator, optimizationNumber);
 
     logs.info() << "Solver Criterion File: `" << filename << "'";
 
@@ -68,12 +70,13 @@ void OPT_EcrireResultatFonctionObjectiveAuFormatTXT(
 void OPT_WriteSolution(const PROBLEME_ANTARES_A_RESOUDRE& pb,
                        const OptPeriodStringGenerator& optPeriodStringGenerator,
                        int optimizationNumber,
-                       Solver::IResultWriter& writer)
+                       IResultWriter& writer)
 {
     auto s = [](int x) { return static_cast<size_t>(x); };
 
     Yuni::Clob buffer;
-    auto filename = createSolutionFilename(optPeriodStringGenerator, optimizationNumber);
+    Solver::Utils::FileNamer fn;
+    auto filename = fn.createSolutionFilename(optPeriodStringGenerator, optimizationNumber);
     for (int var = 0; var < pb.NombreDeVariables; var++)
     {
         buffer.appendFormat("%s\t%11.10e\n", pb.NomDesVariables[s(var)].c_str(), pb.X[s(var)]);
@@ -81,7 +84,7 @@ void OPT_WriteSolution(const PROBLEME_ANTARES_A_RESOUDRE& pb,
     writer.addEntryFromBuffer(filename, buffer);
     buffer.clear();
 
-    filename = createMarginalCostFilename(optPeriodStringGenerator, optimizationNumber);
+    filename = fn.createMarginalCostFilename(optPeriodStringGenerator, optimizationNumber);
     for (int cont = 0; cont < pb.NombreDeContraintes; ++cont)
     {
         buffer.appendFormat("%s\t%11.10e\n",
@@ -91,7 +94,7 @@ void OPT_WriteSolution(const PROBLEME_ANTARES_A_RESOUDRE& pb,
     writer.addEntryFromBuffer(filename, buffer);
     buffer.clear();
 
-    filename = createReducedCostFilename(optPeriodStringGenerator, optimizationNumber);
+    filename = fn.createReducedCostFilename(optPeriodStringGenerator, optimizationNumber);
     for (int var = 0; var < pb.NombreDeVariables; ++var)
     {
         buffer.appendFormat("%s\t%11.10e\n",
@@ -105,21 +108,22 @@ namespace
 {
 void notifyProblemHebdo(const PROBLEME_HEBDO* problemeHebdo,
                         int optimizationNumber,
-                        Solver::Simulation::ISimulationObserver& simulationObserver,
+                        Simulation::ISimulationObserver& simulationObserver,
                         const OptPeriodStringGenerator* optPeriodStringGenerator)
 {
+    Solver::Utils::FileNamer fn;
     simulationObserver.notifyHebdoProblem(*problemeHebdo,
                                           optimizationNumber,
-                                          createMPSfilename(*optPeriodStringGenerator,
-                                                            optimizationNumber));
+                                          fn.createMPSfilename(*optPeriodStringGenerator,
+                                                                           optimizationNumber));
 }
 } // namespace
 
 bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& options,
                            PROBLEME_HEBDO* problemeHebdo,
-                           Solver::IResultWriter& writer,
+                           IResultWriter& writer,
                            int optimizationNumber,
-                           Solver::Simulation::ISimulationObserver& simulationObserver)
+                           Simulation::ISimulationObserver& simulationObserver)
 {
     const int NombreDePasDeTempsPourUneOptimisation = problemeHebdo
                                                         ->NombreDePasDeTempsPourUneOptimisation;
@@ -146,10 +150,11 @@ bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& option
                                         PremierPdtDeLIntervalle,
                                         DernierPdtDeLIntervalle);
 
+        Solver::Utils::FileNamer fn;
         // An optimization period represents a sequence as <year>-<week> or <year>-<week>-<day>,
         // depending whether the optimization is daily or weekly.
         // These sequences are used when building the names of MPS or criterion files.
-        auto optPeriodStringGenerator = createOptPeriodAsString(
+        auto optPeriodStringGenerator = fn.createOptPeriodAsString(
           problemeHebdo->OptimisationAuPasHebdomadaire,
           numeroDeLIntervalle,
           problemeHebdo->weekInTheYear,
@@ -170,7 +175,7 @@ bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& option
             return false;
         }
 
-        if (problemeHebdo->ExportMPS != Data::mpsExportStatus::NO_EXPORT)
+        if (problemeHebdo->ExportMPS != mpsExportStatus::NO_EXPORT)
         {
             double optimalSolutionCost = OPT_ObjectiveFunctionResult(problemeHebdo,
                                                                      numeroDeLIntervalle,
@@ -232,8 +237,8 @@ void resizeProbleme(PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre,
 
 bool OPT_OptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                               PROBLEME_HEBDO* problemeHebdo,
-                              Solver::IResultWriter& writer,
-                              Solver::Simulation::ISimulationObserver& simulationObserver)
+                              IResultWriter& writer,
+                              Simulation::ISimulationObserver& simulationObserver)
 {
     if (!problemeHebdo->OptimisationAuPasHebdomadaire)
     {

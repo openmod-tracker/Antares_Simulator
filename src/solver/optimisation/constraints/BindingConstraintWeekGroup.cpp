@@ -40,8 +40,6 @@ void BindingConstraintWeekGroup::BuildConstraints()
     if (problemeHebdo_->NombreDePasDeTempsPourUneOptimisation
         > problemeHebdo_->NombreDePasDeTempsDUneJournee)
     {
-        CORRESPONDANCES_DES_CONTRAINTES_HEBDOMADAIRES& CorrespondanceCntNativesCntOptimHebdomadaires
-          = problemeHebdo_->CorrespondanceCntNativesCntOptimHebdomadaires;
         for (uint32_t cntCouplante = 0;
              cntCouplante < problemeHebdo_->NombreDeContraintesCouplantes;
              cntCouplante++)

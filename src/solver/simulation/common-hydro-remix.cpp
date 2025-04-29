@@ -28,7 +28,6 @@
 #include <antares/utils/utils.h>
 #include "antares/solver/simulation/common-eco-adq.h"
 #include "antares/solver/simulation/shave-peaks-by-remix-hydro.h"
-#include "antares/study/simulation.h"
 
 #define EPSILON 1e-6
 

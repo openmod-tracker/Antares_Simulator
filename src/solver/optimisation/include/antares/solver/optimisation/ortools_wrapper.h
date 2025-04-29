@@ -18,16 +18,11 @@
 ** You should have received a copy of the Mozilla Public Licence 2.0
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
-#ifndef __ORTOOLS_WRAPPER__
-#define __ORTOOLS_WRAPPER__
+#pragma once
 
-#include <ortools/linear_solver/linear_solver.h>
-#include <string>
-
-#include <antares/optimization-options/options.h>
-
-#include "named_problem.h"
-
+namespace operations_research {
+    class MPSolver;
+}
 namespace Antares::Solver::Utils
 {
 void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* ProbSpx,
@@ -43,5 +38,5 @@ void ORTOOLS_CorrigerLesBornes(operations_research::MPSolver* ProbSpx,
                                const int* typeVar,
                                int nbVar);
 void ORTOOLS_LibererProbleme(operations_research::MPSolver* ProbSpx);
+
 } // namespace Antares::Solver::Utils
-#endif

@@ -7,5 +7,4 @@ add_boost_test(tests-simple-study
       antares-solver-variable
       antares-solver-simulation
       antares-solver-ts-generator
-      model_antares
       Antares::tests::in-memory-study)

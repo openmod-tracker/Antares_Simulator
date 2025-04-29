@@ -30,7 +30,6 @@ using adqPatchParamsMode = Antares::Data::AdequacyPatch::AdequacyPatchMode;
 
 class AdequacyPatchRuntimeData
 {
-private:
     std::vector<std::set<int>> csrTriggeredHoursPerArea_;
 
 public:

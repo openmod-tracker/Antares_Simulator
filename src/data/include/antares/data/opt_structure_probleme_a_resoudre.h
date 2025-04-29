@@ -1,34 +1,32 @@
-/*
-** Copyright 2007-2024, RTE (https://www.rte-france.com)
-** See AUTHORS.txt
-** SPDX-License-Identifier: MPL-2.0
-** This file is part of Antares-Simulator,
-** Adequacy and Performance assessment for interconnected energy networks.
-**
-** Antares_Simulator is free software: you can redistribute it and/or modify
-** it under the terms of the Mozilla Public Licence 2.0 as published by
-** the Mozilla Foundation, either version 2 of the License, or
-** (at your option) any later version.
-**
-** Antares_Simulator is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** Mozilla Public Licence 2.0 for more details.
-**
-** You should have received a copy of the Mozilla Public Licence 2.0
-** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
-*/
+// Copyright 2007-2025, RTE (https://www.rte-france.com)
+// See AUTHORS.txt
+// SPDX-License-Identifier: MPL-2.0
+// This file is part of Antares-Simulator,
+// Adequacy and Performance assessment for interconnected energy networks.
+//
+// Antares_Simulator is free software: you can redistribute it and/or modify
+// it under the terms of the Mozilla Public Licence 2.0 as published by
+// the Mozilla Foundation, either version 2 of the License, or
+// (at your option) any later version.
+//
+// Antares_Simulator is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// Mozilla Public Licence 2.0 for more details.
+//
+// You should have received a copy of the Mozilla Public Licence 2.0
+// along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 #ifndef __SOLVER_OPTIMISATION_STRUCTURE_PROBLEME_A_RESOUDRE_H__
 #define __SOLVER_OPTIMISATION_STRUCTURE_PROBLEME_A_RESOUDRE_H__
 
 #include <memory>
+#include <spx_constantes_externes.h>
 #include <string>
 #include <vector>
 
 #include <antares/solver/utils/basis_status.h>
 
 #include "SparseVector.hxx"
-#include "opt_constants.h"
 
 namespace operations_research
 {
@@ -41,8 +39,8 @@ class MPSolver;
 struct PROBLEME_ANTARES_A_RESOUDRE
 {
     /* La matrice des contraintes */
-    int NombreDeVariables;
-    int NombreDeContraintes; /* Il est egal a :
+    int NombreDeVariables{0};
+    int NombreDeContraintes{0}; /* Il est egal a :
                                  (  NombreDePays contraintes de bilan
                                   + NombreDePays contraintes de reserve
                                   + NombreDeContraintesCouplantes
@@ -53,8 +51,8 @@ struct PROBLEME_ANTARES_A_RESOUDRE
     std::vector<int> NombreDeTermesDesLignes;
     SparseVector<double> CoefficientsDeLaMatriceDesContraintes;
     SparseVector<int> IndicesColonnes;
-    int IncrementDAllocationMatriceDesContraintes;
-    int NombreDeTermesDansLaMatriceDesContraintes;
+    int IncrementDAllocationMatriceDesContraintes{0};
+    int NombreDeTermesDansLaMatriceDesContraintes{0};
     /* Donnees variables de la matrice des contraintes */
     std::vector<double> CoutQuadratique;
     std::vector<double> CoutLineaire;
@@ -86,7 +84,7 @@ struct PROBLEME_ANTARES_A_RESOUDRE
     std::vector<double*> AdresseOuPlacerLaValeurDesCoutsReduits;
     std::vector<double> CoutsReduits;
     /* En Entree ou en Sortie */
-    int ExistenceDUneSolution; /* En sortie, vaut :
+    int ExistenceDUneSolution{NON_SPX}; /* En sortie, vaut :
                                    OUI_SPX s'il y a une solution,
                                    NON_SPX s'il n'y a pas de solution admissible
                                    SPX_ERREUR_INTERNE si probleme a l'execution (saturation memoire

@@ -21,21 +21,21 @@
 
 #pragma once
 
-#include "antares/solver/simulation/base_post_process.h"
+#include "antares/solver/optimisation/base_post_process.h"
 
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 class OptPostProcessList: public interfacePostProcessList
 {
 public:
     OptPostProcessList(PROBLEME_HEBDO* problemeHebdo,
                        uint numSpace,
-                       AreaList& areas,
-                       SheddingPolicy sheddingPolicy,
-                       SimplexOptimization splxOptimization,
-                       Calendar& calendar);
+                       Data::AreaList& areas,
+                       Data::SheddingPolicy sheddingPolicy,
+                       Data::SimplexOptimization splxOptimization,
+                       Date::Calendar& calendar);
 
-    virtual ~OptPostProcessList() = default;
+    ~OptPostProcessList() override = default;
 };
 
 } // namespace Antares::Solver::Simulation

@@ -18,15 +18,9 @@
  * You should have received a copy of the Mozilla Public Licence 2.0
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
-#ifndef __SOLVER_SIMULATION_DATA_STRUCTS_H__
-#define __SOLVER_SIMULATION_DATA_STRUCTS_H__
+#pragma once
 
-typedef struct
+struct PRODUCTION_THERMIQUE
 {
     double* Horaire;
-} PRODUCTION_THERMIQUE;
-
-/* Old define */
-#define DEFINITION_STRUCTURES_DONNEES
-
-#endif /* __SOLVER_SIMULATION_DATA_STRUCTS_H__ */
+};

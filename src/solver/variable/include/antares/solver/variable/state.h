@@ -29,7 +29,7 @@
 #include <antares/study/area/scratchpad.h>
 #include <antares/study/fwd.h>
 #include "antares/solver/simulation/sim_structure_donnees.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 
 namespace Antares::Solver::Variable
 {

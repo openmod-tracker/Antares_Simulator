@@ -23,7 +23,7 @@
 
 #include <string>
 
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 
 ////////////////////////////////////////////////////////////////////
 // Export de la structure des LPs

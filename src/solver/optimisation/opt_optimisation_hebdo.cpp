@@ -27,7 +27,7 @@
 #include "antares/optimization-options/options.h"
 #include "antares/solver/optimisation/opt_appel_solveur_quadratique.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 
 using namespace Antares::Data;
 

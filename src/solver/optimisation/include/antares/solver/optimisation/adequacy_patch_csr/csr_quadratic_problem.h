@@ -39,16 +39,16 @@ public:
     {
     }
 
-    void buildConstraintMatrix();
+    void buildConstraintMatrix() const;
 
 private:
     PROBLEME_HEBDO* problemeHebdo_;
     PROBLEME_ANTARES_A_RESOUDRE& problemeAResoudre_;
     HourlyCSRProblem& hourlyCsrProblem_;
 
-    void setConstraintsOnFlows(ConstraintBuilder& builder);
-    void setNodeBalanceConstraints(ConstraintBuilder& builder);
-    void setBindingConstraints(ConstraintBuilder& builder);
+    void setConstraintsOnFlows(ConstraintBuilder& builder) const;
+    void setNodeBalanceConstraints(ConstraintBuilder& builder) const;
+    void setBindingConstraints(ConstraintBuilder& builder) const;
 };
 
 } // namespace Antares::Solver::Optimization

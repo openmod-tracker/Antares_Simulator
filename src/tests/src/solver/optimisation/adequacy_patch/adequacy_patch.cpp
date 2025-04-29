@@ -33,9 +33,6 @@
 #include "antares/solver/optimisation/adequacy_patch_csr/adq_patch_curtailment_sharing.h"
 #include "antares/study/parameters/adq-patch-params.h"
 
-static double origineExtremite = -1;
-static double extremiteOrigine = 5;
-
 using namespace Antares::Data::AdequacyPatch;
 namespace tt = boost::test_tools;
 

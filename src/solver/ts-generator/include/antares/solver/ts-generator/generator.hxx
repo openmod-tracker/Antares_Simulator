@@ -22,13 +22,11 @@
 #define __ANTARES_SOLVER_timeSeries_GENERATOR_HXX__
 
 #include <antares/logs/logs.h>
+#include "antares/solver/ts-generator/hydro.h"
+
 
 namespace Antares::TSGenerator
 {
-
-// forward declaration
-// Hydro - see hydro.cpp
-bool GenerateHydroTimeSeries(Data::Study& study, uint year, IResultWriter& writer);
 
 template<>
 inline bool GenerateTimeSeries<Data::timeSeriesHydro>(Data::Study& study,

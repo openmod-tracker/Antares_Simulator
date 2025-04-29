@@ -21,18 +21,10 @@
 
 #pragma once
 
-#include "antares/solver/simulation/sim_constants.h"
+constexpr double LINFINI_ANTARES = 1.e+80;
 
 constexpr char PREMIERE_OPTIMISATION = 1;
 constexpr char DEUXIEME_OPTIMISATION = 2;
-
-constexpr char CONTRAINTE_HORAIRE = 1;
-constexpr char CONTRAINTE_JOURNALIERE = 2;
-constexpr char CONTRAINTE_HEBDOMADAIRE = 3;
-
-constexpr char PAS_DE_LISSAGE_HYDRAULIQUE = 0;
-constexpr char LISSAGE_HYDRAULIQUE_SUR_SOMME_DES_VARIATIONS = 1;
-constexpr char LISSAGE_HYDRAULIQUE_SUR_VARIATION_MAX = 2;
 
 constexpr char ALTRUISTE = 1;
 constexpr char EGOISTE = 2;

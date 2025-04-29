@@ -1,4 +1,5 @@
-set(SRC
+add_library(antares_utils)
+target_sources(antares_utils PRIVATE
         basis_status.cpp
         basis_status_impl.cpp
         basis_status_impl.h
@@ -9,34 +10,26 @@ set(SRC
         include/antares/solver/utils/name_translator.h
         include/antares/solver/utils/named_problem.h
         include/antares/solver/utils/opt_period_string_generator.h
-        include/antares/solver/utils/ortools_quadratic_wrapper.h
         include/antares/solver/utils/ortools_utils.h
         mps_utils.cpp
         name_translator.cpp
         named_problem.cpp
         opt_period_string_generator.cpp
-        ortools_quadratic_wrapper.cpp
         ortools_utils.cpp
 )
 
-add_library(utils ${SRC})
-add_library(Antares::solverUtils ALIAS utils)
-if (NOT MSVC)
-    target_compile_options(utils
-            PUBLIC
-            "-Wno-unused-variable")
-endif ()
-target_link_libraries(utils
+add_library(Antares::solverUtils ALIAS antares_utils)
+
+target_link_libraries(antares_utils
         PUBLIC
         ortools::ortools
         sirius_solver
-        Antares::study
         Antares::result_writer
         Antares::optimization-options
-        antares-core
+        Antares::exception
 )
 
-target_include_directories(utils
+target_include_directories(antares_utils
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )

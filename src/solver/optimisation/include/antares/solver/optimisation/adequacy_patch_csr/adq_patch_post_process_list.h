@@ -21,27 +21,36 @@
 
 #pragma once
 
-#include "antares/solver/simulation/base_post_process.h"
+#include "antares/solver/optimisation/base_post_process.h"
 #include "antares/study/parameters/adq-patch-params.h"
+
+namespace Antares::OptimizationOptions {
+    class OptimizationOptions;
+}
+
+namespace Antares::Date {
+    class Calendar;
+}
+
+struct PROBLEME_HEBDO;
 
 namespace Antares::Solver::Simulation
 {
 
-class AdqPatchPostProcessList: public interfacePostProcessList
+class AdqPatchPostProcessList: public Optimization::interfacePostProcessList
 {
-    using AdqPatchParams = Antares::Data::AdequacyPatch::AdqPatchParams;
 
 public:
-    AdqPatchPostProcessList(const AdqPatchParams& adqPatchParams,
+    AdqPatchPostProcessList(const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
                             PROBLEME_HEBDO* problemeHebdo,
                             uint numSpace,
-                            AreaList& areas,
-                            SheddingPolicy sheddingPolicy,
-                            SimplexOptimization splxOptimization,
-                            Calendar& calendar,
+                            Data::AreaList& areas,
+                            Data::SheddingPolicy sheddingPolicy,
+                            Data::SimplexOptimization splxOptimization,
+                            Date::Calendar& calendar,
                             const OptimizationOptions::OptimizationOptions& solverOptions);
 
-    virtual ~AdqPatchPostProcessList() = default;
+    ~AdqPatchPostProcessList() override = default;
 };
 
 } // namespace Antares::Solver::Simulation

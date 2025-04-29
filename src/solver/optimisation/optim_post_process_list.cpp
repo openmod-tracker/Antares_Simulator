@@ -23,7 +23,9 @@
 
 #include "antares/solver/optimisation/post_process_commands.h"
 
-namespace Antares::Solver::Simulation
+using namespace Antares::Data;
+using namespace Antares::Date;
+namespace Antares::Optimization
 {
 OptPostProcessList::OptPostProcessList(PROBLEME_HEBDO* problemeHebdo,
                                        uint numSpace,

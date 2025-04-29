@@ -19,9 +19,11 @@
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
 
+#include <cstdint>
 #include <numeric>
 
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_constants.h"
 
 double OPT_SommeDesPminThermiques(const PROBLEME_HEBDO*, int, uint);
 void OPT_InitialiserLeSecondMembreDuProblemeLineaireCoutsDeDemarrage(PROBLEME_HEBDO*, int, int);

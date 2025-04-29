@@ -266,6 +266,7 @@ OMESSAGE("") # empty line
 add_subdirectory(api)
 add_subdirectory(io)
 add_subdirectory(libs) 		#antares-core fswalker
+add_subdirectory(data)
 
 if(BUILD_UI)
 	add_subdirectory(ui)		#all antares ui libs + antares simulator
@@ -397,3 +398,9 @@ include(CPack)
 
 #Last. We need all target defined
 add_subdirectory(packaging)
+add_custom_target(graphviz
+		COMMAND ${CMAKE_COMMAND} "--graphviz=xpansion.dot" .
+		COMMAND dot -Tsvg xpansion.dot -o xpansion.svg
+		COMMAND dot -Tpng xpansion.dot -o xpansion.png
+		WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+)

@@ -8,5 +8,4 @@ add_boost_test(timeseries-tests
   LIBS
   Antares::array
   Antares::series
-  antares-solver-simulation
 )

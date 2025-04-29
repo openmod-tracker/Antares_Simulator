@@ -21,8 +21,7 @@
 #pragma once
 
 #include <antares/study/study.h>
-#include "antares/config/config.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 
 void SIM_AllocationProblemeDonneesGenerales(PROBLEME_HEBDO& problem,
                                             const Antares::Data::Study& study,

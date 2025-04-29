@@ -9,7 +9,8 @@ set(src_libs_antares_study "${CMAKE_SOURCE_DIR}/libs/antares/study")
 add_boost_test(test-sc-builder-file-read-line
   SRC test-sc-builder-file-read-line.cpp
   INCLUDE "${src_libs_antares_study}/include"
-  LIBS model_antares)
+  LIBS Antares::optimisation
+)
 
 # ====================================
 # Tests on saving scenario-builder
@@ -23,7 +24,8 @@ add_boost_test(test-sc-builder-file-save
   "${src_libs_antares_study}/scenario-builder"
   "${src_tests_src_libs_antares_study}"
   LIBS
-  model_antares)
+        Antares::optimisation
+)
 
 add_boost_test(test-sc-builder-get-set
   SRC test-sc-builder-get-set.cpp
@@ -32,4 +34,5 @@ add_boost_test(test-sc-builder-get-set
   "${src_libs_antares_study}/scenario-builder"
   "${src_tests_src_libs_antares_study}"
   LIBS
-  model_antares)
+        Antares::optimisation
+)

@@ -29,15 +29,16 @@
 #include "antares/solver/simulation/simulation.h"
 
 using namespace Yuni;
-using Antares::Constants::nbHoursInAWeek;
+using Constants::nbHoursInAWeek;
 
+using namespace Antares::Data;
+using namespace Antares::Date;
 namespace Antares::Solver::Simulation
 {
-Economy::Economy(Data::Study& study,
+Economy::Economy(Study& study,
                  IResultWriter& resultWriter,
-                 Simulation::ISimulationObserver& simulationObserver):
+                 ISimulationObserver& simulationObserver):
     study(study),
-    preproOnly(false),
     resultWriter(resultWriter),
     simulationObserver_(simulationObserver)
 {
@@ -114,7 +115,7 @@ bool Economy::year(Progression::Task& progression,
                    std::list<uint>& failedWeekList,
                    const HYDRO_VENTILATION_RESULTS& hydroVentilationResults,
                    OptimizationStatisticsWriter& optWriter,
-                   const Antares::Data::Area::ScratchMap& scratchmap)
+                   const Area::ScratchMap& scratchmap)
 {
     // No failed week at year start
     failedWeekList.clear();
@@ -135,7 +136,7 @@ bool Economy::year(Progression::Task& progression,
         currentProblem.weekInTheYear = state.weekInTheYear = w;
         currentProblem.HeureDansLAnnee = hourInTheYear;
 
-        ::SIM_RenseignementProblemeHebdo(study,
+        SIM_RenseignementProblemeHebdo(study,
                                          currentProblem,
                                          state.weekInTheYear,
                                          hourInTheYear,
@@ -188,7 +189,7 @@ bool Economy::year(Progression::Task& progression,
             }
             optWriter.addTime(w, currentProblem.timeMeasure);
         }
-        catch (Data::AssertionError& ex)
+        catch (AssertionError& ex)
         {
             // Indicate failed week list (first week of the year is "week number one" for the user
             // but w=0 for the loop)
@@ -199,7 +200,7 @@ bool Economy::year(Progression::Task& progression,
                        + " simulation is stopped : " + ex.what());
             return false;
         }
-        catch (Data::UnfeasibleProblemError&)
+        catch (UnfeasibleProblemError&)
         {
             // need to clean next problemeHebdo
             reinitOptim = true;
@@ -209,7 +210,7 @@ bool Economy::year(Progression::Task& progression,
             failedWeekList.push_back(w + 1);
 
             // Define if simulation must be stopped
-            if (Data::stopSimulation(study.parameters.include.unfeasibleProblemBehavior))
+            if (stopSimulation(study.parameters.include.unfeasibleProblemBehavior))
             {
                 return false;
             }
@@ -226,8 +227,7 @@ bool Economy::year(Progression::Task& progression,
     return true;
 }
 
-void Economy::incrementProgression(Progression::Task& progression)
-{
+void Economy::incrementProgression(Progression::Task& progression) const {
     for (uint w = 0; w < pNbWeeks; ++w)
     {
         ++progression;
@@ -236,14 +236,14 @@ void Economy::incrementProgression(Progression::Task& progression)
 
 // Retrieve weighted average balance for each area
 static std::vector<AvgExchangeResults*> retrieveBalance(
-  const Data::Study& study,
-  Solver::Variable::Economy::AllVariables& variables)
+  const Study& study,
+  Variable::Economy::AllVariables& variables)
 {
     const uint nbAreas = study.areas.size();
     std::vector<AvgExchangeResults*> balance(nbAreas, nullptr);
     for (uint areaIndex = 0; areaIndex < nbAreas; ++areaIndex)
     {
-        const Data::Area* area = study.areas.byIndex[areaIndex];
+        const Area* area = study.areas.byIndex[areaIndex];
         variables.retrieveResultsForArea<Variable::Economy::VCardBalance>(&balance[areaIndex],
                                                                           area);
     }
@@ -259,8 +259,7 @@ void Economy::simulationEnd()
     }
 }
 
-void Economy::prepareClustersInMustRunMode(Data::Area::ScratchMap& scratchmap, uint year)
-{
+void Economy::prepareClustersInMustRunMode(Area::ScratchMap& scratchmap, uint year) const {
     for (uint i = 0; i < study.areas.size(); ++i)
     {
         auto& area = *study.areas[i];

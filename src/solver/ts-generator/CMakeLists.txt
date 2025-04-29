@@ -5,6 +5,7 @@ project(ts-generator)
 #
 set(SRC_GENERATORS
         include/antares/solver/ts-generator/generator.h
+        include/antares/solver/ts-generator/hydro.h
         include/antares/solver/ts-generator/generator.hxx
         generator.cpp
         availability.cpp
@@ -45,16 +46,13 @@ source_group("ts-generator\\XCast" FILES ${SRC_XCAST})
 add_library(antares-solver-ts-generator
         ${SRC_GENERATORS}
         ${SRC_XCAST})
+add_library(Antares::solverTsGenerator ALIAS antares-solver-ts-generator)
 
 find_package(fmt REQUIRED)
 target_link_libraries(antares-solver-ts-generator
         PRIVATE
-        result_writer
-        array
-        benchmarking
         Antares::study
         Antares::misc
-		antares-solver-simulation
 		fmt::fmt
 )
 

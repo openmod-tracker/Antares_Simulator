@@ -24,7 +24,7 @@
 #include <antares/optimization-options/options.h>
 #include <antares/solver/utils/opt_period_string_generator.h>
 #include <antares/writer/i_writer.h>
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
 #include "antares/solver/simulation/ISimulationObserver.h"
 #include "antares/study/parameters/adq-patch-params.h"
 

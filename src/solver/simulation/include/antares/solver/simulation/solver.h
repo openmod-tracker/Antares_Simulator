@@ -18,16 +18,12 @@
  * You should have received a copy of the Mozilla Public Licence 2.0
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
-#ifndef __SOLVER_SIMULATION_SOLVER_H__
-#define __SOLVER_SIMULATION_SOLVER_H__
+#pragma once
 
 #include <yuni/job/queue/service.h>
 
 #include <antares/benchmarking/DurationCollector.h>
-#include <antares/logs/logs.h>
 #include <antares/solver/simulation/ISimulationObserver.h>
-#include <antares/study/study.h>
-#include <antares/writer/writer_factory.h>
 #include "antares/solver/hydro/management/management.h"
 #include "antares/solver/misc/options.h"
 #include "antares/solver/simulation/solver.data.h"
@@ -37,16 +33,15 @@
 class NumSpaceManager
 {
 public:
-    NumSpaceManager(int N):
+    explicit NumSpaceManager(int N):
         available(N, true)
     {
     }
 
-    inline int getAvailableNumSpace()
+    int getAvailableNumSpace()
     {
         // std::find not available for std::vector<bool>
         std::unique_lock lk(mut);
-        int idx = 0;
         for (std::size_t idx = 0; idx < available.size(); idx++)
         {
             if (available[idx])
@@ -58,7 +53,7 @@ public:
         return -1;
     }
 
-    inline void freeNumSpace(int numSpace)
+    void freeNumSpace(int numSpace)
     {
         std::unique_lock lk(mut);
         available[numSpace] = true;
@@ -123,15 +118,6 @@ private:
     void regenerateTimeSeries(uint year);
 
     /*!
-    ** \brief Builds sets of parallel years
-    **
-    ** \return The max number of years in a set of parallel years (to be executed or not)
-    */
-    uint buildSetsOfParallelYears(uint firstYear,
-                                  uint endYear,
-                                  std::vector<setOfParallelYears>& setsOfParallelYears);
-
-    /*!
     ** \brief Allocate storage for random numbers of parallel years
     **
     ** \param	randomParallelYears	... to be finished ...
@@ -188,12 +174,10 @@ public:
     //! The queue service that runs every set of parallel years
     std::shared_ptr<Yuni::Job::QueueService> pQueueService = nullptr;
     //! Result writer
-    Antares::Solver::IResultWriter& pResultWriter;
+    IResultWriter& pResultWriter;
 
     std::reference_wrapper<ISimulationObserver> simulationObserver_;
 }; // class ISimulation
 } // namespace Antares::Solver::Simulation
 
 #include "solver.hxx"
-
-#endif // __SOLVER_SIMULATION_SOLVER_H__

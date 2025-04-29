@@ -18,37 +18,30 @@
 ** You should have received a copy of the Mozilla Public Licence 2.0
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
-#ifndef __SOLVER_SIMULATION_H__
-#define __SOLVER_SIMULATION_H__
+#pragma once
 
-#include <antares/study/study.h>
-#include "antares/config/config.h"
 #include "antares/solver/hydro/management/management.h"
-
-#include "sim_structure_donnees.h"
 
 struct PROBLEME_HEBDO;
 
 /*!
 ** \brief Alloue toutes les donnees d'un probleme hebdo
 */
-void SIM_AllocationProblemeHebdo(const Antares::Data::Study& study,
+void SIM_AllocationProblemeHebdo(const Data::Study& study,
                                  PROBLEME_HEBDO& problem,
                                  uint NombreDePasDeTemps);
 
 /*!
 ** \brief Alloue et initialise un probleme hebdo
 */
-void SIM_InitialisationProblemeHebdo(Antares::Data::Study& study,
+void SIM_InitialisationProblemeHebdo(Data::Study& study,
                                      PROBLEME_HEBDO& problem,
                                      unsigned int NombreDePasDeTemps,
                                      uint numspace);
 
-void SIM_RenseignementProblemeHebdo(const Antares::Data::Study& study,
+void SIM_RenseignementProblemeHebdo(const Data::Study& study,
                                     PROBLEME_HEBDO& problem,
                                     uint weekInTheYear,
                                     const int,
-                                    const Antares::HYDRO_VENTILATION_RESULTS&,
-                                    const Antares::Data::Area::ScratchMap&);
-
-#endif /* __SOLVER_SIMULATION_H__ */
+                                    const HYDRO_VENTILATION_RESULTS&,
+                                    const Data::Area::ScratchMap&);

@@ -23,10 +23,12 @@
 
 #include "antares/solver/optimisation/post_process_commands.h"
 
+using namespace Antares::Data;
+using namespace Antares::Date;
 namespace Antares::Solver::Simulation
 {
 AdqPatchPostProcessList::AdqPatchPostProcessList(
-  const AdqPatchParams& adqPatchParams,
+  const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
   PROBLEME_HEBDO* problemeHebdo,
   uint numSpace,
   AreaList& areas,

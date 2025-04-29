@@ -22,9 +22,11 @@
 #include "antares/solver/optimisation/post_process_commands.h"
 
 #include "antares/solver/optimisation/adequacy_patch_csr/adq_patch_curtailment_sharing.h"
-#include "antares/solver/simulation/adequacy_patch_runtime_data.h"
+#include "antares/data/adequacy_patch_runtime_data.h"
 #include "antares/solver/simulation/common-eco-adq.h"
 
+using namespace Antares::Data;
+using namespace Antares::Date;
 namespace Antares::Solver::Simulation
 {
 const uint nbHoursInWeek = 168;
@@ -115,7 +117,6 @@ void UpdateMrgPriceAfterCSRcmd::execute(const optRuntimeData&)
     for (uint32_t Area = 0; Area < problemeHebdo_->NombreDePays; Area++)
     {
         auto& hourlyResults = problemeHebdo_->ResultatsHoraires[Area];
-        const auto& scratchpad = area_list_[Area]->scratchpad[numSpace_];
         const double unsuppliedEnergyCost = area_list_[Area]->thermal.unsuppliedEnergyCost;
         const bool areaInside = problemeHebdo_->adequacyPatchRuntimeData->areaMode[Area]
                                 == physicalAreaInsideAdqPatch;
@@ -281,8 +282,6 @@ double CurtailmentSharingPostProcessCmd::calculateDensNewAndTotalLmrViolation()
                 // adjust densNew according to the new specification/request by ELIA
                 /* DENS_new (node A) = max [ 0; ENS_init (node A) + net_position_init (node A)
                                         + ? flows (node 1 -> node A) - DTG.MRG(node A)] */
-                const auto& scratchpad = area_list_[Area]->scratchpad[numSpace_];
-                double dtgMrg = scratchpad.dispatchableGenerationMargin[hour];
                 // write down densNew values for all the hours
                 problemeHebdo_->ResultatsHoraires[Area].ValeursHorairesDENS[hour] = std::max(
                   0.0,

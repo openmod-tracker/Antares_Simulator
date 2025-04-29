@@ -20,8 +20,8 @@
 */
 
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/simulation/simulation.h"
 
 /*

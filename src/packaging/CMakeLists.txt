@@ -20,6 +20,7 @@ set(TARGET_LIBS #No alias
         # study
         yuni-static-core
         array
+        data
         date
         inifile
         stdcxx
@@ -48,7 +49,7 @@ set(TARGET_LIBS #No alias
         # antares-solver-simulation
         concurrency
         misc
-        model_antares
+        optimisation
         antares-solver-ts-generator
         shave-peaks-by-remix-hydro
 

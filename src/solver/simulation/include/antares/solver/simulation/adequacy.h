@@ -18,15 +18,13 @@
  * You should have received a copy of the Mozilla Public Licence 2.0
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
-#ifndef __SOLVER_SIMULATION_ADEQUACY_H__
-#define __SOLVER_SIMULATION_ADEQUACY_H__
+#pragma once
 
 #include "antares/infoCollection/StudyInfoCollector.h"
 #include "antares/solver/simulation/common-eco-adq.h"
 #include "antares/solver/simulation/opt_time_writer.h"
 #include "antares/solver/simulation/solver.h" // for definition of type yearRandomNumbers
 #include "antares/solver/variable/adequacy/all.h"
-#include "antares/solver/variable/economy/all.h"
 #include "antares/solver/variable/state.h"
 #include "antares/solver/variable/variable.h"
 
@@ -105,5 +103,3 @@ private:
 }; // class Adequacy
 
 } // namespace Antares::Solver::Simulation
-
-#endif // __SOLVER_SIMULATION_ADEQUACY_H__

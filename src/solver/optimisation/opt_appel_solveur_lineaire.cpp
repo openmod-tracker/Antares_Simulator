@@ -32,11 +32,12 @@
 #include "antares/solver/optim-model-filler/ComponentFiller.h"
 #include "antares/solver/optimisation/LegacyFiller.h"
 #include "antares/solver/optimisation/LegacyOrtoolsLinearProblem.h"
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_constants.h"
 #include "antares/solver/utils/filename.h"
 #include "antares/solver/utils/mps_utils.h"
-#include "antares/solver/utils/ortools_wrapper.h"
+#include "antares/solver/optimisation/ortools_wrapper.h"
 #include "antares/study/system-model/system.h"
 #include "antares/solver/optimisation/ortools_simplexe.h"
 
@@ -125,8 +126,9 @@ static void writeModelerSolutions(const operations_research::MPSolver* solver,
         contentStream << (*v)->name() << "\t" << (*v)->solution_value() << std::endl;
     }
 
-    auto modelerSolutionFilename = createModelerSolutionsFilename(optPeriodStringGenerator,
-                                                                  optimizationNumber);
+    Solver::Utils::FileNamer fn;
+    auto modelerSolutionFilename = fn.createModelerSolutionsFilename(optPeriodStringGenerator,
+                                                                                 optimizationNumber);
     std::string content = contentStream.str();
     writer.addEntryFromBuffer(modelerSolutionFilename, content);
 }
@@ -266,7 +268,8 @@ static SimplexResult OPT_TryToCallSimplex(const OptimizationOptions::SingleOptim
     {
         solver = convertToMPSolver(Probleme, problemeHebdo, options);
     }
-    const std::string filename = createMPSfilename(optPeriodStringGenerator, optimizationNumber);
+    Solver::Utils::FileNamer fn;
+    const std::string filename = fn.createMPSfilename(optPeriodStringGenerator, optimizationNumber);
 
     mpsWriterFactory mps_writer_factory(problemeHebdo->ExportMPS,
                                         problemeHebdo->exportMPSOnError,
@@ -424,8 +427,9 @@ bool OPT_AppelDuSimplexe(const OptimizationOptions::SingleOptimOptions& options,
         analyzer->printReport();
 
         auto mps_writer_on_error = simplexResult.mps_writer_factory.createOnOptimizationError();
-        const std::string filename = createMPSfilename(optPeriodStringGenerator,
-                                                       optimizationNumber);
+        Solver::Utils::FileNamer fn;
+        const std::string filename = fn.createMPSfilename(optPeriodStringGenerator,
+                                                                      optimizationNumber);
         mps_writer_on_error->runIfNeeded(writer, filename);
 
         return false;

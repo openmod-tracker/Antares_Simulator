@@ -18,7 +18,7 @@
  * You should have received a copy of the Mozilla Public Licence 2.0
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
-#define BOOST_TEST_MODULE test solver simulation things
+#define BOOST_TEST_MODULE testTSNumbers
 
 #define WIN32_LEAN_AND_MEAN
 

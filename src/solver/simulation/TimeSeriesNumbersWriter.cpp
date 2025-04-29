@@ -23,7 +23,6 @@
 //
 
 #include <filesystem>
-#include <utility>
 
 #include "antares/solver/simulation/BindingConstraintsTimeSeriesNumbersWriter.h"
 #include "antares/study/binding_constraint/BindingConstraintGroupRepository.h"

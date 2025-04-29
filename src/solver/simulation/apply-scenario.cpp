@@ -27,9 +27,9 @@ namespace Antares::Solver
 {
 void ApplyCustomScenario(Data::Study& study)
 {
-    auto& parameters = study.parameters;
+    const auto& parameters = study.parameters;
 
-    auto& rulename = parameters.activeRulesScenario;
+    const auto& rulename = parameters.activeRulesScenario;
     logs.info() << "Preparing time-series numbers... (" << rulename << ')';
     logs.info() << "  :: Scenario Builder, active target: " << rulename;
     Data::RulesScenarioName id = rulename;

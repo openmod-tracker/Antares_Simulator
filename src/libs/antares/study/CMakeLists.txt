@@ -218,7 +218,6 @@ set(SRC_STUDY
         include/antares/study/runtime.h
         include/antares/study/runtime/runtime.h
         include/antares/study/sets.h
-        include/antares/study/simulation.h
         include/antares/study/study.h
         include/antares/study/study.h
         include/antares/study/study.hxx

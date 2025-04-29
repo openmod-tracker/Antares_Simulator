@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include "antares/solver/simulation/base_post_process.h"
+#include "antares/solver/optimisation/base_post_process.h"
 
 namespace Antares::Solver::Simulation
 {
@@ -29,52 +29,52 @@ class DispatchableMarginPostProcessCmd: public basePostProcessCommand
 public:
     DispatchableMarginPostProcessCmd(PROBLEME_HEBDO* problemeHebdo,
                                      unsigned int numSpace,
-                                     AreaList& areas);
+                                     Data::AreaList& areas);
     void execute(const optRuntimeData& opt_runtime_data) override;
 
 private:
     unsigned int numSpace_ = 0;
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
 };
 
 class RemixHydroPostProcessCmd: public basePostProcessCommand
 {
 public:
     RemixHydroPostProcessCmd(PROBLEME_HEBDO* problemeHebdo,
-                             AreaList& areas,
-                             SheddingPolicy sheddingPolicy,
-                             SimplexOptimization simplexOptimization,
+                             Data::AreaList& areas,
+                             Data::SheddingPolicy sheddingPolicy,
+                             Data::SimplexOptimization simplexOptimization,
                              unsigned int numSpace);
     void execute(const optRuntimeData& opt_runtime_data) override;
 
 private:
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
     unsigned int numSpace_ = 0;
-    SheddingPolicy shedding_policy_;
-    SimplexOptimization splx_optimization_;
+    Data::SheddingPolicy shedding_policy_;
+    Data::SimplexOptimization splx_optimization_;
 };
 
 class UpdateMrgPriceAfterCSRcmd: public basePostProcessCommand
 {
 public:
     UpdateMrgPriceAfterCSRcmd(PROBLEME_HEBDO* problemeHebdo,
-                              AreaList& areas,
+                              Data::AreaList& areas,
                               unsigned int numSpace);
     void execute(const optRuntimeData&) override;
 
 private:
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
     unsigned int numSpace_ = 0;
 };
 
 class DTGnettingAfterCSRcmd: public basePostProcessCommand
 {
 public:
-    DTGnettingAfterCSRcmd(PROBLEME_HEBDO* problemeHebdo, AreaList& areas, unsigned int numSpace);
+    DTGnettingAfterCSRcmd(PROBLEME_HEBDO* problemeHebdo, Data::AreaList& areas, unsigned int numSpace);
     void execute(const optRuntimeData&) override;
 
 private:
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
     unsigned int numSpace_ = 0;
 };
 
@@ -82,33 +82,33 @@ class InterpolateWaterValuePostProcessCmd: public basePostProcessCommand
 {
 public:
     InterpolateWaterValuePostProcessCmd(PROBLEME_HEBDO* problemeHebdo,
-                                        AreaList& areas,
+                                        Data::AreaList& areas,
                                         const Date::Calendar& calendar);
 
     void execute(const optRuntimeData& opt_runtime_data) override;
 
 private:
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
     const Date::Calendar& calendar_;
 };
 
 class HydroLevelsFinalUpdatePostProcessCmd: public basePostProcessCommand
 {
 public:
-    HydroLevelsFinalUpdatePostProcessCmd(PROBLEME_HEBDO* problemeHebdo, AreaList& areas);
+    HydroLevelsFinalUpdatePostProcessCmd(PROBLEME_HEBDO* problemeHebdo, Data::AreaList& areas);
 
     void execute(const optRuntimeData& opt_runtime_data) override;
 
 private:
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
 };
 
 class CurtailmentSharingPostProcessCmd: public basePostProcessCommand
 {
 public:
-    CurtailmentSharingPostProcessCmd(const AdqPatchParams& adqPatchParams,
+    CurtailmentSharingPostProcessCmd(const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
                                      PROBLEME_HEBDO* problemeHebdo,
-                                     AreaList& areas,
+                                     Data::AreaList& areas,
                                      unsigned int numSpace,
                                      const OptimizationOptions::OptimizationOptions& solverOptions);
 
@@ -121,7 +121,7 @@ private:
     std::set<int> getHoursRequiringCurtailmentSharing() const;
 
     using AdqPatchParams = Antares::Data::AdequacyPatch::AdqPatchParams;
-    const AreaList& area_list_;
+    const Data::AreaList& area_list_;
     const AdqPatchParams& adqPatchParams_;
     unsigned int numSpace_ = 0;
     const OptimizationOptions::OptimizationOptions& solverOptions_;

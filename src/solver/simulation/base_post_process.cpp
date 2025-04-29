@@ -19,14 +19,16 @@
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
 
-#include "antares/solver/simulation/base_post_process.h"
+#include "antares/solver/optimisation/base_post_process.h"
 
 #include <memory>
 
 #include "antares/solver/optimisation/adequacy_patch_csr/adq_patch_post_process_list.h"
 #include "antares/solver/optimisation/optim_post_process_list.h"
 
-namespace Antares::Solver::Simulation
+using namespace Antares::Data;
+using namespace Antares::Date;
+namespace Antares::Optimization
 {
 
 basePostProcessCommand::basePostProcessCommand(PROBLEME_HEBDO* problemeHebdo):
@@ -41,7 +43,7 @@ interfacePostProcessList::interfacePostProcessList(PROBLEME_HEBDO* problemesHebd
 }
 
 std::unique_ptr<interfacePostProcessList> interfacePostProcessList::create(
-  AdqPatchParams& adqPatchParams,
+    AdequacyPatch::AdqPatchParams& adqPatchParams,
   PROBLEME_HEBDO* problemeHebdo,
   uint numSpace,
   AreaList& areas,
@@ -63,12 +65,12 @@ std::unique_ptr<interfacePostProcessList> interfacePostProcessList::create(
     }
     else
     {
-        return std::make_unique<OptPostProcessList>(problemeHebdo,
-                                                    numSpace,
-                                                    areas,
-                                                    sheddingPolicy,
-                                                    splxOptimization,
-                                                    calendar);
+        return std::make_unique<Solver::Simulation::OptPostProcessList>(problemeHebdo,
+                                                                        numSpace,
+                                                                        areas,
+                                                                        sheddingPolicy,
+                                                                        splxOptimization,
+                                                                        calendar);
     }
 }
 

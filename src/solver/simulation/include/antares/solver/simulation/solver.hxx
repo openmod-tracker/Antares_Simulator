@@ -18,8 +18,7 @@
  * You should have received a copy of the Mozilla Public Licence 2.0
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
-#ifndef __SOLVER_SIMULATION_SOLVER_HXX__
-#define __SOLVER_SIMULATION_SOLVER_HXX__
+#pragma once
 
 #include <yuni/io/io.h>
 
@@ -172,7 +171,7 @@ public:
             std::list<uint> failedWeekList;
 
             OptimizationStatisticsWriter optWriter(pResultWriter, y);
-            bool yearFailed = !simulation_->year(progression,
+            [[maybe_unused]] bool yearFailed = !simulation_->year(progression,
                                                  state,
                                                  numSpace,
                                                  randomForCurrentYear,
@@ -235,7 +234,7 @@ public:
 };
 
 template<class ImplementationType>
-inline ISimulation<ImplementationType>::ISimulation(
+ISimulation<ImplementationType>::ISimulation(
   Data::Study& study,
   const ::Settings& settings,
   Benchmarking::DurationCollector& duration_collector,
@@ -266,7 +265,7 @@ inline ISimulation<ImplementationType>::ISimulation(
 }
 
 template<class ImplementationType>
-inline void ISimulation<ImplementationType>::checkWriter() const
+ void ISimulation<ImplementationType>::checkWriter() const
 {
     // The zip writer needs a queue service (async mutexed write)
     if (!pQueueService && pResultWriter.needsTheJobQueue())
@@ -276,7 +275,7 @@ inline void ISimulation<ImplementationType>::checkWriter() const
 }
 
 template<class ImplementationType>
-inline ISimulation<ImplementationType>::~ISimulation()
+ISimulation<ImplementationType>::~ISimulation()
 {
 }
 
@@ -798,14 +797,10 @@ void ISimulation<ImplementationType>::loopThroughYears(uint firstYear,
     MersenneTwister randomHydroGenerator;
     randomHydroGenerator.reset(study.parameters.seed[Data::seedHydroManagement]);
 
-    // List of parallel years sets
-    std::vector<setOfParallelYears> setsOfParallelYears;
-
     // Gets information on each set of parallel years and returns the max number of years performed
     // in a set The variable "maxNbYearsPerformedInAset" is the maximum numbers of years to be
     // actually executed in a set. A set contains some years to be actually executed (at most
     // "pNbMaxPerformedYearsInParallel" years) and some others to skip.
-    uint maxNbYearsPerformedInAset = pNbMaxPerformedYearsInParallel;
 
     // Number of threads to perform the jobs waiting in the queue
     pQueueService->maximumThreadCount(pNbMaxPerformedYearsInParallel);
@@ -863,7 +858,6 @@ void ISimulation<ImplementationType>::loopThroughYears(uint firstYear,
     std::map<uint, bool> yearFailed;
     NumSpaceManager numspaceManager(pNbMaxPerformedYearsInParallel);
 
-    bool yearPerformed = false;
     Concurrency::FutureSet results;
     std::mutex aggregationMutex;
     for (uint year = firstYear; year < endYear; year++)
@@ -939,5 +933,3 @@ void ISimulation<ImplementationType>::loopThroughYears(uint firstYear,
 }
 
 } // namespace Antares::Solver::Simulation
-
-#endif // __SOLVER_SIMULATION_SOLVER_HXX__

@@ -27,7 +27,7 @@
 
 #include <antares/logs/logs.h>
 #include <antares/study/parameters/adq-patch-params.h>
-#include "antares/solver/optimisation/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
 
 #include "../variables/VariableManagerUtils.h"
 

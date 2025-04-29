@@ -22,8 +22,9 @@
 #include <cmath>
 #include <spx_constantes_externes.h>
 
-#include "antares/solver/simulation/adequacy_patch_runtime_data.h"
-#include "antares/solver/simulation/sim_structure_probleme_economique.h"
+#include "antares/data/adequacy_patch_runtime_data.h"
+#include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_constants.h"
 
 #include "variables/VariableManagement.h"
 #include "variables/VariableManagerUtils.h"

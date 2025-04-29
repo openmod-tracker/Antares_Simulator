@@ -152,7 +152,6 @@ set(ANTARES_LIBS
 		Antares::locator
 		yuni-static-core
 		yuni-static-uuid
-		model_antares
 	)
 
 	target_link_libraries(${execname}

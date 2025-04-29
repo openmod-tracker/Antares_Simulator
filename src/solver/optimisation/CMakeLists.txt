@@ -1,4 +1,7 @@
-set(RTESOLVER_OPT
+add_library(optimisation ${SRC_MODEL})
+add_library(Antares::optimisation ALIAS optimisation)
+target_sources(optimisation
+        PRIVATE
         HebdoProblemToLpsTranslator.cpp
         LegacyFiller.cpp
         LinearProblemMatrix.cpp
@@ -66,13 +69,13 @@ set(RTESOLVER_OPT
         constraints/ShortTermStorageLevel.cpp
         constraints/constraint_builder_utils.cpp
         include/antares/solver/optimisation/HebdoProblemToLpsTranslator.h
+        include/antares/solver/optimisation/IPostProcessList.h
         include/antares/solver/optimisation/LegacyFiller.h
         include/antares/solver/optimisation/LegacyOrtoolsLinearProblem.h
         include/antares/solver/optimisation/LinearProblemMatrix.h
         include/antares/solver/optimisation/LinearProblemMatrixStartUpCosts.h
         include/antares/solver/optimisation/ProblemMatrixEssential.h
         include/antares/solver/optimisation/QuadraticProblemMatrix.h
-        include/antares/solver/optimisation/SparseVector.hxx
         include/antares/solver/optimisation/adequacy_patch_csr/adq_patch_curtailment_sharing.h
         include/antares/solver/optimisation/adequacy_patch_csr/adq_patch_post_process_list.h
         include/antares/solver/optimisation/adequacy_patch_csr/constraints/CsrAreaBalance.h
@@ -132,7 +135,6 @@ set(RTESOLVER_OPT
         include/antares/solver/optimisation/opt_fonctions.h
         include/antares/solver/optimisation/opt_optimisation_hebdo.h
         include/antares/solver/optimisation/opt_rename_problem.h
-        include/antares/solver/optimisation/opt_structure_probleme_a_resoudre.h
         include/antares/solver/optimisation/optim_post_process_list.h
         include/antares/solver/optimisation/post_process_commands.h
         include/antares/solver/optimisation/weekly_optimization.h
@@ -183,32 +185,18 @@ set(RTESOLVER_OPT
         variables/VariableManagerUtils.cpp
         variables/VariableManagerUtils.h
         weekly_optimization.cpp
+        ortools_wrapper.cpp
+        include/antares/solver/optimisation/ortools_wrapper.h
 )
 
-
-set(SRC_MODEL
-        ${RTESOLVER_OPT}
-)
-
-add_library(model_antares ${SRC_MODEL})
-add_library(Antares::model_antares ALIAS model_antares)
-if (NOT MSVC)
-    target_compile_options(model_antares
-            PUBLIC
-            "-Wno-unused-variable")
-else ()
-    #set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS} /wd 4101") # unused local variable
-    #set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} /wd 4101") # unused local variable
-endif ()
-target_link_libraries(model_antares
+target_link_libraries(optimisation
         PUBLIC
-        Antares::solverUtils
         sirius_solver
-        antares-solver-simulation
         Antares::benchmarking
         Antares::optimization-options
         Antares::lps
         PRIVATE
+        Antares::solverUtils
         infeasible_problem_analysis
         Antares::linear-problem-api
         Antares::linear-problem-data-impl
@@ -218,7 +206,7 @@ target_link_libraries(model_antares
         Antares::antares-study-system-model
 )
 
-target_include_directories(model_antares
+target_include_directories(optimisation
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )

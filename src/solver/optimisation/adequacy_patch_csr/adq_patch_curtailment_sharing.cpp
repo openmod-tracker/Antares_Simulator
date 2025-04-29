@@ -25,7 +25,7 @@
 
 #include "antares/solver/optimisation/adequacy_patch_csr/count_constraints_variables.h"
 #include "antares/solver/optimisation/adequacy_patch_csr/csr_quadratic_problem.h"
-#include "antares/solver/simulation/adequacy_patch_runtime_data.h"
+#include "antares/data/adequacy_patch_runtime_data.h"
 
 #include "solve_problem.h"
 
