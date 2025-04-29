@@ -23,24 +23,26 @@
 #include <antares/study/study.h>
 #include "antares/data/sim_structure_probleme_economique.h"
 
-void SIM_AllocationProblemeDonneesGenerales(PROBLEME_HEBDO& problem,
-                                            const Antares::Data::Study& study,
-                                            unsigned NombreDePasDeTemps);
+namespace Antares::Solver::Simulation {
+    void SIM_AllocationProblemeDonneesGenerales(PROBLEME_HEBDO& problem,
+                                                const Data::Study& study,
+                                                unsigned NombreDePasDeTemps);
 
-void SIM_AllocationProblemePasDeTemps(PROBLEME_HEBDO& problem,
-                                      const Antares::Data::Study& study,
-                                      unsigned NombreDePasDeTemps);
+    void SIM_AllocationProblemePasDeTemps(PROBLEME_HEBDO& problem,
+                                          const Data::Study& study,
+                                          unsigned NombreDePasDeTemps);
 
-void SIM_AllocationLinks(PROBLEME_HEBDO& problem,
-                         const uint linkCount,
-                         unsigned NombreDePasDeTemps);
+    void SIM_AllocationLinks(PROBLEME_HEBDO& problem,
+                             const uint linkCount,
+                             unsigned NombreDePasDeTemps);
 
-void SIM_AllocationConstraints(PROBLEME_HEBDO& problem,
-                               const Antares::Data::Study& study,
-                               unsigned NombreDePasDeTemps);
-void SIM_AllocationShortermStorageCumulation(PROBLEME_HEBDO& problem,
-                                             const Antares::Data::Study& study);
+    void SIM_AllocationConstraints(PROBLEME_HEBDO& problem,
+                                   const Data::Study& study,
+                                   unsigned NombreDePasDeTemps);
+    void SIM_AllocationShortermStorageCumulation(PROBLEME_HEBDO& problem,
+                                                 const Data::Study& study);
 
-void SIM_AllocateAreas(PROBLEME_HEBDO& problem,
-                       const Antares::Data::Study& study,
-                       unsigned NombreDePasDeTemps);
+    void SIM_AllocateAreas(PROBLEME_HEBDO& problem,
+                           const Data::Study& study,
+                           unsigned NombreDePasDeTemps);
+}

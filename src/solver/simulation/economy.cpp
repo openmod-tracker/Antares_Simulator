@@ -38,7 +38,7 @@ namespace Antares::Solver::Simulation
 {
 Economy::Economy(Study& study,
                  IResultWriter& resultWriter,
-                 ISimulationObserver& simulationObserver):
+                 Optimization::ISimulationObserver& simulationObserver):
     study(study),
     resultWriter(resultWriter),
     simulationObserver_(simulationObserver)

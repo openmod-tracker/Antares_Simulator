@@ -25,7 +25,7 @@
 #include <antares/solver/utils/opt_period_string_generator.h>
 #include <antares/writer/i_writer.h>
 #include "antares/data/opt_structure_probleme_a_resoudre.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
+#include "antares/solver/optimisation/ISimulationObserver.h"
 #include "antares/study/parameters/adq-patch-params.h"
 
 #include "adequacy_patch_csr/hourly_csr_problem.h"
@@ -43,7 +43,7 @@ void OPT_InitialiserLesCoutsLineaire(PROBLEME_HEBDO*, int, int);
 bool OPT_PilotageOptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                                       PROBLEME_HEBDO* problemeHebdo,
                                       Solver::IResultWriter& writer,
-                                      Solver::Simulation::ISimulationObserver& simulationObserver);
+                                      Optimization::ISimulationObserver& simulationObserver);
 void OPT_VerifierPresenceReserveJmoins1(PROBLEME_HEBDO*);
 
 /*!
@@ -62,7 +62,7 @@ void OPT_LiberationProblemesSimplexe(const PROBLEME_HEBDO*);
 bool OPT_OptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                               PROBLEME_HEBDO* problemeHebdo,
                               Solver::IResultWriter& writer,
-                              Solver::Simulation::ISimulationObserver& simulationObserver);
+                              Optimization::ISimulationObserver& simulationObserver);
 void OPT_RestaurerLesDonnees(PROBLEME_HEBDO*);
 /*------------------------------*/
 

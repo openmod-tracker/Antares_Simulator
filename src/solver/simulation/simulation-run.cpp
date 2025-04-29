@@ -32,7 +32,7 @@ Benchmarking::OptimizationInfo runSimulation(Antares::Data::Study& study,
                                              const Settings& settings,
                                              Benchmarking::DurationCollector& durationCollector,
                                              IResultWriter& resultWriter,
-                                             Simulation::ISimulationObserver& simulationObserver)
+                                             Optimization::ISimulationObserver& simulationObserver)
 {
     simulationType simulation(study, settings, durationCollector, resultWriter, simulationObserver);
     simulation.checkWriter();
@@ -52,7 +52,7 @@ Benchmarking::OptimizationInfo simulationRun(Antares::Data::Study& study,
                                              const Settings& settings,
                                              Benchmarking::DurationCollector& durationCollector,
                                              IResultWriter& resultWriter,
-                                             Simulation::ISimulationObserver& simulationObserver)
+                                             Optimization::ISimulationObserver& simulationObserver)
 {
     // gp : is there a reason why we do that here and not inside the clusters and
     // gp : right after the read step ?

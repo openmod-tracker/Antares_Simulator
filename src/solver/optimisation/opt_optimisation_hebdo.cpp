@@ -36,7 +36,7 @@ namespace Antares::Optimization
 void OPT_OptimisationHebdomadaire(const OptimizationOptions::OptimizationOptions& options,
                                   PROBLEME_HEBDO* pProblemeHebdo,
                                   Solver::IResultWriter& writer,
-                                  Solver::Simulation::ISimulationObserver& simulationObserver)
+                                  Optimization::ISimulationObserver& simulationObserver)
 {
     if (pProblemeHebdo->TypeDOptimisation == OPTIMISATION_LINEAIRE)
     {

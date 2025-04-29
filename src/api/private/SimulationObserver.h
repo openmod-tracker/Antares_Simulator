@@ -21,7 +21,7 @@
 
 #pragma once
 #include <antares/solver/lps/LpsFromAntares.h>
-#include <antares/solver/simulation/ISimulationObserver.h>
+#include <antares/solver/optimisation/ISimulationObserver.h>
 
 namespace Antares::API
 {
@@ -32,7 +32,7 @@ namespace Antares::API
  * @details It inherits from the ISimulationObserver interface and overrides the notifyHebdoProblem
  * method.
  */
-class SimulationObserver: public Solver::Simulation::ISimulationObserver
+class SimulationObserver: public Optimization::ISimulationObserver
 {
 public:
     /**

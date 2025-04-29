@@ -93,8 +93,6 @@ bool Cluster::loadDataSeriesFromFolder(Study& s, const fs::path& folder)
         return true;
     }
 
-    auto& buffer = s.bufferLoadingTS;
-
     bool ret = true;
     fs::path seriesPath = folder / parentArea->id.to<std::string>() / id() / "series.txt";
 
@@ -113,11 +111,10 @@ bool Cluster::loadDataSeriesFromFolder(Study& s, const fs::path& folder)
 
 #undef SEP
 
-void Cluster::invalidateArea()
-{
+void Cluster::invalidateArea() const {
     if (parentArea)
     {
-        parentArea->forceReload();
+        [[maybe_unused]] auto _ = parentArea->forceReload();
     }
 }
 

@@ -37,7 +37,7 @@ namespace Antares::Solver::Simulation
 {
 Adequacy::Adequacy(Data::Study& study,
                    IResultWriter& resultWriter,
-                   ISimulationObserver& simulationObserver):
+                   Optimization::ISimulationObserver& simulationObserver):
     study(study),
     resultWriter(resultWriter),
     simulationObserver_(simulationObserver)
@@ -150,7 +150,7 @@ bool Adequacy::year(Progression::Task& progression,
         currentProblem.weekInTheYear = state.weekInTheYear = w;
         currentProblem.HeureDansLAnnee = hourInTheYear;
 
-        ::SIM_RenseignementProblemeHebdo(study,
+        SIM_RenseignementProblemeHebdo(study,
                                          currentProblem,
                                          state.weekInTheYear,
                                          hourInTheYear,

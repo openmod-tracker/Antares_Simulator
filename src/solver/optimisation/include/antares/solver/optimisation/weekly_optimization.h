@@ -22,9 +22,9 @@
 #pragma once
 
 #include "antares/data/sim_structure_probleme_economique.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
+#include "antares/solver/optimisation/ISimulationObserver.h"
 
-namespace Antares::Solver::Optimization
+namespace Antares::Optimization
 {
 
 class WeeklyOptimization
@@ -32,15 +32,15 @@ class WeeklyOptimization
 public:
     WeeklyOptimization(OptimizationOptions::OptimizationOptions options,
                        PROBLEME_HEBDO* problemeHebdo,
-                       IResultWriter& writer,
-                       Simulation::ISimulationObserver& simulationObserver);
+                       Solver::IResultWriter& writer,
+                       ISimulationObserver& simulationObserver);
     ~WeeklyOptimization() = default;
     void solve() const;
 
 private:
     OptimizationOptions::OptimizationOptions options_;
     PROBLEME_HEBDO* const problemeHebdo_ = nullptr;
-    IResultWriter& writer_;
-    std::reference_wrapper<Simulation::ISimulationObserver> simulationObserver_;
+    Solver::IResultWriter& writer_;
+    std::reference_wrapper<ISimulationObserver> simulationObserver_;
 };
 } // namespace Antares::Solver::Optimization

@@ -23,7 +23,7 @@
 #include <yuni/job/queue/service.h>
 
 #include <antares/benchmarking/DurationCollector.h>
-#include <antares/solver/simulation/ISimulationObserver.h>
+#include <antares/solver/optimisation/ISimulationObserver.h>
 #include "antares/solver/hydro/management/management.h"
 #include "antares/solver/misc/options.h"
 #include "antares/solver/simulation/solver.data.h"
@@ -84,7 +84,7 @@ public:
                 const ::Settings& settings,
                 Benchmarking::DurationCollector& duration_collector,
                 IResultWriter& resultWriter,
-                Simulation::ISimulationObserver& simulationObserver);
+                Optimization::ISimulationObserver& simulationObserver);
     //! Destructor
     ~ISimulation();
     //@}
@@ -176,7 +176,7 @@ public:
     //! Result writer
     IResultWriter& pResultWriter;
 
-    std::reference_wrapper<ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<Optimization::ISimulationObserver> simulationObserver_;
 }; // class ISimulation
 } // namespace Antares::Solver::Simulation
 

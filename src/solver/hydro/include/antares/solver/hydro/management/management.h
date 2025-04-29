@@ -67,7 +67,7 @@ public:
                     Solver::IResultWriter& resultWriter);
 
     //! Perform the hydro ventilation
-    void makeVentilation(double* randomReservoirLevel,
+    void makeVentilation(const double* randomReservoirLevel,
                          uint y,
                          Antares::Data::Area::ScratchMap& scratchmap);
 

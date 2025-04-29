@@ -146,7 +146,6 @@ void HydroManagement::prepareNetDemand(uint year,
           const auto& rormatrix = area.hydro.series->ror;
           const auto* ror = rormatrix.getColumn(year);
 
-          auto& data = area.hydro.managementData[year];
           auto& hydro_specific = hydro_specific_map[&area];
           const double* loadSeries = area.load.series.getColumn(year);
           const double* windSeries = area.wind.series.getColumn(year);
@@ -194,7 +193,6 @@ void HydroManagement::prepareEffectiveDemand(uint year, HydroSpecificMap& hydro_
     areas_.each(
       [this, &year, &hydro_specific_map](Data::Area& area)
       {
-          auto& data = area.hydro.managementData[year];
           auto& hydro_specific = hydro_specific_map[&area];
 
           for (uint day = 0; day != 365; ++day)
@@ -266,7 +264,7 @@ void HydroManagement::prepareEffectiveDemand(uint year, HydroSpecificMap& hydro_
       });
 }
 
-void HydroManagement::makeVentilation(double* randomReservoirLevel,
+void HydroManagement::makeVentilation(const double* randomReservoirLevel,
                                       uint y,
                                       Antares::Data::Area::ScratchMap& scratchmap)
 {

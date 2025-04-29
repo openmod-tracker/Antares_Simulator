@@ -78,7 +78,7 @@ public:
     /*!
     ** \brief Invalidate the whole attached area
     */
-    void invalidateArea();
+    void invalidateArea() const;
 
     /*!
     ** \brief Mark the cluster as modified

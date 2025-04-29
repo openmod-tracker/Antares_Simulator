@@ -50,7 +50,7 @@ public:
     */
     Economy(Data::Study& study,
             IResultWriter& resultWriter,
-            ISimulationObserver& simulationObserver);
+            Optimization::ISimulationObserver& simulationObserver);
     //! Destructor
     ~Economy() = default;
     //@}
@@ -99,7 +99,7 @@ private:
     std::vector<std::unique_ptr<Antares::Optimization::interfacePostProcessList>>
       postProcessesList_;
     IResultWriter& resultWriter;
-    std::reference_wrapper<ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<Optimization::ISimulationObserver> simulationObserver_;
 }; // class Economy
 
 } // namespace Antares::Solver::Simulation

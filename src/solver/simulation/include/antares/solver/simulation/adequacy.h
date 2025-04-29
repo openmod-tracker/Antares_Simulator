@@ -48,7 +48,7 @@ public:
     */
     Adequacy(Data::Study& study,
              IResultWriter& resultWriter,
-             ISimulationObserver& simulationObserver);
+             Optimization::ISimulationObserver& simulationObserver);
     //! Destructor
     ~Adequacy() = default;
     //@}
@@ -99,7 +99,7 @@ private:
     Matrix<> pRES;
     IResultWriter& resultWriter;
 
-    std::reference_wrapper<ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<Optimization::ISimulationObserver> simulationObserver_;
 }; // class Adequacy
 
 } // namespace Antares::Solver::Simulation

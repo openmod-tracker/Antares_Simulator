@@ -44,8 +44,10 @@ struct PROBLEME_HEBDO;
 
 namespace Antares::Optimization
 {
-void OPT_OptimisationHebdomadaire(const OptimizationOptions::OptimizationOptions& options,
-                                  PROBLEME_HEBDO* pProblemeHebdo,
-                                  Solver::IResultWriter& writer,
-                                  Solver::Simulation::ISimulationObserver& simulationObserver);
+    class ISimulationObserver;
+
+    void OPT_OptimisationHebdomadaire(const OptimizationOptions::OptimizationOptions& options,
+                                      PROBLEME_HEBDO* pProblemeHebdo,
+                                      Solver::IResultWriter& writer,
+                                      ISimulationObserver& simulationObserver);
 }

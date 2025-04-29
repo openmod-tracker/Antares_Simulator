@@ -26,12 +26,12 @@
 #include "antares/solver/optimisation/opt_fonctions.h"
 #include "antares/solver/optimisation/opt_optimisation_hebdo.h"
 
-namespace Antares::Solver::Optimization
+namespace Antares::Optimization
 {
 WeeklyOptimization::WeeklyOptimization(OptimizationOptions::OptimizationOptions options,
                                        PROBLEME_HEBDO* problemeHebdo,
-                                       IResultWriter& writer,
-                                       Simulation::ISimulationObserver& simulationObserver):
+                                       Solver::IResultWriter& writer,
+                                       Optimization::ISimulationObserver& simulationObserver):
     options_(std::move(options)),
     problemeHebdo_(problemeHebdo),
     writer_(writer),
@@ -41,7 +41,7 @@ WeeklyOptimization::WeeklyOptimization(OptimizationOptions::OptimizationOptions 
 
 void WeeklyOptimization::solve() const
 {
-    Antares::Optimization::OPT_OptimisationHebdomadaire(options_,
+    OPT_OptimisationHebdomadaire(options_,
                                                         problemeHebdo_,
                                                         writer_,
                                                         simulationObserver_.get());

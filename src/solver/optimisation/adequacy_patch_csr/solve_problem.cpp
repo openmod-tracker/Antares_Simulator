@@ -22,7 +22,6 @@
 #include "antares/data/opt_structure_probleme_a_resoudre.h"
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/simulation/simulation.h"
 
 /*
  pi_define.h doesn't include this header, yet it uses struct jmp_buf.

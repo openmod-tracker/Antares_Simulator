@@ -396,7 +396,7 @@ void Application::execute()
     memoryReport.interval(1000 * 60 * 5); // 5 minutes
     memoryReport.start();
 
-    Simulation::NullSimulationObserver observer;
+    Optimization::NullSimulationObserver observer;
     pOptimizationInfo = simulationRun(*pStudy,
                                       pSettings,
                                       pDurationCollector,

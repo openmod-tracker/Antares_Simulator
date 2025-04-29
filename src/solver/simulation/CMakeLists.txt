@@ -8,7 +8,6 @@ set(SRC_SIMULATION
         common-eco-adq.cpp
         economy.cpp
         include/antares/solver/simulation/BindingConstraintsTimeSeriesNumbersWriter.h
-        include/antares/solver/simulation/ISimulationObserver.h
         include/antares/solver/simulation/ITimeSeriesNumbersWriter.h
         include/antares/solver/simulation/adequacy.h
         include/antares/solver/simulation/apply-scenario.h

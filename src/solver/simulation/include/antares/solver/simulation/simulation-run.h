@@ -27,10 +27,10 @@
 namespace Antares::Solver
 {
 
-Benchmarking::OptimizationInfo simulationRun(Antares::Data::Study& study,
+Benchmarking::OptimizationInfo simulationRun(Data::Study& study,
                                              const Settings& settings,
                                              Benchmarking::DurationCollector& durationCollector,
                                              IResultWriter& resultWriter,
-                                             Simulation::ISimulationObserver& simulationObserver);
+                                             Optimization::ISimulationObserver& simulationObserver);
 
 } // namespace Antares::Solver

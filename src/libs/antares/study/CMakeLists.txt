@@ -283,7 +283,6 @@ target_link_libraries(study
         Antares::solverUtils #sim_structure_probleme_economique.h -> optimization_statistics.h
         Antares::stdcxx #enum.hxx
         Antares::utils #area.hxx
-        antares-core
         antares-solver-simulation
         linear-problem-api
         yuni-static-core

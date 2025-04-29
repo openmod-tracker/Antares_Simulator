@@ -92,7 +92,7 @@ static void RecalculDesEchangesMoyens(Data::Study& study,
     try
     {
         NullResultWriter resultWriter;
-        NullSimulationObserver simulationObserver;
+        Optimization::NullSimulationObserver simulationObserver;
         Optimization::OPT_OptimisationHebdomadaire(study.parameters.optOptions,
                                                    &problem,
                                                    resultWriter,

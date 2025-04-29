@@ -28,7 +28,7 @@
 #include "antares/solver/optimisation/opt_constants.h"
 #include "antares/solver/optimisation/opt_export_structure.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
+#include "antares/solver/optimisation/ISimulationObserver.h"
 #include "antares/solver/utils/filename.h"
 
 using namespace Antares::Solver;
@@ -108,7 +108,7 @@ namespace
 {
 void notifyProblemHebdo(const PROBLEME_HEBDO* problemeHebdo,
                         int optimizationNumber,
-                        Simulation::ISimulationObserver& simulationObserver,
+                        Optimization::ISimulationObserver& simulationObserver,
                         const OptPeriodStringGenerator* optPeriodStringGenerator)
 {
     Solver::Utils::FileNamer fn;
@@ -123,7 +123,7 @@ bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& option
                            PROBLEME_HEBDO* problemeHebdo,
                            IResultWriter& writer,
                            int optimizationNumber,
-                           Simulation::ISimulationObserver& simulationObserver)
+                           Optimization::ISimulationObserver& simulationObserver)
 {
     const int NombreDePasDeTempsPourUneOptimisation = problemeHebdo
                                                         ->NombreDePasDeTempsPourUneOptimisation;
@@ -238,7 +238,7 @@ void resizeProbleme(PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre,
 bool OPT_OptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                               PROBLEME_HEBDO* problemeHebdo,
                               IResultWriter& writer,
-                              Simulation::ISimulationObserver& simulationObserver)
+                              Optimization::ISimulationObserver& simulationObserver)
 {
     if (!problemeHebdo->OptimisationAuPasHebdomadaire)
     {

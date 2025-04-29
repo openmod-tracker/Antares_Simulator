@@ -196,6 +196,7 @@ target_sources(optimisation
         shave-peaks-by-remix-hydro.cpp
         include/antares/solver/optimisation/shave-peaks-by-remix-hydro.h
         include/antares/solver/optimisation/common-hydro-levels.h
+        include/antares/solver/optimisation/ISimulationObserver.h
         common-hydro-levels.cpp
 
 )

@@ -54,7 +54,7 @@ public:
             bool pYearByYear,
             Benchmarking::DurationCollector& durationCollector,
             IResultWriter& resultWriter,
-            ISimulationObserver& simulationObserver,
+            Optimization::ISimulationObserver& simulationObserver,
             std::mutex& aggregationMutex):
         simulation_(simulation),
         y(pY),
@@ -92,7 +92,7 @@ private:
     bool yearByYear;
     Benchmarking::DurationCollector& pDurationCollector;
     IResultWriter& pResultWriter;
-    std::reference_wrapper<ISimulationObserver> simulationObserver_;
+    std::reference_wrapper<Optimization::ISimulationObserver> simulationObserver_;
     HydroManagement hydroManagement;
     std::mutex& aggregationMutex;
 
@@ -239,7 +239,7 @@ ISimulation<ImplementationType>::ISimulation(Data::Study& study,
                                              const ::Settings& settings,
                                              Benchmarking::DurationCollector& duration_collector,
                                              IResultWriter& resultWriter,
-                                             Simulation::ISimulationObserver& simulationObserver):
+                                             Optimization::ISimulationObserver& simulationObserver):
     ImplementationType(study, resultWriter, simulationObserver),
     study(study),
     settings(settings),

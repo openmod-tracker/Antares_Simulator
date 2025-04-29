@@ -23,25 +23,26 @@
 #include "antares/solver/hydro/management/management.h"
 
 struct PROBLEME_HEBDO;
-
-/*!
-** \brief Alloue toutes les donnees d'un probleme hebdo
-*/
-void SIM_AllocationProblemeHebdo(const Data::Study& study,
-                                 PROBLEME_HEBDO& problem,
-                                 uint NombreDePasDeTemps);
-
-/*!
-** \brief Alloue et initialise un probleme hebdo
-*/
-void SIM_InitialisationProblemeHebdo(Data::Study& study,
+namespace Antares::Solver::Simulation {
+    /*!
+    ** \brief Alloue toutes les donnees d'un probleme hebdo
+    */
+    void SIM_AllocationProblemeHebdo(const Data::Study& study,
                                      PROBLEME_HEBDO& problem,
-                                     unsigned int NombreDePasDeTemps,
-                                     uint numspace);
+                                     uint NombreDePasDeTemps);
 
-void SIM_RenseignementProblemeHebdo(const Data::Study& study,
-                                    PROBLEME_HEBDO& problem,
-                                    uint weekInTheYear,
-                                    const int,
-                                    const HYDRO_VENTILATION_RESULTS&,
-                                    const Data::Area::ScratchMap&);
+    /*!
+    ** \brief Alloue et initialise un probleme hebdo
+    */
+    void SIM_InitialisationProblemeHebdo(Data::Study& study,
+                                         PROBLEME_HEBDO& problem,
+                                         unsigned int NombreDePasDeTemps,
+                                         uint numspace);
+
+    void SIM_RenseignementProblemeHebdo(const Data::Study& study,
+                                        PROBLEME_HEBDO& problem,
+                                        uint weekInTheYear,
+                                        const int,
+                                        const HYDRO_VENTILATION_RESULTS&,
+                                        const Data::Area::ScratchMap&);
+}

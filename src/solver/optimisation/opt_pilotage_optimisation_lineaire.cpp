@@ -22,12 +22,12 @@
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/optimization-options/options.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
+#include "antares/solver/optimisation/ISimulationObserver.h"
 
 bool OPT_PilotageOptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                                       PROBLEME_HEBDO* problemeHebdo,
                                       Solver::IResultWriter& writer,
-                                      Solver::Simulation::ISimulationObserver& simulationObserver)
+                                      Optimization::ISimulationObserver& simulationObserver)
 {
     if (!problemeHebdo->LeProblemeADejaEteInstancie)
     {

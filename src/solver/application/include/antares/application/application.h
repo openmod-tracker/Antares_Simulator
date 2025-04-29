@@ -29,7 +29,7 @@
 #include <antares/writer/i_writer.h>
 #include "antares/infoCollection/StudyInfoCollector.h"
 #include "antares/solver/misc/options.h"
-#include "antares/solver/simulation/ISimulationObserver.h"
+#include "antares/solver/optimisation/ISimulationObserver.h"
 
 namespace Antares::Solver
 {
