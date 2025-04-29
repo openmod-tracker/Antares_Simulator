@@ -23,7 +23,7 @@
 
 #include <antares/optimisation/linear-problem-mpsolver-impl/mipVariable.h>
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 OrtoolsMipVariable::OrtoolsMipVariable(operations_research::MPVariable* mpVar):
@@ -71,4 +71,4 @@ bool OrtoolsMipVariable::isInteger() const
     return mpVar_->integer();
 }
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

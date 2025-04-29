@@ -68,8 +68,9 @@ target_sources(optimisation
         constraints/ShortTermStorageCumulation.cpp
         constraints/ShortTermStorageLevel.cpp
         constraints/constraint_builder_utils.cpp
+        base_post_process.cpp
         include/antares/solver/optimisation/HebdoProblemToLpsTranslator.h
-        include/antares/solver/optimisation/IPostProcessList.h
+        include/antares/solver/optimisation/base_post_process.h
         include/antares/solver/optimisation/LegacyFiller.h
         include/antares/solver/optimisation/LegacyOrtoolsLinearProblem.h
         include/antares/solver/optimisation/LinearProblemMatrix.h
@@ -187,6 +188,16 @@ target_sources(optimisation
         weekly_optimization.cpp
         ortools_wrapper.cpp
         include/antares/solver/optimisation/ortools_wrapper.h
+        post_process_commands.cpp
+        post_process_commands.cpp
+        include/antares/solver/optimisation/post_process_commands.h
+        include/antares/solver/optimisation/common-hydro-remix.h
+        common-hydro-remix.cpp
+        shave-peaks-by-remix-hydro.cpp
+        include/antares/solver/optimisation/shave-peaks-by-remix-hydro.h
+        include/antares/solver/optimisation/common-hydro-levels.h
+        common-hydro-levels.cpp
+
 )
 
 target_link_libraries(optimisation

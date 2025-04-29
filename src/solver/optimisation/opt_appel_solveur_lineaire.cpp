@@ -42,9 +42,9 @@
 #include "antares/solver/optimisation/ortools_simplexe.h"
 
 using namespace operations_research;
-using namespace Antares::Optimisation::LinearProblemApi;
-using namespace Antares::Optimisation::LinearProblemDataImpl;
-using namespace Antares::Optimisation::LinearProblemMpsolverImpl;
+using namespace Antares::Optimization::LinearProblemApi;
+using namespace Antares::Optimization::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemMpsolverImpl;
 
 class TimeMeasurement
 {

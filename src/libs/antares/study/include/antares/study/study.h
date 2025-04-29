@@ -630,7 +630,7 @@ public:
         return modelerInput_.system.get();
     }
 
-    Optimisation::LinearProblemApi::ILinearProblemData* getModelerData() const
+    Optimization::LinearProblemApi::ILinearProblemData* getModelerData() const
     {
         return modelerInput_.dataSeries.get();
     }

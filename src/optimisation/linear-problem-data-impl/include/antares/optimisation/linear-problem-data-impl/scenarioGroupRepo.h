@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 class ScenarioGroupRepository
 {
@@ -36,4 +36,4 @@ public:
         explicit ScenarioNotExist(const std::string& groupId, unsigned scenario);
     };
 };
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

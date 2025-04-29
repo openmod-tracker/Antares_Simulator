@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 
 class IDataSeries
@@ -28,4 +28,4 @@ private:
     std::string name_;
 };
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

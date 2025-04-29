@@ -37,11 +37,11 @@ class TimeDependentLinearExpression
 {
 public:
     explicit TimeDependentLinearExpression(
-      const Optimisation::LinearProblemApi::FillContext& fillContext);
+      const Optimization::LinearProblemApi::FillContext& fillContext);
 
     // Construction from one LinearExpression, to be duplicated for all timestep
     explicit TimeDependentLinearExpression(
-      const Optimisation::LinearProblemApi::FillContext& fillContext,
+      const Optimization::LinearProblemApi::FillContext& fillContext,
       const LinearExpression& linearExpression);
     explicit TimeDependentLinearExpression(const LinearExpressionMap& linearExpressions);
 

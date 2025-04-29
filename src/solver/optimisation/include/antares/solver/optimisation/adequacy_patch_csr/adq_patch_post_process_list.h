@@ -34,10 +34,10 @@ namespace Antares::Date {
 
 struct PROBLEME_HEBDO;
 
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 
-class AdqPatchPostProcessList: public Optimization::interfacePostProcessList
+class AdqPatchPostProcessList: public interfacePostProcessList
 {
 
 public:

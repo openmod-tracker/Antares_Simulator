@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_SUITE(_PrintAndEvalNodes_)
 BOOST_AUTO_TEST_CASE(test_getSystemParameterValueAsDouble)
 {
     // Mock dependency
-    struct MockLinearProblemData: Antares::Optimisation::LinearProblemApi::ILinearProblemData
+    struct MockLinearProblemData: Antares::Optimization::LinearProblemApi::ILinearProblemData
     {
         double getData(const std::string&, const std::string&, unsigned int, unsigned int) override
         {
@@ -394,9 +394,9 @@ BOOST_AUTO_TEST_CASE(AlltimeSum_VectorValue_OutOfRange)
 
 struct MyDummyFixture: Registry<Node>
 {
-    Antares::Optimisation::LinearProblemDataImpl::LinearProblemData data;
+    Antares::Optimization::LinearProblemDataImpl::LinearProblemData data;
     EvaluationContext evaluationContext{{}, {}, data};
-    Antares::Optimisation::LinearProblemApi::FillContext fillContext{0, 0};
+    Antares::Optimization::LinearProblemApi::FillContext fillContext{0, 0};
     EvalVisitor evalVisitor{evaluationContext, fillContext};
 };
 
@@ -590,7 +590,7 @@ BOOST_FIXTURE_TEST_CASE(evaluate_param, MyDummyFixture)
     BOOST_CHECK_EQUAL(std::stod(value), eval);
 }
 
-struct MockLinearProblemData: Antares::Optimisation::LinearProblemApi::ILinearProblemData
+struct MockLinearProblemData: Antares::Optimization::LinearProblemApi::ILinearProblemData
 {
     double getData(const std::string& dataSetId,
                    const std::string& scenarioGroup,

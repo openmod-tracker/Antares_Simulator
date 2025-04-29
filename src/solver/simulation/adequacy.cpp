@@ -25,6 +25,8 @@
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/solver/optimisation/opt_fonctions.h>
 #include "antares/solver/optimisation/opt_optimisation_hebdo.h"
+#include "antares/solver/optimisation/common-hydro-remix.h"
+#include "antares/solver/optimisation/common-hydro-levels.h"
 
 using namespace Yuni;
 using Antares::Constants::nbHoursInAWeek;
@@ -210,7 +212,7 @@ bool Adequacy::year(Progression::Task& progression,
                                                            resultWriter,
                                                            simulationObserver_.get());
 
-                RemixHydroForAllAreas(study.areas,
+                Optimization::RemixHydroForAllAreas(study.areas,
                                       currentProblem,
                                       study.parameters.shedding.policy,
                                       study.parameters.simplexOptimizationRange,
@@ -322,9 +324,9 @@ bool Adequacy::year(Progression::Task& progression,
             }
         }
 
-        interpolateWaterValue(study.areas, currentProblem, study.calendar, hourInTheYear);
+        Optimization::interpolateWaterValue(study.areas, currentProblem, study.calendar, hourInTheYear);
 
-        updatingWeeklyFinalHydroLevel(study.areas, currentProblem);
+        Optimization::updatingWeeklyFinalHydroLevel(study.areas, currentProblem);
 
         variables.weekBegin(state);
         uint previousHourInTheYear = state.hourInTheYear;

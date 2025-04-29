@@ -2,7 +2,7 @@
 
 #include <pi_constantes_externes.h>
 
-using namespace Antares::Optimisation::LinearProblemApi;
+using namespace Antares::Optimization::LinearProblemApi;
 
 namespace Antares::Optimization
 {

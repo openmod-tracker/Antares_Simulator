@@ -4,7 +4,7 @@
 
 #include "dataSeries.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 class TimeSeriesSet: public IDataSeries
 {
@@ -45,4 +45,4 @@ public:
     };
 };
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

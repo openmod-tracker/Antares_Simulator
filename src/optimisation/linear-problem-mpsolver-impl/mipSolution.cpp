@@ -22,7 +22,7 @@
 #include <antares/logs/logs.h>
 #include <antares/optimisation/linear-problem-mpsolver-impl/mipSolution.h>
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 OrtoolsMipSolution::OrtoolsMipSolution(operations_research::MPSolver::ResultStatus& status,
@@ -98,4 +98,4 @@ const std::map<std::string, double>& OrtoolsMipSolution::getOptimalValues() cons
     return solution_;
 }
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

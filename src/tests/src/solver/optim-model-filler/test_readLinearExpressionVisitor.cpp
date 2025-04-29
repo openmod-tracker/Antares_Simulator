@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_SUITE(_read_linear_expression_visitor_)
 
 struct MyDummyFixture: Registry<Node>
 {
-    Antares::Optimisation::LinearProblemDataImpl::LinearProblemData data;
+    Antares::Optimization::LinearProblemDataImpl::LinearProblemData data;
     EvaluationContext evaluationContext{{}, {}, data};
     std::string componentId = "compo";
     ReadLinearExpressionVisitor visitor{evaluationContext, {0, 0}, componentId};
@@ -94,7 +94,7 @@ BOOST_FIXTURE_TEST_CASE(visit_literal_plus_param_plus_var, MyDummyFixture)
     BOOST_CHECK_EQUAL(linear_expression.coefPerVar().at(FullKey(componentId, "var", 0, 0)), 7.);
 }
 
-struct MockLinearProblemData: Antares::Optimisation::LinearProblemApi::ILinearProblemData
+struct MockLinearProblemData: Antares::Optimization::LinearProblemApi::ILinearProblemData
 {
     double getData(const std::string& dataSetId,
                    const std::string& scenarioGroup,

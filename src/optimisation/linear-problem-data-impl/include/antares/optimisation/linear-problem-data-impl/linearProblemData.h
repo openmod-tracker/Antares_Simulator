@@ -28,7 +28,7 @@
 #include "antares/optimisation/linear-problem-data-impl/dataSeriesRepo.h"
 #include "antares/optimisation/linear-problem-data-impl/scenarioGroupRepo.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 
 class LinearProblemData: public LinearProblemApi::ILinearProblemData
@@ -54,4 +54,4 @@ private:
     ScenarioGroupRepository groupRepository_;
 };
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

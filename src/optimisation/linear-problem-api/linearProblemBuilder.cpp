@@ -23,7 +23,7 @@
 
 #include <antares/optimisation/linear-problem-api/linearProblemBuilder.h>
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 LinearProblemBuilder::LinearProblemBuilder(const std::vector<LinearProblemFiller*>& fillers):
@@ -41,4 +41,4 @@ void LinearProblemBuilder::build(ILinearProblem& pb, ILinearProblemData& data, F
                           [&](const auto& filler) { filler->addObjective(pb, data, ctx); });
 }
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

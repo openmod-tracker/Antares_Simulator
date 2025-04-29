@@ -1,37 +1,37 @@
-/*
-** Copyright 2007-2024, RTE (https://www.rte-france.com)
-** See AUTHORS.txt
-** SPDX-License-Identifier: MPL-2.0
-** This file is part of Antares-Simulator,
-** Adequacy and Performance assessment for interconnected energy networks.
-**
-** Antares_Simulator is free software: you can redistribute it and/or modify
-** it under the terms of the Mozilla Public Licence 2.0 as published by
-** the Mozilla Foundation, either version 2 of the License, or
-** (at your option) any later version.
-**
-** Antares_Simulator is distributed in the hope that it will be useful,
-** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-** Mozilla Public Licence 2.0 for more details.
-**
-** You should have received a copy of the Mozilla Public Licence 2.0
-** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
-*/
+// Copyright 2007-2025, RTE (https://www.rte-france.com)
+// See AUTHORS.txt
+// SPDX-License-Identifier: MPL-2.0
+// This file is part of Antares-Simulator,
+// Adequacy and Performance assessment for interconnected energy networks.
+//
+// Antares_Simulator is free software: you can redistribute it and/or modify
+// it under the terms of the Mozilla Public Licence 2.0 as published by
+// the Mozilla Foundation, either version 2 of the License, or
+// (at your option) any later version.
+//
+// Antares_Simulator is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// Mozilla Public Licence 2.0 for more details.
+//
+// You should have received a copy of the Mozilla Public Licence 2.0
+// along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 
 #include <cassert>
 #include <cmath>
 
+#include "antares/solver/optimisation/common-hydro-remix.h"
 #include <antares/exception/AssertionError.hpp>
 #include <antares/logs/logs.h>
 #include <antares/study/study.h>
 #include <antares/utils/utils.h>
-#include "antares/solver/simulation/common-eco-adq.h"
-#include "antares/solver/simulation/shave-peaks-by-remix-hydro.h"
+#include <antares/data/sim_structure_probleme_economique.h>
+#include <antares/study/area/scratchpad.h>
+#include "antares/solver/optimisation/shave-peaks-by-remix-hydro.h"
 
 #define EPSILON 1e-6
 
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 
 const unsigned int HOURS_IN_WEEK = 168;

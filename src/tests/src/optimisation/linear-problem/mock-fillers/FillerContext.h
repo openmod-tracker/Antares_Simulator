@@ -2,7 +2,7 @@
 
 #include "antares/optimisation/linear-problem-api/linearProblemFiller.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 class VarFillerContext: public LinearProblemFiller
@@ -45,4 +45,4 @@ void VarFillerContext::addObjective([[maybe_unused]] ILinearProblem& pb,
 {
 }
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

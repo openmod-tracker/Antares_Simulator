@@ -1,6 +1,6 @@
 #include "antares/optimisation/linear-problem-data-impl/dataSeriesRepo.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 void DataSeriesRepository::addDataSeries(std::unique_ptr<IDataSeries> dataSeries)
 {
@@ -24,4 +24,4 @@ IDataSeries& DataSeriesRepository::getDataSeries(const std::string& setId)
     }
     return *(dataSeries_[setId]);
 }
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

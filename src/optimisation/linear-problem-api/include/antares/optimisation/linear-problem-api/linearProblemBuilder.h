@@ -25,7 +25,7 @@
 
 #include "linearProblemFiller.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 class LinearProblemBuilder
@@ -38,4 +38,4 @@ private:
     const std::vector<LinearProblemFiller*>& fillers_;
 };
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

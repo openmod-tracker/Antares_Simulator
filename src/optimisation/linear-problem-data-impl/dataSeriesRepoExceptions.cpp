@@ -2,7 +2,7 @@
 
 #include "antares/optimisation/linear-problem-data-impl/dataSeriesRepo.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 DataSeriesRepository::Empty::Empty():
     std::invalid_argument("Data series repo is empty, and somebody requests data from it")
@@ -19,4 +19,4 @@ DataSeriesRepository::DataSeriesAlreadyExists::DataSeriesAlreadyExists(const std
 {
 }
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

@@ -46,7 +46,7 @@ namespace Antares::Optimization
  * Implements LinearProblemFiller interface.
  * Fills a LinearProblem with variables, constraints, and objective coefficients of a Component
  */
-class ComponentFiller: public Optimisation::LinearProblemApi::LinearProblemFiller
+class ComponentFiller: public Optimization::LinearProblemApi::LinearProblemFiller
 {
 public:
     ComponentFiller() = delete;
@@ -54,24 +54,24 @@ public:
     /// Create a ComponentFiller for a Component
     explicit ComponentFiller(const ModelerStudy::SystemModel::Component& component);
 
-    void addVariables(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                      Optimisation::LinearProblemApi::ILinearProblemData& data,
-                      Optimisation::LinearProblemApi::FillContext& ctx) override;
+    void addVariables(Optimization::LinearProblemApi::ILinearProblem& pb,
+                      Optimization::LinearProblemApi::ILinearProblemData& data,
+                      Optimization::LinearProblemApi::FillContext& ctx) override;
 
-    void addStaticConstraint(Optimisation::LinearProblemApi::ILinearProblem& pb,
+    void addStaticConstraint(Optimization::LinearProblemApi::ILinearProblem& pb,
                              const LinearConstraint& linear_constraint,
                              const std::string& constraint_id) const;
 
-    void addTimeDependentConstraints(Optimisation::LinearProblemApi::ILinearProblem& pb,
+    void addTimeDependentConstraints(Optimization::LinearProblemApi::ILinearProblem& pb,
                                      const std::vector<LinearConstraint>& linear_constraints,
                                      const std::string& constraint_id) const;
 
-    void addConstraints(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                        Optimisation::LinearProblemApi::ILinearProblemData& data,
-                        Optimisation::LinearProblemApi::FillContext& ctx) override;
-    void addObjective(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                      Optimisation::LinearProblemApi::ILinearProblemData& data,
-                      Optimisation::LinearProblemApi::FillContext& ctx) override;
+    void addConstraints(Optimization::LinearProblemApi::ILinearProblem& pb,
+                        Optimization::LinearProblemApi::ILinearProblemData& data,
+                        Optimization::LinearProblemApi::FillContext& ctx) override;
+    void addObjective(Optimization::LinearProblemApi::ILinearProblem& pb,
+                      Optimization::LinearProblemApi::ILinearProblemData& data,
+                      Optimization::LinearProblemApi::FillContext& ctx) override;
 
     VariableDictionary variableDictionary;
 
@@ -85,7 +85,7 @@ private:
 class VariablesBulkAddition
 {
 public:
-    VariablesBulkAddition(Optimisation::LinearProblemApi::ILinearProblem& linear_problem,
+    VariablesBulkAddition(Optimization::LinearProblemApi::ILinearProblem& linear_problem,
                           VariableDictionary& variableDictionary);
     void addVariable(double lb,
                      double ub,
@@ -114,7 +114,7 @@ public:
     };
 
 private:
-    Optimisation::LinearProblemApi::ILinearProblem& linear_problem_;
+    Optimization::LinearProblemApi::ILinearProblem& linear_problem_;
     VariableDictionary& variableDictionary;
 };
 } // namespace Antares::Optimization

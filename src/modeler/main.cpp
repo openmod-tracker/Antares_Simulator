@@ -30,10 +30,10 @@
 #include <antares/solver/modeler/parameters/parseModelerParameters.h>
 #include <antares/solver/optim-model-filler/ComponentFiller.h>
 
-using namespace Antares::Optimisation::LinearProblemMpsolverImpl;
+using namespace Antares::Optimization::LinearProblemMpsolverImpl;
 using namespace Antares;
 using namespace Antares::Solver;
-using namespace Antares::Optimisation::LinearProblemApi;
+using namespace Antares::Optimization::LinearProblemApi;
 
 class SystemLinearProblemBuilder
 {

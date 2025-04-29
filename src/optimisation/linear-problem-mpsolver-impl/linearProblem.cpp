@@ -28,7 +28,7 @@
 #include <antares/optimisation/linear-problem-mpsolver-impl/linearProblem.h>
 #include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 OrtoolsLinearProblem::OrtoolsLinearProblem(bool isMip, const std::string& solverName)
@@ -202,4 +202,4 @@ double OrtoolsLinearProblem::infinity() const
     return operations_research::MPSolver::infinity();
 }
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

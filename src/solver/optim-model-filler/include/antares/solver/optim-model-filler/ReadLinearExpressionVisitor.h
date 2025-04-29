@@ -42,7 +42,7 @@ class ReadLinearExpressionVisitor
 {
 public:
     explicit ReadLinearExpressionVisitor(Expressions::Visitors::EvaluationContext context,
-                                         Optimisation::LinearProblemApi::FillContext fillContext,
+                                         Optimization::LinearProblemApi::FillContext fillContext,
                                          const std::string& componentId /* or vector ?*/);
 
     ReadLinearExpressionVisitor() = delete;
@@ -75,7 +75,7 @@ private:
     TimeDependentLinearExpression visit(const Expressions::Nodes::TimeSumNode* node) override;
     TimeDependentLinearExpression visit(const Expressions::Nodes::AllTimeSumNode* node) override;
 
-    Optimisation::LinearProblemApi::FillContext fillContext_;
+    Optimization::LinearProblemApi::FillContext fillContext_;
     const std::string& componentId_;
     Expressions::Visitors::EvalVisitor evalVisitor_;
 };

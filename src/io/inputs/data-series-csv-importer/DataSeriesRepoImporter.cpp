@@ -31,7 +31,7 @@ namespace fs = std::filesystem;
 
 namespace Antares::IO::Inputs::DataSeriesCsvImporter
 {
-using namespace Optimisation::LinearProblemDataImpl;
+using namespace Optimization::LinearProblemDataImpl;
 
 static std::vector<double> readLine(std::string line,
                                     std::string csvSeparators,

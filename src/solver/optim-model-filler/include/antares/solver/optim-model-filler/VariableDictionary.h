@@ -29,7 +29,7 @@
 
 #include <antares/solver/optim-model-filler/FullKey.h>
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 class IMipVariable;
 }
@@ -95,7 +95,7 @@ struct TimeAndScenario
 
 class VariableDictionary
 {
-    using Value = Antares::Optimisation::LinearProblemApi::IMipVariable*;
+    using Value = Antares::Optimization::LinearProblemApi::IMipVariable*;
 
     class VectorWithOffset
     {

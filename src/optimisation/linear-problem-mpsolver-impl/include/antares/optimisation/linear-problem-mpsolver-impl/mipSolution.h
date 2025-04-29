@@ -28,7 +28,7 @@
 
 #include <antares/optimisation/linear-problem-api/mipSolution.h>
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 class OrtoolsMipSolution final: public LinearProblemApi::IMipSolution
@@ -52,4 +52,4 @@ private:
     std::map<std::string, double> solution_;
 };
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

@@ -32,7 +32,7 @@
 
 using namespace std;
 using namespace Antares::IO::Inputs::DataSeriesCsvImporter;
-using namespace Antares::Optimisation::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemDataImpl;
 
 struct CsvCreationFixture
 {

@@ -25,7 +25,7 @@
 #include <antares/optimisation/linear-problem-mpsolver-impl/mipConstraint.h>
 #include <antares/optimisation/linear-problem-mpsolver-impl/mipVariable.h>
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 OrtoolsMipConstraint::OrtoolsMipConstraint(operations_research::MPConstraint* mpConstraint):
@@ -89,4 +89,4 @@ const std::string& OrtoolsMipConstraint::getName() const
     return mpConstraint_->name();
 }
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

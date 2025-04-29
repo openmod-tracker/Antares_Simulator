@@ -7,7 +7,7 @@
 #include <antares/optimisation/linear-problem-data-impl/dataSeriesRepo.h>
 #include <antares/optimisation/linear-problem-data-impl/timeSeriesSet.h>
 
-using namespace Antares::Optimisation::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemDataImpl;
 
 BOOST_AUTO_TEST_CASE(repo_is_empty__asking_any_data_series_raises_exception)
 {

@@ -6,7 +6,7 @@
 
 #include <antares/optimisation/linear-problem-data-impl/scenarioGroupRepo.h>
 
-using namespace Antares::Optimisation::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemDataImpl;
 
 BOOST_AUTO_TEST_CASE(ask_repo_a_question_it_can_answer___repo_answers_correctly)
 {

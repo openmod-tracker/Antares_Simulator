@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 class ILinearProblemData;
 }
@@ -43,7 +43,7 @@ public:
      */
     explicit EvaluationContext(std::map<std::string, ParameterTypeAndValue> system_parameters,
                                std::map<std::string, double> variables,
-                               Optimisation::LinearProblemApi::ILinearProblemData& data);
+                               Optimization::LinearProblemApi::ILinearProblemData& data);
 
     /**
      * @brief Retrieves the value of a variable.
@@ -88,7 +88,7 @@ private:
      * @brief A map storing variable values.
      */
     std::map<std::string, double> variables_;
-    Optimisation::LinearProblemApi::ILinearProblemData& data_;
+    Optimization::LinearProblemApi::ILinearProblemData& data_;
 };
 
 } // namespace Antares::Expressions::Visitors

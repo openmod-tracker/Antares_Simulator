@@ -609,6 +609,6 @@ public:
 
     // TODO: 1 study but several PROBLEME_HEBDO, may cause race conditions
     const ModelerStudy::SystemModel::System* modelerSystem;                   // for hybrid studies
-    Optimisation::LinearProblemApi::ILinearProblemData* linear_problem_data_; // for hybrid studies
+    Optimization::LinearProblemApi::ILinearProblemData* linear_problem_data_; // for hybrid studies
 };
 #endif

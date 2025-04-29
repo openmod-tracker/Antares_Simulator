@@ -33,7 +33,7 @@ class MPSolverParameters;
 class MPObjective;
 } // namespace operations_research
 
-namespace Antares::Optimisation::LinearProblemMpsolverImpl
+namespace Antares::Optimization::LinearProblemMpsolverImpl
 {
 
 class OrtoolsLinearProblem: public LinearProblemApi::ILinearProblem
@@ -90,4 +90,4 @@ private:
     std::unique_ptr<OrtoolsMipSolution> solution_;
 };
 
-} // namespace Antares::Optimisation::LinearProblemMpsolverImpl
+} // namespace Antares::Optimization::LinearProblemMpsolverImpl

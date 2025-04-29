@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 class FillContext
 {
@@ -58,4 +58,4 @@ public:
     virtual ~ILinearProblemData() = default;
 };
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

@@ -1,14 +1,3 @@
-# Remix hydro algorithm
-add_library(shave-peaks-by-remix-hydro)
-
-target_sources(shave-peaks-by-remix-hydro
-        PRIVATE
-        shave-peaks-by-remix-hydro.cpp)
-
-target_include_directories(shave-peaks-by-remix-hydro
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-
 #
 # Simulation
 #
@@ -16,17 +5,13 @@ set(SRC_SIMULATION
         TimeSeriesNumbersWriter.cpp
         adequacy.cpp
         apply-scenario.cpp
-        base_post_process.cpp
         common-eco-adq.cpp
-        common-hydro-levels.cpp
-        common-hydro-remix.cpp
         economy.cpp
         include/antares/solver/simulation/BindingConstraintsTimeSeriesNumbersWriter.h
         include/antares/solver/simulation/ISimulationObserver.h
         include/antares/solver/simulation/ITimeSeriesNumbersWriter.h
         include/antares/solver/simulation/adequacy.h
         include/antares/solver/simulation/apply-scenario.h
-        include/antares/solver/simulation/base_post_process.h
         include/antares/solver/simulation/common-eco-adq.h
         include/antares/solver/simulation/economy.h
         include/antares/solver/simulation/opt_time_writer.h
@@ -77,7 +62,6 @@ target_link_libraries(antares-solver-simulation
         antares-solver-hydro
         antares-solver-variable
         antares-solver-ts-generator
-        shave-peaks-by-remix-hydro
 )
 
 install(DIRECTORY include/antares

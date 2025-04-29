@@ -24,7 +24,7 @@
 #include "hasBounds.h"
 #include "hasName.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 class IMipVariable: public IHasBounds, public IHasName
@@ -33,4 +33,4 @@ public:
     virtual bool isInteger() const = 0;
 };
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

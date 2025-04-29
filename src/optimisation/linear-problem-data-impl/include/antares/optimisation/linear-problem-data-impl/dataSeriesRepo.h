@@ -8,7 +8,7 @@
 
 #include "dataSeries.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 
 class DataSeriesRepository
@@ -41,4 +41,4 @@ public:
     };
 };
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

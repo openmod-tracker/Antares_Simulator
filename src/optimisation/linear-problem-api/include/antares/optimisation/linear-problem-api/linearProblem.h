@@ -29,7 +29,7 @@
 #include "mipVariable.h"
 
 /// Namespace for the classes related to the linear problem API
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 /**
@@ -86,4 +86,4 @@ public:
     virtual double infinity() const = 0;
 };
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

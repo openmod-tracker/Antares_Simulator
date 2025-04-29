@@ -33,7 +33,7 @@ namespace Antares::Optimization
 {
 
 VariablesBulkAddition::VariablesBulkAddition(
-  Optimisation::LinearProblemApi::ILinearProblem& linear_problem,
+  Optimization::LinearProblemApi::ILinearProblem& linear_problem,
   VariableDictionary& variableDictionary):
     linear_problem_(linear_problem),
     variableDictionary(variableDictionary)
@@ -143,14 +143,14 @@ ComponentFiller::ComponentFiller(const ModelerStudy::SystemModel::Component& com
 {
 }
 
-bool checkTimeSteps(Optimisation::LinearProblemApi::FillContext& ctx)
+bool checkTimeSteps(Optimization::LinearProblemApi::FillContext& ctx)
 {
     return ctx.getFirstTimeStep() <= ctx.getLastTimeStep();
 }
 
-void ComponentFiller::addVariables(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                                   Optimisation::LinearProblemApi::ILinearProblemData& data,
-                                   Optimisation::LinearProblemApi::FillContext& ctx)
+void ComponentFiller::addVariables(Optimization::LinearProblemApi::ILinearProblem& pb,
+                                   Optimization::LinearProblemApi::ILinearProblemData& data,
+                                   Optimization::LinearProblemApi::FillContext& ctx)
 {
     if (!checkTimeSteps(ctx))
     {
@@ -207,7 +207,7 @@ void ComponentFiller::addVariables(Optimisation::LinearProblemApi::ILinearProble
     }
 }
 
-void ComponentFiller::addStaticConstraint(Optimisation::LinearProblemApi::ILinearProblem& pb,
+void ComponentFiller::addStaticConstraint(Optimization::LinearProblemApi::ILinearProblem& pb,
                                           const LinearConstraint& linear_constraint,
                                           const std::string& constraint_id) const
 {
@@ -222,7 +222,7 @@ void ComponentFiller::addStaticConstraint(Optimisation::LinearProblemApi::ILinea
 }
 
 void ComponentFiller::addTimeDependentConstraints(
-  Optimisation::LinearProblemApi::ILinearProblem& pb,
+  Optimization::LinearProblemApi::ILinearProblem& pb,
   const std::vector<LinearConstraint>& linear_constraints,
   const std::string& constraint_id) const
 {
@@ -241,9 +241,9 @@ void ComponentFiller::addTimeDependentConstraints(
     }
 }
 
-void ComponentFiller::addConstraints(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                                     Optimisation::LinearProblemApi::ILinearProblemData& data,
-                                     Optimisation::LinearProblemApi::FillContext& ctx)
+void ComponentFiller::addConstraints(Optimization::LinearProblemApi::ILinearProblem& pb,
+                                     Optimization::LinearProblemApi::ILinearProblemData& data,
+                                     Optimization::LinearProblemApi::FillContext& ctx)
 {
     Expressions::Visitors::EvaluationContext evaluationContext(component_.getParameterValues(),
                                                                {},
@@ -268,9 +268,9 @@ void ComponentFiller::addConstraints(Optimisation::LinearProblemApi::ILinearProb
     }
 }
 
-void ComponentFiller::addObjective(Optimisation::LinearProblemApi::ILinearProblem& pb,
-                                   Optimisation::LinearProblemApi::ILinearProblemData& data,
-                                   Optimisation::LinearProblemApi::FillContext& ctx)
+void ComponentFiller::addObjective(Optimization::LinearProblemApi::ILinearProblem& pb,
+                                   Optimization::LinearProblemApi::ILinearProblemData& data,
+                                   Optimization::LinearProblemApi::FillContext& ctx)
 {
     auto model = component_.getModel();
     if (model->Objective().Empty())

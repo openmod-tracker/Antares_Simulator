@@ -58,7 +58,7 @@ public:
     ReadLinearConstraintVisitor() = delete;
     explicit ReadLinearConstraintVisitor(
       Expressions::Visitors::EvaluationContext context,
-      const Optimisation::LinearProblemApi::FillContext& fillContext,
+      const Optimization::LinearProblemApi::FillContext& fillContext,
       const std::string& componentId /* or vector ?*/);
     std::string name() const override;
 

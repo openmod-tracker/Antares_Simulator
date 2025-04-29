@@ -40,7 +40,7 @@
  *
  * @example
  * // Example usage with visual representation:
- * Optimisation::LinearProblemApi::FillContext fillContext;
+ * Optimization::LinearProblemApi::FillContext fillContext;
  * fillContext.NumberOfTimestep = 5; // Range size is 5
  * fillContext.firstTimeStep = 10;   // First timestep is 10
  * // Timesteps range: {10, 11, 12, 13, 14}
@@ -58,7 +58,7 @@
  *
  * @example
  * // Example with negative shift and visual representation:
- * Optimisation::LinearProblemApi::FillContext fillContext;
+ * Optimization::LinearProblemApi::FillContext fillContext;
  * fillContext.NumberOfTimestep = 5; // Range size is 5
  * fillContext.firstTimeStep = 10;   // First timestep is 10
  * // Timesteps range: {10, 11, 12, 13, 14}
@@ -76,7 +76,7 @@
  */
 inline int rotatedIndex(unsigned key,
                         int shift,
-                        const Antares::Optimisation::LinearProblemApi::FillContext& fillContext)
+                        const Antares::Optimization::LinearProblemApi::FillContext& fillContext)
 {
     unsigned rangeSize = fillContext.getNumberOfTimestep();
 

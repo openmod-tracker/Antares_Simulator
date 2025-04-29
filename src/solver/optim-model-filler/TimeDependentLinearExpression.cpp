@@ -31,7 +31,7 @@ namespace Antares::Optimization
 {
 
 TimeDependentLinearExpression::TimeDependentLinearExpression(
-  const Optimisation::LinearProblemApi::FillContext& fillContext,
+  const Optimization::LinearProblemApi::FillContext& fillContext,
   const LinearExpression& linearExpression)
 {
     for (auto timestep(fillContext.getFirstTimeStep()); timestep <= fillContext.getLastTimeStep();
@@ -42,7 +42,7 @@ TimeDependentLinearExpression::TimeDependentLinearExpression(
 }
 
 TimeDependentLinearExpression::TimeDependentLinearExpression(
-  const Optimisation::LinearProblemApi::FillContext& fillContext):
+  const Optimization::LinearProblemApi::FillContext& fillContext):
     TimeDependentLinearExpression(fillContext, LinearExpression())
 {
 }
@@ -135,7 +135,7 @@ TimeDependentLinearExpression& TimeDependentLinearExpression::operator+=(
 TimeDependentLinearExpression TimeDependentLinearExpression::shiftLinearExpressions(
   int shiftValue) const
 {
-    const Optimisation::LinearProblemApi::FillContext fillContext{
+    const Optimization::LinearProblemApi::FillContext fillContext{
       linearExpressions_.begin()->first,
       linearExpressions_.rbegin()->first};
 
@@ -150,7 +150,7 @@ TimeDependentLinearExpression TimeDependentLinearExpression::shiftLinearExpressi
 
 TimeDependentLinearExpression TimeDependentLinearExpression::operator[](int timeStep) const
 {
-    const Optimisation::LinearProblemApi::FillContext fillContext{
+    const Optimization::LinearProblemApi::FillContext fillContext{
       linearExpressions_.begin()->first,
       linearExpressions_.rbegin()->first};
     return TimeDependentLinearExpression(fillContext, linearExpressions_.at(timeStep));
@@ -159,7 +159,7 @@ TimeDependentLinearExpression TimeDependentLinearExpression::operator[](int time
 TimeDependentLinearExpression TimeDependentLinearExpression::timeSumLinearExpressions(int from,
                                                                                       int to) const
 {
-    const Optimisation::LinearProblemApi::FillContext fillContext{
+    const Optimization::LinearProblemApi::FillContext fillContext{
       linearExpressions_.begin()->first,
       linearExpressions_.rbegin()->first};
     TimeDependentLinearExpression ret(fillContext);
@@ -173,7 +173,7 @@ TimeDependentLinearExpression TimeDependentLinearExpression::timeSumLinearExpres
 
 TimeDependentLinearExpression TimeDependentLinearExpression::allTimeSumLinearExpressions() const
 {
-    const Optimisation::LinearProblemApi::FillContext fillContext{
+    const Optimization::LinearProblemApi::FillContext fillContext{
       linearExpressions_.begin()->first,
       linearExpressions_.rbegin()->first};
     TimeDependentLinearExpression ret(fillContext);

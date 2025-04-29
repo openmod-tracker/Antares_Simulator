@@ -31,7 +31,7 @@
 namespace Antares::Expressions::Visitors
 {
 EvalVisitor::EvalVisitor(EvaluationContext context,
-                         Optimisation::LinearProblemApi::FillContext fillContext):
+                         Optimization::LinearProblemApi::FillContext fillContext):
     context_(std::move(context)),
     fillContext_(std::move(fillContext))
 {

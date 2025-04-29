@@ -21,13 +21,17 @@
 
 #include "antares/solver/optimisation/post_process_commands.h"
 
+#include <antares/solver/optimisation/common-hydro-levels.h>
+#include <antares/solver/optimisation/common-hydro-remix.h>
+#include <antares/solver/optimisation/adequacy_patch_csr/hourly_csr_problem.h>
+
 #include "antares/solver/optimisation/adequacy_patch_csr/adq_patch_curtailment_sharing.h"
 #include "antares/data/adequacy_patch_runtime_data.h"
-#include "antares/solver/simulation/common-eco-adq.h"
+#include "antares/study/area/scratchpad.h"
 
 using namespace Antares::Data;
 using namespace Antares::Date;
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 const uint nbHoursInWeek = 168;
 

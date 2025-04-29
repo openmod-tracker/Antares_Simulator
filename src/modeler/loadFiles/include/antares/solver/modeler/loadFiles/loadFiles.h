@@ -46,7 +46,7 @@ ModelerStudy::SystemModel::System loadSystem(
   const std::filesystem::path& studyPath,
   const std::vector<ModelerStudy::SystemModel::Library>& libraries);
 
-std::unique_ptr<Optimisation::LinearProblemApi::ILinearProblemData> loadDataSeries(
+std::unique_ptr<Optimization::LinearProblemApi::ILinearProblemData> loadDataSeries(
   const std::filesystem::path& studyPath);
 
 void handleYamlError(const YAML::Exception& e, const std::string& context);

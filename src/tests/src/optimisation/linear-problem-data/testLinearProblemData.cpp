@@ -7,7 +7,7 @@
 #include <antares/optimisation/linear-problem-data-impl/linearProblemData.h>
 #include <antares/optimisation/linear-problem-data-impl/timeSeriesSet.h>
 
-using namespace Antares::Optimisation::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemDataImpl;
 
 // TODO: activate this test when we support scenario groups
 /*BOOST_AUTO_TEST_CASE(PbData_is_empty__asking_it_a_value_leads_to_exception)

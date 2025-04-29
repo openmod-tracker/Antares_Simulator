@@ -31,9 +31,9 @@
 #include "mock-fillers/OneVarFiller.h"
 #include "mock-fillers/TwoVarsTwoConstraintsFiller.h"
 
-using namespace Antares::Optimisation::LinearProblemApi;
-using namespace Antares::Optimisation::LinearProblemDataImpl;
-using namespace Antares::Optimisation::LinearProblemMpsolverImpl;
+using namespace Antares::Optimization::LinearProblemApi;
+using namespace Antares::Optimization::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemMpsolverImpl;
 
 struct Fixture
 {

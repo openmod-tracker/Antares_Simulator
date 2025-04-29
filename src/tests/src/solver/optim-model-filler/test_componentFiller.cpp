@@ -36,8 +36,8 @@
 
 #include "unit_test_utils.h"
 
-using namespace Antares::Optimisation::LinearProblemApi;
-using namespace Antares::Optimisation::LinearProblemDataImpl;
+using namespace Antares::Optimization::LinearProblemApi;
+using namespace Antares::Optimization::LinearProblemDataImpl;
 using namespace Antares::ModelerStudy::SystemModel;
 using namespace Antares::Optimization;
 using namespace Antares::Expressions;
@@ -235,7 +235,7 @@ void LinearProblemBuildingFixture::buildLinearProblem(FillContext& time_scenario
     {
         fillers_ptr.push_back(component_filler.get());
     }
-    pb = make_unique<Antares::Optimisation::LinearProblemMpsolverImpl::OrtoolsLinearProblem>(
+    pb = make_unique<Antares::Optimization::LinearProblemMpsolverImpl::OrtoolsLinearProblem>(
       false,
       "sirius");
     LinearProblemBuilder linear_problem_builder(fillers_ptr);

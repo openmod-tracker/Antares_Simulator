@@ -2,7 +2,7 @@
 
 #include "antares/optimisation/linear-problem-data-impl/scenarioGroupRepo.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 
 ScenarioGroupRepository::AlreadyExists::AlreadyExists(const std::string& groupId):
@@ -22,4 +22,4 @@ ScenarioGroupRepository::ScenarioNotExist::ScenarioNotExist(const std::string& g
 {
 }
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

@@ -2,7 +2,7 @@
 
 #include "antares/optimisation/linear-problem-api/linearProblemFiller.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 class OneVarFiller: public LinearProblemFiller
@@ -38,4 +38,4 @@ void OneVarFiller::addObjective(ILinearProblem& pb,
     pb.setObjectiveCoefficient(var, 1);
 }
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

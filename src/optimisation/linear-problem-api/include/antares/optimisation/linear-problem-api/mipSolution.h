@@ -27,7 +27,7 @@
 
 #include "mipVariable.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 enum class MipStatus
@@ -56,4 +56,4 @@ public:
     virtual const std::map<std::string, double>& getOptimalValues() const = 0;
 };
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

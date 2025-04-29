@@ -21,7 +21,7 @@
 
 #include "antares/optimisation/linear-problem-data-impl/linearProblemData.h"
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 
 void LinearProblemData::addScenarioGroup(const std::string& groupId,
@@ -46,4 +46,4 @@ double LinearProblemData::getData(const std::string& dataSetId,
     return dataSeriesRepository_.getDataSeries(dataSetId).getData(rank, hour);
 }
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

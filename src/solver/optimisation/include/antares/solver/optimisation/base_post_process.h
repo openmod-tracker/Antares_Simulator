@@ -22,11 +22,6 @@
 #include <memory>
 #include <antares/study/fwd.h>
 
-namespace Antares::Solver::Simulation {
-    class basePostProcessCommand;
-    struct optRuntimeData;
-}
-
 namespace Antares::OptimizationOptions {
     class OptimizationOptions;
 }
@@ -93,7 +88,7 @@ namespace Antares::Optimization {
             Data::SimplexOptimization splxOptimization,
             Date::Calendar& calendar,
           const OptimizationOptions::OptimizationOptions& solverOptions);
-        void runAll(const Solver::Simulation::optRuntimeData& opt_runtime_data);
+        void runAll(const optRuntimeData& opt_runtime_data);
 
     protected:
         // Member functions
@@ -102,6 +97,6 @@ namespace Antares::Optimization {
         // Data mambers
         PROBLEME_HEBDO* const problemeHebdo_ = nullptr;
         const unsigned int numSpace_;
-        std::vector<std::unique_ptr<Solver::Simulation::basePostProcessCommand>> post_process_list;
+        std::vector<std::unique_ptr<basePostProcessCommand>> post_process_list;
     };
 }

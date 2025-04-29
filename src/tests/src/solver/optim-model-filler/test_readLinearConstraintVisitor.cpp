@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_SUITE(_read_linear_constraint_visitor_)
 
 struct MyDummyFixture: Registry<Node>
 {
-    Antares::Optimisation::LinearProblemDataImpl::LinearProblemData data;
+    Antares::Optimization::LinearProblemDataImpl::LinearProblemData data;
     EvaluationContext evaluationContext{{}, {}, data};
     std::string componentId = "compo";
     ReadLinearConstraintVisitor visitor{evaluationContext, {0, 0}, componentId};

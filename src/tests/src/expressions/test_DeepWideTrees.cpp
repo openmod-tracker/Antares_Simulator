@@ -47,7 +47,7 @@ static Node* deepNegationTree(Registry<Node>& registry, double litValue, size_t 
 
 struct MyDummyFixture: Registry<Node>
 {
-    Antares::Optimisation::LinearProblemDataImpl::LinearProblemData data;
+    Antares::Optimization::LinearProblemDataImpl::LinearProblemData data;
     EvaluationContext evaluationContext{{}, {}, data};
     EvalVisitor evalVisitor{evaluationContext, {0, 0}};
 };

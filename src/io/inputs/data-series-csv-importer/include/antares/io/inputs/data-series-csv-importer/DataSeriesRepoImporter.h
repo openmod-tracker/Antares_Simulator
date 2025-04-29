@@ -34,7 +34,7 @@ class DataSeriesRepoImporter
 {
 public:
     DataSeriesRepoImporter() = delete; // must not be used
-    static Optimisation::LinearProblemDataImpl::DataSeriesRepository importFromDirectory(
+    static Optimization::LinearProblemDataImpl::DataSeriesRepository importFromDirectory(
       const std::filesystem::path&,
       std::string csvSeparators = "\t");
 };

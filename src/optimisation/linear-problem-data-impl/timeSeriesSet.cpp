@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 TimeSeriesSet::TimeSeriesSet(std::string name, unsigned int height):
     IDataSeries::IDataSeries(name),
@@ -39,4 +39,4 @@ double TimeSeriesSet::getData(unsigned rank, unsigned hour)
     return tsSet_[rank][hour];
 }
 
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

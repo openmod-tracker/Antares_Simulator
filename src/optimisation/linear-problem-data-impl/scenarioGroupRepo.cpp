@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-namespace Antares::Optimisation::LinearProblemDataImpl
+namespace Antares::Optimization::LinearProblemDataImpl
 {
 void ScenarioGroupRepository::addPairScenarioRankToGroup(
   const std::string& groupId,
@@ -29,4 +29,4 @@ unsigned ScenarioGroupRepository::getDataRank(const std::string& groupId, const 
 
     return scenarioGroups_.at(groupId).at(scenario);
 }
-} // namespace Antares::Optimisation::LinearProblemDataImpl
+} // namespace Antares::Optimization::LinearProblemDataImpl

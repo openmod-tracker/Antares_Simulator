@@ -25,7 +25,7 @@
 
 using namespace Antares::Data;
 using namespace Antares::Date;
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 AdqPatchPostProcessList::AdqPatchPostProcessList(
   const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,

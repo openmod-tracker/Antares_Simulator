@@ -2,7 +2,7 @@
 
 #include "antares/optimisation/linear-problem-api/linearProblemFiller.h"
 
-namespace Antares::Optimisation::LinearProblemApi
+namespace Antares::Optimization::LinearProblemApi
 {
 
 class TwoVarsTwoConstraintsFiller: public LinearProblemFiller
@@ -36,4 +36,4 @@ void TwoVarsTwoConstraintsFiller::addObjective([[maybe_unused]] ILinearProblem& 
 {
 }
 
-} // namespace Antares::Optimisation::LinearProblemApi
+} // namespace Antares::Optimization::LinearProblemApi

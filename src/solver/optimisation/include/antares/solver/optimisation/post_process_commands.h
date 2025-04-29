@@ -20,9 +20,11 @@
 */
 #pragma once
 
+#include <set>
+
 #include "antares/solver/optimisation/base_post_process.h"
 
-namespace Antares::Solver::Simulation
+namespace Antares::Optimization
 {
 class DispatchableMarginPostProcessCmd: public basePostProcessCommand
 {

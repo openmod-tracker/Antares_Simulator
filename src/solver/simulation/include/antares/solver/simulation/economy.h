@@ -98,7 +98,7 @@ private:
     uint pNbMaxPerformedYearsInParallel{0};
     std::vector<PROBLEME_HEBDO> pProblemesHebdo;
     std::vector<Optimization::WeeklyOptimization> weeklyOptProblems_;
-    std::vector<std::unique_ptr<interfacePostProcessList>> postProcessesList_;
+    std::vector<std::unique_ptr<Antares::Optimization::interfacePostProcessList>> postProcessesList_;
     IResultWriter& resultWriter;
     std::reference_wrapper<ISimulationObserver> simulationObserver_;
 }; // class Economy
