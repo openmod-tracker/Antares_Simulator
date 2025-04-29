@@ -25,6 +25,7 @@
 
 using namespace Antares::Data;
 using namespace Antares::Date;
+
 namespace Antares::Optimization
 {
 AdqPatchPostProcessList::AdqPatchPostProcessList(
@@ -61,4 +62,4 @@ AdqPatchPostProcessList::AdqPatchPostProcessList(
       std::make_unique<HydroLevelsFinalUpdatePostProcessCmd>(problemeHebdo_, areas));
 }
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

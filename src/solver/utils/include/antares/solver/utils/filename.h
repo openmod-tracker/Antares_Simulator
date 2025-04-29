@@ -25,30 +25,33 @@
 
 #include "opt_period_string_generator.h"
 
-namespace Antares::Solver::Utils {
-    class FileNamer {
-    public:
-        std::shared_ptr<OptPeriodStringGenerator> createOptPeriodAsString(bool isOptimizationWeekly,
-                                                                          unsigned int day,
-                                                                          unsigned int week,
-                                                                          unsigned int year);
+namespace Antares::Solver::Utils
+{
+class FileNamer
+{
+public:
+    std::shared_ptr<OptPeriodStringGenerator> createOptPeriodAsString(bool isOptimizationWeekly,
+                                                                      unsigned int day,
+                                                                      unsigned int week,
+                                                                      unsigned int year);
 
-        std::string createCriterionFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
-                                            unsigned int optNumber);
+    std::string createCriterionFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
+                                        unsigned int optNumber);
 
-        std::string createMPSfilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
-                                      unsigned int optNumber);
+    std::string createMPSfilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
+                                  unsigned int optNumber);
 
-        std::string createSolutionFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
+    std::string createSolutionFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
+                                       unsigned int optNumber);
+
+    std::string createMarginalCostFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
                                            unsigned int optNumber);
 
-        std::string createMarginalCostFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
-                                               unsigned int optNumber);
+    std::string createReducedCostFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
+                                          unsigned int optNumber);
 
-        std::string createReducedCostFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
-                                              unsigned int optNumber);
-
-        std::string createModelerSolutionsFilename(const OptPeriodStringGenerator& optPeriodStringGenerator,
-                                                   unsigned int optNumber);
-    };
-}
+    std::string createModelerSolutionsFilename(
+      const OptPeriodStringGenerator& optPeriodStringGenerator,
+      unsigned int optNumber);
+};
+} // namespace Antares::Solver::Utils

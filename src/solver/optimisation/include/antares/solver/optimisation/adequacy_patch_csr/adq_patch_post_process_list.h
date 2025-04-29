@@ -24,12 +24,14 @@
 #include "antares/solver/optimisation/base_post_process.h"
 #include "antares/study/parameters/adq-patch-params.h"
 
-namespace Antares::OptimizationOptions {
-    class OptimizationOptions;
+namespace Antares::OptimizationOptions
+{
+class OptimizationOptions;
 }
 
-namespace Antares::Date {
-    class Calendar;
+namespace Antares::Date
+{
+class Calendar;
 }
 
 struct PROBLEME_HEBDO;
@@ -39,7 +41,6 @@ namespace Antares::Optimization
 
 class AdqPatchPostProcessList: public interfacePostProcessList
 {
-
 public:
     AdqPatchPostProcessList(const Data::AdequacyPatch::AdqPatchParams& adqPatchParams,
                             PROBLEME_HEBDO* problemeHebdo,
@@ -53,4 +54,4 @@ public:
     ~AdqPatchPostProcessList() override = default;
 };
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

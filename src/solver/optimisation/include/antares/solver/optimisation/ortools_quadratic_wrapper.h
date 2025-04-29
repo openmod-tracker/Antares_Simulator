@@ -32,4 +32,4 @@ namespace Antares::Optimization
  */
 void SolveQuadraticProblemWithOrtools(const OptimizationOptions::SingleOptimOptions& options,
                                       PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre);
-} // namespace Antares::Solver::Utils
+} // namespace Antares::Optimization

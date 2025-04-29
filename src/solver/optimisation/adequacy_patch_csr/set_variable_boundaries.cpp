@@ -21,11 +21,11 @@
 
 #include <pi_constantes_externes.h>
 
-#include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/data/opt_structure_probleme_a_resoudre.h"
 #include "antares/data/adequacy_patch_runtime_data.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/opt_constants.h"
+#include "antares/solver/optimisation/opt_fonctions.h"
 
 using namespace Yuni;
 

@@ -72,7 +72,9 @@ private:
 class DTGnettingAfterCSRcmd: public basePostProcessCommand
 {
 public:
-    DTGnettingAfterCSRcmd(PROBLEME_HEBDO* problemeHebdo, Data::AreaList& areas, unsigned int numSpace);
+    DTGnettingAfterCSRcmd(PROBLEME_HEBDO* problemeHebdo,
+                          Data::AreaList& areas,
+                          unsigned int numSpace);
     void execute(const optRuntimeData&) override;
 
 private:
@@ -129,4 +131,4 @@ private:
     const OptimizationOptions::OptimizationOptions& solverOptions_;
 };
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

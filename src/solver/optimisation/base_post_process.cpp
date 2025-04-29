@@ -26,6 +26,7 @@
 
 using namespace Antares::Data;
 using namespace Antares::Date;
+
 namespace Antares::Optimization
 {
 
@@ -41,7 +42,7 @@ interfacePostProcessList::interfacePostProcessList(PROBLEME_HEBDO* problemesHebd
 }
 
 std::unique_ptr<interfacePostProcessList> interfacePostProcessList::create(
-    AdequacyPatch::AdqPatchParams& adqPatchParams,
+  AdequacyPatch::AdqPatchParams& adqPatchParams,
   PROBLEME_HEBDO* problemeHebdo,
   uint numSpace,
   AreaList& areas,
@@ -64,11 +65,11 @@ std::unique_ptr<interfacePostProcessList> interfacePostProcessList::create(
     else
     {
         return std::make_unique<OptPostProcessList>(problemeHebdo,
-                                                                        numSpace,
-                                                                        areas,
-                                                                        sheddingPolicy,
-                                                                        splxOptimization,
-                                                                        calendar);
+                                                    numSpace,
+                                                    areas,
+                                                    sheddingPolicy,
+                                                    splxOptimization,
+                                                    calendar);
     }
 }
 
@@ -80,4 +81,4 @@ void interfacePostProcessList::runAll(const optRuntimeData& opt_runtime_data)
     }
 }
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

@@ -24,10 +24,10 @@
 #include <antares/antares/fatal-error.h>
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/logs/logs.h>
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/optimization-options/options.h"
 #include "antares/solver/optimisation/opt_appel_solveur_quadratique.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/data/sim_structure_probleme_economique.h"
 
 using namespace Antares::Data;
 

@@ -19,9 +19,10 @@
 
 #include "antares/solver/optimisation/ortools_wrapper.h"
 
+#include <ortools/linear_solver/linear_solver.h>
+
 #include "pi_constantes_externes.h"
 #include "spx_constantes_externes.h"
-#include <ortools/linear_solver/linear_solver.h>
 
 namespace Antares::Solver::Utils
 {
@@ -53,7 +54,9 @@ void ORTOOLS_CorrigerLesBornes(operations_research::MPSolver* solver,
     }
 }
 
-void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* solver, const double* costs, int nbVar)
+void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* solver,
+                                    const double* costs,
+                                    int nbVar)
 {
     auto& variables = solver->variables();
     for (int idxVar = 0; idxVar < nbVar; ++idxVar)

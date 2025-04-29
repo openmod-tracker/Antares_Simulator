@@ -23,21 +23,22 @@
 
 #include <vector>
 
+#include "antares/data/adequacy_patch_runtime_data.h"
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/adequacy_patch_csr/constraints/CsrAreaBalance.h"
 #include "antares/solver/optimisation/adequacy_patch_csr/constraints/CsrBindingConstraintHour.h"
 #include "antares/solver/optimisation/adequacy_patch_csr/constraints/CsrFlowDissociation.h"
 #include "antares/solver/optimisation/adequacy_patch_csr/hourly_csr_problem.h"
 #include "antares/solver/optimisation/constraints/constraint_builder_utils.h"
-#include "antares/data/opt_structure_probleme_a_resoudre.h"
-#include "antares/data/adequacy_patch_runtime_data.h"
-#include "antares/data/sim_structure_probleme_economique.h"
 
 using namespace Antares::Data;
 
 namespace Antares::Solver::Optimization
 {
 
-void CsrQuadraticProblem::setConstraintsOnFlows(ConstraintBuilder& builder) const {
+void CsrQuadraticProblem::setConstraintsOnFlows(ConstraintBuilder& builder) const
+{
     int hour = hourlyCsrProblem_.triggeredHour;
     //!\ TODO not associated problemHebdo && probleamAressoudre
     CsrFlowDissociationData csrFlowDissociationData = {
@@ -53,7 +54,8 @@ void CsrQuadraticProblem::setConstraintsOnFlows(ConstraintBuilder& builder) cons
     csrFlowDissociation.add();
 }
 
-void CsrQuadraticProblem::setNodeBalanceConstraints(ConstraintBuilder& builder) const {
+void CsrQuadraticProblem::setNodeBalanceConstraints(ConstraintBuilder& builder) const
+{
     int hour = hourlyCsrProblem_.triggeredHour;
 
     // constraint:
@@ -81,7 +83,8 @@ void CsrQuadraticProblem::setNodeBalanceConstraints(ConstraintBuilder& builder) 
     csrAreaBalance.add();
 }
 
-void CsrQuadraticProblem::setBindingConstraints(ConstraintBuilder& builder) const {
+void CsrQuadraticProblem::setBindingConstraints(ConstraintBuilder& builder) const
+{
     int hour = hourlyCsrProblem_.triggeredHour;
 
     CsrBindingConstraintHourData csrBindingConstraintHourData = {
@@ -101,7 +104,8 @@ void CsrQuadraticProblem::setBindingConstraints(ConstraintBuilder& builder) cons
     }
 }
 
-void CsrQuadraticProblem::buildConstraintMatrix() const {
+void CsrQuadraticProblem::buildConstraintMatrix() const
+{
     logs.debug() << "[CSR] constraint list:";
 
     std::vector<double> Pi(problemeAResoudre_.NombreDeVariables);

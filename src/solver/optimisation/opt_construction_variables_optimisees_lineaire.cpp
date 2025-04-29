@@ -20,8 +20,8 @@
  */
 #include <spx_constantes_externes.h>
 
-#include "antares/solver/optimisation/opt_rename_problem.h"
 #include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_rename_problem.h"
 
 #include "variables/VariableManagerUtils.h"
 

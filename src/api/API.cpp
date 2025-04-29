@@ -32,10 +32,9 @@
 
 namespace Antares::API
 {
-SimulationResults APIInternal::run(
-  const IStudyLoader& study_loader,
-  const std::filesystem::path& output,
-  const OptimizationOptions::OptimizationOptions& optOptions)
+SimulationResults APIInternal::run(const IStudyLoader& study_loader,
+                                   const std::filesystem::path& output,
+                                   const OptimizationOptions::OptimizationOptions& optOptions)
 {
     try
     {

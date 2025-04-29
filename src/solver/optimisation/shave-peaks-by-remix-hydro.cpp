@@ -358,4 +358,4 @@ RemixHydroOutput shavePeaksByRemixingHydro(const std::vector<double>& DispatchGe
     return {OutHydroGen, OutUnsupE, levels};
 }
 
-} // End namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

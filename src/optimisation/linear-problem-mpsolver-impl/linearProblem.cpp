@@ -19,6 +19,7 @@
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
 
+#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 #include <exception>
 #include <fstream>
 #include <memory>
@@ -26,7 +27,6 @@
 
 #include <antares/logs/logs.h>
 #include <antares/optimisation/linear-problem-mpsolver-impl/linearProblem.h>
-#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 
 namespace Antares::Optimization::LinearProblemMpsolverImpl
 {

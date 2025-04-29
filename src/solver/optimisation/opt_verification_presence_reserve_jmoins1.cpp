@@ -21,8 +21,9 @@
 
 #include "antares/data/sim_structure_probleme_economique.h"
 
-namespace {
-    constexpr double ZERO_RESERVE_J_MOINS1 = 1.e-2;
+namespace
+{
+constexpr double ZERO_RESERVE_J_MOINS1 = 1.e-2;
 }
 
 void OPT_VerifierPresenceReserveJmoins1(PROBLEME_HEBDO* problemeHebdo)

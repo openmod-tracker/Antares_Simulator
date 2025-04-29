@@ -20,14 +20,19 @@
 
 #pragma once
 
-namespace Antares::Data {
-    class Study;
+namespace Antares::Data
+{
+class Study;
 }
 
-namespace Antares::Solver {
-    class IResultWriter;
+namespace Antares::Solver
+{
+class IResultWriter;
 }
 
-namespace Antares::TSGenerator {
-    bool GenerateHydroTimeSeries(Antares::Data::Study& study, uint currentYear, Antares::Solver::IResultWriter& writer);
+namespace Antares::TSGenerator
+{
+bool GenerateHydroTimeSeries(Data::Study& study,
+                             unsigned int currentYear,
+                             Solver::IResultWriter& writer);
 }

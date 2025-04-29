@@ -252,4 +252,4 @@ void SolveQuadraticProblemWithOrtools(const OptimizationOptions::SingleOptimOpti
     auto resultStatus = Solve(model, solverType, args);
     ProcessSolveResult(ProblemeAResoudre, model, resultStatus);
 }
-} // namespace Antares::Solver::Utils
+} // namespace Antares::Optimization

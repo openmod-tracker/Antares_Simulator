@@ -26,8 +26,7 @@
 namespace Antares::Optimization
 {
 
-class LegacyOrtoolsLinearProblem final
-    : public LinearProblemMpsolverImpl::OrtoolsLinearProblem
+class LegacyOrtoolsLinearProblem final: public LinearProblemMpsolverImpl::OrtoolsLinearProblem
 {
 public:
     LegacyOrtoolsLinearProblem(bool isMip, const std::string& solverName):

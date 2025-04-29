@@ -20,9 +20,11 @@
 */
 #pragma once
 
-namespace operations_research {
-    class MPSolver;
+namespace operations_research
+{
+class MPSolver;
 }
+
 namespace Antares::Solver::Utils
 {
 void ORTOOLS_ModifierLeVecteurCouts(operations_research::MPSolver* ProbSpx,

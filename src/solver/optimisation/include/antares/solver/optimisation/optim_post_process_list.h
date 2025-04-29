@@ -38,4 +38,4 @@ public:
     ~OptPostProcessList() override = default;
 };
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

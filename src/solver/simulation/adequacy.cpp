@@ -24,9 +24,11 @@
 #include <antares/exception/AssertionError.hpp>
 #include <antares/exception/UnfeasibleProblemError.hpp>
 #include <antares/solver/optimisation/opt_fonctions.h>
-#include "antares/solver/optimisation/opt_optimisation_hebdo.h"
-#include "antares/solver/optimisation/common-hydro-remix.h"
+#include <antares/solver/simulation/simulation.h>
+
 #include "antares/solver/optimisation/common-hydro-levels.h"
+#include "antares/solver/optimisation/common-hydro-remix.h"
+#include "antares/solver/optimisation/opt_optimisation_hebdo.h"
 
 using namespace Yuni;
 using Antares::Constants::nbHoursInAWeek;
@@ -213,11 +215,11 @@ bool Adequacy::year(Progression::Task& progression,
                                                            simulationObserver_.get());
 
                 Optimization::RemixHydroForAllAreas(study.areas,
-                                      currentProblem,
-                                      study.parameters.shedding.policy,
-                                      study.parameters.simplexOptimizationRange,
-                                      numSpace,
-                                      hourInTheYear);
+                                                    currentProblem,
+                                                    study.parameters.shedding.policy,
+                                                    study.parameters.simplexOptimizationRange,
+                                                    numSpace,
+                                                    hourInTheYear);
             }
             catch (Data::AssertionError& ex)
             {
@@ -324,7 +326,10 @@ bool Adequacy::year(Progression::Task& progression,
             }
         }
 
-        Optimization::interpolateWaterValue(study.areas, currentProblem, study.calendar, hourInTheYear);
+        Optimization::interpolateWaterValue(study.areas,
+                                            currentProblem,
+                                            study.calendar,
+                                            hourInTheYear);
 
         Optimization::updatingWeeklyFinalHydroLevel(study.areas, currentProblem);
 

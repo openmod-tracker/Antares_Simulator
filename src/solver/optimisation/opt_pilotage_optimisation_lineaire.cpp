@@ -19,10 +19,10 @@
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
 
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/optimization-options/options.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
 #include "antares/solver/simulation/ISimulationObserver.h"
-#include "antares/data/sim_structure_probleme_economique.h"
 
 bool OPT_PilotageOptimisationLineaire(const OptimizationOptions::OptimizationOptions& options,
                                       PROBLEME_HEBDO* problemeHebdo,

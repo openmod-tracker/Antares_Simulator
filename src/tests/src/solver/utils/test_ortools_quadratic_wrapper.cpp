@@ -20,13 +20,12 @@
  */
 #define WIN32_LEAN_AND_MEAN
 
+#include <../../../../solver/optimisation/include/antares/solver/optimisation/ortools_quadratic_wrapper.h>
 #include <cmath>
 #include <pi_constantes_externes.h>
 #include <unit_test_utils.h>
 
 #include <boost/test/unit_test.hpp>
-
-#include <../../../../solver/optimisation/include/antares/solver/optimisation/ortools_quadratic_wrapper.h>
 
 #include "spx_constantes_externes.h"
 static double tolerance = 1e-5;

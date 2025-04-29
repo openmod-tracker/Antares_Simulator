@@ -19,10 +19,11 @@
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
 
+#include "antares/solver/ts-generator/hydro.h"
+
 #include <cmath>
 #include <fmt/format.h>
 
-#include "antares/solver/ts-generator/hydro.h"
 #include <antares/antares/fatal-error.h>
 #include <antares/study/study.h>
 #include <antares/utils/utils.h>
@@ -59,7 +60,7 @@ static void PreproRoundAllEntriesPlusDerated(Data::Study& study)
       });
 }
 
-bool GenerateHydroTimeSeries(Data::Study& study, uint currentYear, Solver::IResultWriter& writer)
+bool GenerateHydroTimeSeries(Data::Study& study, unsigned int currentYear, Solver::IResultWriter& writer)
 {
     logs.info() << "Generating the hydro time-series";
 

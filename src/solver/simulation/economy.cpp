@@ -33,6 +33,7 @@ using Constants::nbHoursInAWeek;
 
 using namespace Antares::Data;
 using namespace Antares::Date;
+
 namespace Antares::Solver::Simulation
 {
 Economy::Economy(Study& study,
@@ -137,11 +138,11 @@ bool Economy::year(Progression::Task& progression,
         currentProblem.HeureDansLAnnee = hourInTheYear;
 
         SIM_RenseignementProblemeHebdo(study,
-                                         currentProblem,
-                                         state.weekInTheYear,
-                                         hourInTheYear,
-                                         hydroVentilationResults,
-                                         scratchmap);
+                                       currentProblem,
+                                       state.weekInTheYear,
+                                       hourInTheYear,
+                                       hydroVentilationResults,
+                                       scratchmap);
 
         BuildThermalPartOfWeeklyProblem(study,
                                         currentProblem,
@@ -227,7 +228,8 @@ bool Economy::year(Progression::Task& progression,
     return true;
 }
 
-void Economy::incrementProgression(Progression::Task& progression) const {
+void Economy::incrementProgression(Progression::Task& progression) const
+{
     for (uint w = 0; w < pNbWeeks; ++w)
     {
         ++progression;
@@ -235,9 +237,8 @@ void Economy::incrementProgression(Progression::Task& progression) const {
 }
 
 // Retrieve weighted average balance for each area
-static std::vector<AvgExchangeResults*> retrieveBalance(
-  const Study& study,
-  Variable::Economy::AllVariables& variables)
+static std::vector<AvgExchangeResults*> retrieveBalance(const Study& study,
+                                                        Variable::Economy::AllVariables& variables)
 {
     const uint nbAreas = study.areas.size();
     std::vector<AvgExchangeResults*> balance(nbAreas, nullptr);
@@ -259,7 +260,8 @@ void Economy::simulationEnd()
     }
 }
 
-void Economy::prepareClustersInMustRunMode(Area::ScratchMap& scratchmap, uint year) const {
+void Economy::prepareClustersInMustRunMode(Area::ScratchMap& scratchmap, uint year) const
+{
     for (uint i = 0; i < study.areas.size(); ++i)
     {
         auto& area = *study.areas[i];

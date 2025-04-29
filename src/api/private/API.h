@@ -53,9 +53,8 @@ public:
 
 private:
     std::shared_ptr<Data::Study> study_;
-    SimulationResults execute(
-      const std::filesystem::path& output,
-      const OptimizationOptions::OptimizationOptions& optOptions) const;
+    SimulationResults execute(const std::filesystem::path& output,
+                              const OptimizationOptions::OptimizationOptions& optOptions) const;
 };
 
 } // namespace Antares::API

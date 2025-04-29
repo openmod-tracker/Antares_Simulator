@@ -24,7 +24,6 @@
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/opt_constants.h"
 
-
 void OPT_PbLineairePourAjusterLeNombreMinDeGroupesDemarresCoutsDeDemarrage(
   PROBLEME_HEBDO* problemeHebdo,
   std::vector<int>& NbMinOptDeGroupesEnMarche,

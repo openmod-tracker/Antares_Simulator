@@ -26,20 +26,20 @@
 
 #include <antares/antares/fatal-error.h>
 #include <antares/logs/logs.h>
+#include "antares/data/opt_structure_probleme_a_resoudre.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/optimisation/linear-problem-api/linearProblemBuilder.h"
 #include "antares/optimization-options/options.h"
 #include "antares/solver/infeasible-problem-analysis/unfeasible-pb-analyzer.h"
 #include "antares/solver/optim-model-filler/ComponentFiller.h"
 #include "antares/solver/optimisation/LegacyFiller.h"
 #include "antares/solver/optimisation/LegacyOrtoolsLinearProblem.h"
-#include "antares/data/opt_structure_probleme_a_resoudre.h"
-#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/opt_constants.h"
+#include "antares/solver/optimisation/ortools_simplexe.h"
+#include "antares/solver/optimisation/ortools_wrapper.h"
 #include "antares/solver/utils/filename.h"
 #include "antares/solver/utils/mps_utils.h"
-#include "antares/solver/optimisation/ortools_wrapper.h"
 #include "antares/study/system-model/system.h"
-#include "antares/solver/optimisation/ortools_simplexe.h"
 
 using namespace operations_research;
 using namespace Antares::Optimization::LinearProblemApi;
@@ -128,7 +128,7 @@ static void writeModelerSolutions(const operations_research::MPSolver* solver,
 
     Solver::Utils::FileNamer fn;
     auto modelerSolutionFilename = fn.createModelerSolutionsFilename(optPeriodStringGenerator,
-                                                                                 optimizationNumber);
+                                                                     optimizationNumber);
     std::string content = contentStream.str();
     writer.addEntryFromBuffer(modelerSolutionFilename, content);
 }
@@ -429,7 +429,7 @@ bool OPT_AppelDuSimplexe(const OptimizationOptions::SingleOptimOptions& options,
         auto mps_writer_on_error = simplexResult.mps_writer_factory.createOnOptimizationError();
         Solver::Utils::FileNamer fn;
         const std::string filename = fn.createMPSfilename(optPeriodStringGenerator,
-                                                                      optimizationNumber);
+                                                          optimizationNumber);
         mps_writer_on_error->runIfNeeded(writer, filename);
 
         return false;

@@ -27,9 +27,9 @@
 #include <antares/study/study.h>
 #include <antares/utils/utils.h>
 #include "antares/data/adequacy_patch_runtime_data.h"
+#include "antares/data/constants.h"
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/simulation/simulation.h"
-#include "antares/data/constants.h"
 
 using namespace Antares;
 using namespace Antares::Data;

@@ -27,9 +27,9 @@
 #include <boost/test/unit_test.hpp>
 
 #include "antares/antares/constants.h"
+#include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/constraints/ShortTermStorageCumulation.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
-#include "antares/data/sim_structure_probleme_economique.h"
 
 /*
  * this code is designed to:

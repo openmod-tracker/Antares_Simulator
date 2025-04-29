@@ -25,6 +25,7 @@
 
 using namespace Antares::Data;
 using namespace Antares::Date;
+
 namespace Antares::Optimization
 {
 OptPostProcessList::OptPostProcessList(PROBLEME_HEBDO* problemeHebdo,
@@ -50,4 +51,4 @@ OptPostProcessList::OptPostProcessList(PROBLEME_HEBDO* problemeHebdo,
       std::make_unique<HydroLevelsFinalUpdatePostProcessCmd>(problemeHebdo_, areas));
 }
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

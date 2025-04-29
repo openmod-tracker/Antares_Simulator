@@ -23,11 +23,13 @@
 
 struct PROBLEME_HEBDO;
 
-namespace Antares::Data {
-    class AreaList;
+namespace Antares::Data
+{
+class AreaList;
 }
 
-namespace Antares::Optimization {
+namespace Antares::Optimization
+{
 /*!
 ** \brief Hydro Remix
 **
@@ -41,4 +43,4 @@ void RemixHydroForAllAreas(const Data::AreaList& areas,
                            Data::SimplexOptimization splxOptimization,
                            uint numSpace,
                            uint hourInYear);
-}
+} // namespace Antares::Optimization

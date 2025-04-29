@@ -19,6 +19,7 @@
 ** along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 */
 
+#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 #include <iostream>
 #include <map>
 #include <string>
@@ -33,7 +34,6 @@
 #include <antares/logs/logs.h>
 #include <antares/resources/resources.h>
 #include <antares/solver/simulation/solver.h>
-#include <../../solver/utils/include/antares/solver/utils/ortools_utils.h>
 #include <antares/study/finder/finder.h>
 #include "antares/antares/antares.h"
 #include "antares/locator/locator.h"

@@ -2,13 +2,15 @@
 
 #include <antares/exception/LoadingError.hpp>
 #include <antares/logs/logs.h>
+
 #include "../../../solver/utils/include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares;
+
 namespace Antares::Check
 {
-static void checkSolverExists(const std::string &solverName,
-                              const std::list<std::string> &availableSolversList)
+static void checkSolverExists(const std::string& solverName,
+                              const std::list<std::string>& availableSolversList)
 {
     bool found = std::ranges::find(availableSolversList, solverName) != availableSolversList.end();
     if (!found)
@@ -23,7 +25,8 @@ static void checkForSolversExistence(const OptimizationOptions::CmdLineOptimOpti
     checkSolverExists(solverOptions.quadraticSolver, availableQuadraticSolversList());
 }
 
-static void checkSolverMILPoptionsConsistency(const OptimizationOptions::CmdLineOptimOptions& solverOptions)
+static void checkSolverMILPoptionsConsistency(
+  const OptimizationOptions::CmdLineOptimOptions& solverOptions)
 {
     if (solverOptions.linearSolver == "sirius")
     {
@@ -38,7 +41,8 @@ static void checkSolverMILPoptionsConsistency(const OptimizationOptions::CmdLine
     }
 }
 
-static void checkForSolverOptionsConsistency(const OptimizationOptions::CmdLineOptimOptions& solverOptions)
+static void checkForSolverOptionsConsistency(
+  const OptimizationOptions::CmdLineOptimOptions& solverOptions)
 {
     bool UserSuppliedParamsBothOptims = !solverOptions.linearSolverParameters.empty();
     bool UserSuppliedParamsOptim1 = !solverOptions.lpSolverParamOptim1.empty();
@@ -50,7 +54,8 @@ static void checkForSolverOptionsConsistency(const OptimizationOptions::CmdLineO
     }
 }
 
-void checkSolverOptions(const OptimizationOptions::CmdLineOptimOptions& solverOptions, bool milpRequired)
+void checkSolverOptions(const OptimizationOptions::CmdLineOptimOptions& solverOptions,
+                        bool milpRequired)
 {
     checkForSolversExistence(solverOptions);
     checkForSolverOptionsConsistency(solverOptions);

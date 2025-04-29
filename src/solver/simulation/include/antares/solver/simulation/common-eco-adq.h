@@ -29,68 +29,69 @@
 #include "antares/solver/variable/economy/dispatchable-generation-margin.h" // for OP.MRG
 #include "antares/solver/variable/variable.h"
 
-namespace Antares::Solver::Simulation {
-    // We use the namespace 'economy' here. That means it is mandatory
-    // that adequacy has the same variable (to get the same type)
-    typedef Solver::Variable::Economy::VCardBalance AvgExchangeVCardBalance;
-    typedef Variable::Storage<AvgExchangeVCardBalance>::ResultsType AvgExchangeResults;
+namespace Antares::Solver::Simulation
+{
+// We use the namespace 'economy' here. That means it is mandatory
+// that adequacy has the same variable (to get the same type)
+typedef Solver::Variable::Economy::VCardBalance AvgExchangeVCardBalance;
+typedef Variable::Storage<AvgExchangeVCardBalance>::ResultsType AvgExchangeResults;
 
-    /*!
-** \brief Compute then random unserved energy cost and the new random hydro virtual cost for all
-*areas
-**
-** This method must be called at the begining of each year even if no calculations
-** are performed to be able to make a jump to a given year.
-** (hot start)
-*/
-    void PrepareRandomNumbers(Data::Study& study,
-                              PROBLEME_HEBDO& problem,
-                              yearRandomNumbers& randomForYear);
+/*!
+ ** \brief Compute then random unserved energy cost and the new random hydro virtual cost for all
+ *areas
+ **
+ ** This method must be called at the begining of each year even if no calculations
+ ** are performed to be able to make a jump to a given year.
+ ** (hot start)
+ */
+void PrepareRandomNumbers(Data::Study& study,
+                          PROBLEME_HEBDO& problem,
+                          yearRandomNumbers& randomForYear);
 
-    void SetInitialHydroLevel(Data::Study& study,
-                              PROBLEME_HEBDO& problem,
-                              const HYDRO_VENTILATION_RESULTS& hydroVentilationResults);
+void SetInitialHydroLevel(Data::Study& study,
+                          PROBLEME_HEBDO& problem,
+                          const HYDRO_VENTILATION_RESULTS& hydroVentilationResults);
 
-    void BuildThermalPartOfWeeklyProblem(Data::Study& study,
-                                         PROBLEME_HEBDO& problem,
-                                         const int PasDeTempsDebut,
-                                         std::vector<std::vector<double>>& thermalNoises,
-                                         unsigned int year);
+void BuildThermalPartOfWeeklyProblem(Data::Study& study,
+                                     PROBLEME_HEBDO& problem,
+                                     const int PasDeTempsDebut,
+                                     std::vector<std::vector<double>>& thermalNoises,
+                                     unsigned int year);
 
-    /*!
-** \brief Get if the quadratic optimization should be used according
-**  to the input data (eco+adq)
-**
-** This method check for non-null impedances in links. If a non-null impedance
-** is found, we have to launch the quadratic optimisation.
-** \return True if the quadratic optimisation should be used, false otherwise
-*/
-    bool ShouldUseQuadraticOptimisation(const Data::Study& study);
+/*!
+ ** \brief Get if the quadratic optimization should be used according
+ **  to the input data (eco+adq)
+ **
+ ** This method check for non-null impedances in links. If a non-null impedance
+ ** is found, we have to launch the quadratic optimisation.
+ ** \return True if the quadratic optimisation should be used, false otherwise
+ */
+bool ShouldUseQuadraticOptimisation(const Data::Study& study);
 
-    /*!
-** \brief Perform the quadratic optimization (links) (eco+adq)
-*/
-    void ComputeFlowQuad(Data::Study& study,
-                         PROBLEME_HEBDO& problem,
-                         const std::vector<AvgExchangeResults*>& balance,
-                         unsigned int nbWeeks);
+/*!
+ ** \brief Perform the quadratic optimization (links) (eco+adq)
+ */
+void ComputeFlowQuad(Data::Study& study,
+                     PROBLEME_HEBDO& problem,
+                     const std::vector<AvgExchangeResults*>& balance,
+                     unsigned int nbWeeks);
 
-    /*
-** \brief Compute the weighted average NTC for a link
-**
-** \param areas : the areas of study
-** \param link The link
-** \param Weighted average NTC for the direct direction
-** \param Weighted average NTC for the indirect direction
-*/
-    int retrieveAverageNTC(const Data::Study& study,
-                           const Matrix<>& capacities,
-                           const Data::TimeSeriesNumbers& tsNumbers,
-                           std::vector<double>& avg);
+/*
+ ** \brief Compute the weighted average NTC for a link
+ **
+ ** \param areas : the areas of study
+ ** \param link The link
+ ** \param Weighted average NTC for the direct direction
+ ** \param Weighted average NTC for the indirect direction
+ */
+int retrieveAverageNTC(const Data::Study& study,
+                       const Matrix<>& capacities,
+                       const Data::TimeSeriesNumbers& tsNumbers,
+                       std::vector<double>& avg);
 
-    void finalizeOptimizationStatistics(PROBLEME_HEBDO& problem,
-                                        Antares::Solver::Variable::State& state);
+void finalizeOptimizationStatistics(PROBLEME_HEBDO& problem,
+                                    Antares::Solver::Variable::State& state);
 
-}
+} // namespace Antares::Solver::Simulation
 
 #endif // __SOLVER_SIMULATION_COMMON_ECONOMY_ADEQUACY_H__

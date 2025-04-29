@@ -34,10 +34,11 @@ extern "C"
 }
 
 #include <antares/logs/logs.h>
-#include "antares/optimization-options/options.h"
 #include "antares/data/opt_structure_probleme_a_resoudre.h"
-#include "include/antares/solver/optimisation/ortools_quadratic_wrapper.h"
+#include "antares/optimization-options/options.h"
+
 #include "../utils/include/antares/solver/utils/ortools_utils.h"
+#include "include/antares/solver/optimisation/ortools_quadratic_wrapper.h"
 
 using namespace Antares;
 

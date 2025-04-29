@@ -17,16 +17,17 @@
 // You should have received a copy of the Mozilla Public Licence 2.0
 // along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
 
+#include "antares/solver/optimisation/common-hydro-remix.h"
+
 #include <cassert>
 #include <cmath>
 
-#include "antares/solver/optimisation/common-hydro-remix.h"
+#include <antares/data/sim_structure_probleme_economique.h>
 #include <antares/exception/AssertionError.hpp>
 #include <antares/logs/logs.h>
+#include <antares/study/area/scratchpad.h>
 #include <antares/study/study.h>
 #include <antares/utils/utils.h>
-#include <antares/data/sim_structure_probleme_economique.h>
-#include <antares/study/area/scratchpad.h>
 #include "antares/solver/optimisation/shave-peaks-by-remix-hydro.h"
 
 #define EPSILON 1e-6
@@ -353,4 +354,4 @@ void RemixHydroForAllAreas(const Data::AreaList& areas,
         }
     }
 }
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

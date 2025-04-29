@@ -22,7 +22,6 @@
 
 #include <filesystem>
 #include <memory>
-#include <stdexcept>
 #include <string>
 
 #include <yuni/core/string.h>
@@ -33,6 +32,8 @@ namespace Antares::Solver
 class IResultWriter
 {
 public:
+    virtual ~IResultWriter() = default;
+
     using Ptr = std::shared_ptr<IResultWriter>;
     virtual void addEntryFromBuffer(const std::string& entryPath, Yuni::Clob& entryContent) = 0;
     virtual void addEntryFromBuffer(const std::filesystem::path& entryPath,

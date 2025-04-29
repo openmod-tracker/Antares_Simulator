@@ -55,4 +55,4 @@ RemixHydroOutput shavePeaksByRemixingHydro(const std::vector<double>& DispatchGe
                                            const std::vector<double>& Spillage,
                                            const std::vector<double>& DTG_MRG);
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

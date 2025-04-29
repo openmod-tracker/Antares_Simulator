@@ -171,14 +171,15 @@ public:
             std::list<uint> failedWeekList;
 
             OptimizationStatisticsWriter optWriter(pResultWriter, y);
-            [[maybe_unused]] bool yearFailed = !simulation_->year(progression,
-                                                 state,
-                                                 numSpace,
-                                                 randomForCurrentYear,
-                                                 failedWeekList,
-                                                 hydroManagement.ventilationResults(),
-                                                 optWriter,
-                                                 scratchmap);
+            [[maybe_unused]] bool yearFailed = !simulation_->year(
+              progression,
+              state,
+              numSpace,
+              randomForCurrentYear,
+              failedWeekList,
+              hydroManagement.ventilationResults(),
+              optWriter,
+              scratchmap);
 
             // Log failing weeks
             logFailedWeek(y, study, failedWeekList);
@@ -234,12 +235,11 @@ public:
 };
 
 template<class ImplementationType>
-ISimulation<ImplementationType>::ISimulation(
-  Data::Study& study,
-  const ::Settings& settings,
-  Benchmarking::DurationCollector& duration_collector,
-  IResultWriter& resultWriter,
-  Simulation::ISimulationObserver& simulationObserver):
+ISimulation<ImplementationType>::ISimulation(Data::Study& study,
+                                             const ::Settings& settings,
+                                             Benchmarking::DurationCollector& duration_collector,
+                                             IResultWriter& resultWriter,
+                                             Simulation::ISimulationObserver& simulationObserver):
     ImplementationType(study, resultWriter, simulationObserver),
     study(study),
     settings(settings),
@@ -265,7 +265,7 @@ ISimulation<ImplementationType>::ISimulation(
 }
 
 template<class ImplementationType>
- void ISimulation<ImplementationType>::checkWriter() const
+void ISimulation<ImplementationType>::checkWriter() const
 {
     // The zip writer needs a queue service (async mutexed write)
     if (!pQueueService && pResultWriter.needsTheJobQueue())

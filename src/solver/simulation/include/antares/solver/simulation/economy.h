@@ -22,14 +22,12 @@
 #define __SOLVER_SIMULATION_ECONOMY_H__
 
 #include "antares/infoCollection/StudyInfoCollector.h"
+#include "antares/solver/optimisation/base_post_process.h"
 #include "antares/solver/optimisation/weekly_optimization.h"
 #include "antares/solver/simulation/opt_time_writer.h"
 #include "antares/solver/simulation/solver.h" // for definition of type yearRandomNumbers
 #include "antares/solver/variable/economy/all.h"
-#include "antares/solver/variable/state.h"
 #include "antares/solver/variable/variable.h"
-
-#include "antares/solver/optimisation/base_post_process.h"
 
 namespace Antares::Solver::Simulation
 {
@@ -98,7 +96,8 @@ private:
     uint pNbMaxPerformedYearsInParallel{0};
     std::vector<PROBLEME_HEBDO> pProblemesHebdo;
     std::vector<Optimization::WeeklyOptimization> weeklyOptProblems_;
-    std::vector<std::unique_ptr<Antares::Optimization::interfacePostProcessList>> postProcessesList_;
+    std::vector<std::unique_ptr<Antares::Optimization::interfacePostProcessList>>
+      postProcessesList_;
     IResultWriter& resultWriter;
     std::reference_wrapper<ISimulationObserver> simulationObserver_;
 }; // class Economy

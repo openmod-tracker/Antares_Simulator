@@ -24,8 +24,6 @@
 #include <antares/writer/i_writer.h>
 #include "antares/data/sim_structure_probleme_economique.h"
 
-#include "simulation.h"
-
 class OptimizationStatisticsWriter
 {
 public:
@@ -37,5 +35,5 @@ private:
     void printHeader();
     std::ostringstream pBuffer;
     uint pYear;
-    Antares::Solver::IResultWriter& pWriter;
+    Solver::IResultWriter& pWriter;
 };

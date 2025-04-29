@@ -21,8 +21,8 @@
 
 #pragma once
 
-
 #include <antares/writer/i_writer.h>
+
 #include "ITimeSeriesNumbersWriter.h"
 
 namespace Antares::Solver::Simulation

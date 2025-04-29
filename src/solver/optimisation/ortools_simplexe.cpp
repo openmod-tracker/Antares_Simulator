@@ -23,8 +23,8 @@
 
 #include "antares/exception/LoadingError.hpp"
 #include "antares/optimization-options/options.h"
-#include "antares/solver/utils/named_problem.h"
 #include "antares/solver/utils/basis_status.h"
+#include "antares/solver/utils/named_problem.h"
 
 #include "pi_constantes_externes.h"
 #include "spx_constantes_externes.h"

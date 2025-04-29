@@ -39,6 +39,7 @@
 #include "antares/solver/misc/write-command-line.h"
 #include "antares/solver/simulation/simulation-run.h"
 #include "antares/solver/simulation/solver.h"
+
 #include "../utils/include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares::Check;

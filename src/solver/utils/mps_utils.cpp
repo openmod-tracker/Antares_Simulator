@@ -22,6 +22,7 @@
 
 #include <antares/study/study.h>
 #include "antares/solver/simulation/simulation.h"
+
 #include "include/antares/solver/utils/ortools_utils.h"
 
 using namespace Antares;

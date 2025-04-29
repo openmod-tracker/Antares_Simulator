@@ -24,7 +24,6 @@
 #include <antares/logs/logs.h>
 #include "antares/solver/ts-generator/hydro.h"
 
-
 namespace Antares::TSGenerator
 {
 

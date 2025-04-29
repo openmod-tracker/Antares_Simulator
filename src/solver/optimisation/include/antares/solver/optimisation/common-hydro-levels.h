@@ -23,28 +23,28 @@
 namespace Antares::Optimization
 {
 
-    /*
-    ** \brief Interpolates water values related to reservoir levels for outputs only
-    **
-    ** \param areas : the areas of study
-    ** \param problem The weekly problem, from the solver
-    *point of weekly simulation)
-    ** \param hourInYear The hour in the year of the first hour in the current week
-    **
-    ** For any hour, the computed water values are related to the beginning of the hour, not the end.
-    */
-    void interpolateWaterValue(const Data::AreaList& areas,
-                               PROBLEME_HEBDO& problem,
-                               const Date::Calendar& calendar,
-                               int hourInTheYear);
+/*
+** \brief Interpolates water values related to reservoir levels for outputs only
+**
+** \param areas : the areas of study
+** \param problem The weekly problem, from the solver
+*point of weekly simulation)
+** \param hourInYear The hour in the year of the first hour in the current week
+**
+** For any hour, the computed water values are related to the beginning of the hour, not the end.
+*/
+void interpolateWaterValue(const Data::AreaList& areas,
+                           PROBLEME_HEBDO& problem,
+                           const Date::Calendar& calendar,
+                           int hourInTheYear);
 
-    /*
-    ** \brief Updating the weekly simulation final reservoir level, to be used as a start for the next
-    *week.
-    **
-    ** \param areas : the areas of study
-    ** \param problem The weekly problem, from the solver
-    */
-    void updatingWeeklyFinalHydroLevel(const Data::AreaList& areas, PROBLEME_HEBDO& problem);
+/*
+** \brief Updating the weekly simulation final reservoir level, to be used as a start for the next
+*week.
+**
+** \param areas : the areas of study
+** \param problem The weekly problem, from the solver
+*/
+void updatingWeeklyFinalHydroLevel(const Data::AreaList& areas, PROBLEME_HEBDO& problem);
 
-}
+} // namespace Antares::Optimization

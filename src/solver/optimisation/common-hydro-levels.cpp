@@ -94,4 +94,4 @@ void updatingWeeklyFinalHydroLevel(const Data::AreaList& areas, PROBLEME_HEBDO& 
     }
 }
 
-} // namespace Antares::Solver::Simulation
+} // namespace Antares::Optimization

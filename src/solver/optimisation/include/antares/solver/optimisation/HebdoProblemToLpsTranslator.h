@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include "antares/solver/lps/LpsFromAntares.h"
 #include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/lps/LpsFromAntares.h"
 
 namespace Antares::Solver
 {

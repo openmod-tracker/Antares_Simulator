@@ -20,9 +20,9 @@
 */
 
 #include <antares/logs/logs.h>
-#include "antares/solver/optimisation/opt_fonctions.h"
 #include "antares/data/opt_structure_probleme_a_resoudre.h"
 #include "antares/data/sim_structure_probleme_economique.h"
+#include "antares/solver/optimisation/opt_fonctions.h"
 
 void OPT_AllocateFromNumberOfVariableConstraints(PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre)
 {
