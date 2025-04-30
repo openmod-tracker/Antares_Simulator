@@ -41,7 +41,7 @@ class BasisStatus
 public:
     // Prevent copy & move
     BasisStatus();
-    ~BasisStatus();
+    ~BasisStatus() = default;
     BasisStatus(const BasisStatus&) = delete;
     BasisStatus(BasisStatus&&) = delete;
     BasisStatus& operator=(const BasisStatus&) = delete;

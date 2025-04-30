@@ -150,14 +150,12 @@ target_sources(optimisation
         opt_construction_variables_optimisees_lineaire.cpp
         opt_construction_variables_optimisees_quadratique.cpp
         opt_decompte_variables_et_contraintes.cpp
-        opt_decompte_variables_et_contraintes.cpp
         opt_decompte_variables_et_contraintes_couts_demarrage.cpp
         opt_export_structure.cpp
         opt_gestion_des_bornes_cas_lineaire.cpp
         opt_gestion_des_bornes_cas_quadratique.cpp
         opt_gestion_des_bornes_couts_demarrage.cpp
         opt_gestion_des_couts_cas_lineaire.cpp
-        opt_gestion_des_couts_cas_quadratique.cpp
         opt_gestion_des_couts_cas_quadratique.cpp
         opt_gestion_des_couts_couts_demarrage.cpp
         opt_gestion_des_pmin.cpp
@@ -180,7 +178,6 @@ target_sources(optimisation
         optim_post_process_list.cpp
         ortools_simplexe.cpp
         ortools_quadratic_wrapper.cpp
-        post_process_commands.cpp
         variables/VariableManagement.cpp
         variables/VariableManagement.h
         variables/VariableManagerUtils.cpp
@@ -188,7 +185,6 @@ target_sources(optimisation
         weekly_optimization.cpp
         ortools_wrapper.cpp
         include/antares/solver/optimisation/ortools_wrapper.h
-        post_process_commands.cpp
         post_process_commands.cpp
         include/antares/solver/optimisation/post_process_commands.h
         include/antares/solver/optimisation/common-hydro-remix.h

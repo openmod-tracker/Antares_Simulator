@@ -30,7 +30,6 @@ BasisStatus::BasisStatus():
 {
 }
 
-BasisStatus::~BasisStatus() = default;
 
 void BasisStatus::setStartingBasis(operations_research::MPSolver* solver) const
 {
