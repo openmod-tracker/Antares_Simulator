@@ -48,4 +48,5 @@ bool BasisStatus::exists() const
 {
     return impl->exists();
 }
+
 } // namespace Antares::Solver::Utils
