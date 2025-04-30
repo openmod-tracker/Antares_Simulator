@@ -204,8 +204,8 @@ target_link_libraries(optimisation
         Antares::optimization-options
         Antares::lps
         Antares::data
-        PRIVATE
         Antares::solverUtils
+        PRIVATE
         infeasible_problem_analysis
         Antares::linear-problem-api
         Antares::linear-problem-data-impl
