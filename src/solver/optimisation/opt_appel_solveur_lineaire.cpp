@@ -106,7 +106,7 @@ static void fillModelerComponents(
 }
 
 static void writeModelerSolutions(const operations_research::MPSolver* solver,
-                                  Optimization::PROBLEME_SIMPLEXE_NOMME& Probleme,
+                                  Solver::Utils::PROBLEME_SIMPLEXE_NOMME& Probleme,
                                   const int optimizationNumber,
                                   const OptPeriodStringGenerator& optPeriodStringGenerator,
                                   Solver::IResultWriter& writer)
@@ -134,7 +134,7 @@ static void writeModelerSolutions(const operations_research::MPSolver* solver,
 }
 
 // Returns a non-owning pointer
-MPSolver* convertToMPSolver(const Optimization::PROBLEME_SIMPLEXE_NOMME& pb,
+MPSolver* convertToMPSolver(const Solver::Utils::PROBLEME_SIMPLEXE_NOMME& pb,
                             PROBLEME_HEBDO* problemeHebdo,
                             const OptimizationOptions::SingleOptimOptions& options)
 {
@@ -159,7 +159,7 @@ MPSolver* convertToMPSolver(const Optimization::PROBLEME_SIMPLEXE_NOMME& pb,
 
 static SimplexResult OPT_TryToCallSimplex(const OptimizationOptions::SingleOptimOptions& options,
                                           PROBLEME_HEBDO* problemeHebdo,
-                                          Optimization::PROBLEME_SIMPLEXE_NOMME& Probleme,
+                                          Solver::Utils::PROBLEME_SIMPLEXE_NOMME& Probleme,
                                           const int NumIntervalle,
                                           const int optimizationNumber,
                                           const OptPeriodStringGenerator& optPeriodStringGenerator,
@@ -280,7 +280,7 @@ static SimplexResult OPT_TryToCallSimplex(const OptimizationOptions::SingleOptim
     mps_writer->runIfNeeded(writer, filename);
 
     TimeMeasurement measure;
-    solver = ORTOOLS_Simplexe(&Probleme, solver, options);
+    solver = Optimization::ORTOOLS_Simplexe(&Probleme, solver, options);
     if (solver != nullptr)
     {
         ProblemeAResoudre->ProblemesSpx[NumIntervalle] = solver;
@@ -328,7 +328,7 @@ bool OPT_AppelDuSimplexe(const OptimizationOptions::SingleOptimOptions& options,
                          Solver::IResultWriter& writer)
 {
     const auto& ProblemeAResoudre = problemeHebdo->ProblemeAResoudre;
-    Optimization::PROBLEME_SIMPLEXE_NOMME Probleme(ProblemeAResoudre->NomDesVariables,
+    Solver::Utils::PROBLEME_SIMPLEXE_NOMME Probleme(ProblemeAResoudre->NomDesVariables,
                                                    ProblemeAResoudre->NomDesContraintes,
                                                    ProblemeAResoudre->VariablesEntieres,
                                                    ProblemeAResoudre->basisStatus,

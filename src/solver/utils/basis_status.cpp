@@ -23,7 +23,7 @@
 
 #include "basis_status_impl.h"
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
 BasisStatus::BasisStatus():
     impl(std::make_unique<BasisStatusImpl>())
@@ -37,8 +37,7 @@ void BasisStatus::setStartingBasis(operations_research::MPSolver* solver) const
     impl->setStartingBasis(solver);
 }
 
-void BasisStatus::extractBasis(const operations_research::MPSolver* solver)
-{
+void BasisStatus::extractBasis(const operations_research::MPSolver* solver) const {
     impl->extractBasis(solver);
 }
 

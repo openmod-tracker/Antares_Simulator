@@ -24,6 +24,33 @@
 #include "antares/data/sim_structure_probleme_economique.h"
 #include "antares/solver/optimisation/opt_fonctions.h"
 
+
+namespace {
+    void optimisationAllocateProblem(PROBLEME_HEBDO* problemeHebdo)
+    {
+        const auto& ProblemeAResoudre = problemeHebdo->ProblemeAResoudre;
+
+        int NombreDePasDeTempsPourUneOptimisation = problemeHebdo
+                                                      ->NombreDePasDeTempsPourUneOptimisation;
+
+        logs.info();
+        logs.info()
+          << " Starting Memory Allocation for a Weekly Optimization problem in Canonical form ";
+        logs.info() << " ( Problem Size :" << ProblemeAResoudre->NombreDeVariables << " variables "
+                    << ProblemeAResoudre->NombreDeContraintes << " Constraints) ";
+
+        OPT_AllocateFromNumberOfVariableConstraints(problemeHebdo->ProblemeAResoudre.get());
+
+        int NbIntervalles = problemeHebdo->NombreDePasDeTemps / NombreDePasDeTempsPourUneOptimisation;
+
+        ProblemeAResoudre->ProblemesSpx.assign(NbIntervalles, nullptr);
+
+        logs.info();
+        logs.info() << " Status of Preliminary Allocations for Generic Problem Resolution : Successful";
+        logs.info();
+    }
+}
+
 void OPT_AllocateFromNumberOfVariableConstraints(PROBLEME_ANTARES_A_RESOUDRE* ProblemeAResoudre)
 {
     const size_t nbVariables = ProblemeAResoudre->NombreDeVariables;
@@ -60,30 +87,6 @@ void OPT_AllocateFromNumberOfVariableConstraints(PROBLEME_ANTARES_A_RESOUDRE* Pr
     ProblemeAResoudre->NomDesContraintes.resize(nbConstraints);
     // Integer variables ? (MILP)
     ProblemeAResoudre->VariablesEntieres.resize(nbVariables);
-}
-
-static void optimisationAllocateProblem(PROBLEME_HEBDO* problemeHebdo)
-{
-    const auto& ProblemeAResoudre = problemeHebdo->ProblemeAResoudre;
-
-    int NombreDePasDeTempsPourUneOptimisation = problemeHebdo
-                                                  ->NombreDePasDeTempsPourUneOptimisation;
-
-    logs.info();
-    logs.info()
-      << " Starting Memory Allocation for a Weekly Optimization problem in Canonical form ";
-    logs.info() << " ( Problem Size :" << ProblemeAResoudre->NombreDeVariables << " variables "
-                << ProblemeAResoudre->NombreDeContraintes << " Constraints) ";
-
-    OPT_AllocateFromNumberOfVariableConstraints(problemeHebdo->ProblemeAResoudre.get());
-
-    int NbIntervalles = problemeHebdo->NombreDePasDeTemps / NombreDePasDeTempsPourUneOptimisation;
-
-    ProblemeAResoudre->ProblemesSpx.assign(NbIntervalles, nullptr);
-
-    logs.info();
-    logs.info() << " Status of Preliminary Allocations for Generic Problem Resolution : Successful";
-    logs.info();
 }
 
 void OPT_AllocDuProblemeAOptimiser(PROBLEME_HEBDO* problemeHebdo)

@@ -25,11 +25,11 @@
 
 #include "spx_definition_arguments.h"
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
-class BasisStatus;
+    class BasisStatus;
 
-struct PROBLEME_SIMPLEXE_NOMME: PROBLEME_SIMPLEXE
+    struct PROBLEME_SIMPLEXE_NOMME: PROBLEME_SIMPLEXE
 {
     PROBLEME_SIMPLEXE_NOMME(const std::vector<std::string>& NomDesVariables,
                             const std::vector<std::string>& NomDesContraintes,

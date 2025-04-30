@@ -804,7 +804,7 @@ namespace Antares::Solver::Simulation {
                             {
                                 if (not area.hydro.hardBoundsOnRuleCurves)
                                 {
-                                    if (Utils::isZero(WGU))
+                                    if (Antares::Utils::isZero(WGU))
                                     {
                                         DGU[j] = 0.;
                                     }
@@ -822,7 +822,7 @@ namespace Antares::Solver::Simulation {
                                     auto& minLvl = area.hydro.reservoirLevel[Data::PartHydro::minimum];
                                     double V = std::max(0., WSL - minLvl[nextWeekFirstDay] * rc + WNI);
 
-                                    if (Utils::isZero(WGU))
+                                    if (Antares::Utils::isZero(WGU))
                                     {
                                         DGU[j] = 0.;
                                     }
@@ -950,7 +950,7 @@ namespace Antares::Solver::Simulation {
                                     {
                                         double V = std::max(0., rc - (WNI + WSL));
 
-                                        if (Utils::isZero(U))
+                                        if (Antares::Utils::isZero(U))
                                         {
                                             DPU[j] = 0.;
                                         }
@@ -972,7 +972,7 @@ namespace Antares::Solver::Simulation {
                                                             maxLvl[nextWeekFirstDay] * rc
                                                               - (WNI + WSL));
 
-                                        if (Utils::isZero(U))
+                                        if (Antares::Utils::isZero(U))
                                         {
                                             DPU[j] = 0.;
                                         }

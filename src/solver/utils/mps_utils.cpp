@@ -66,7 +66,7 @@ class ProblemConverter
 {
 public:
     void copyProbSimplexeToProbMps(PROBLEME_MPS* dest,
-                                   Optimization::PROBLEME_SIMPLEXE_NOMME* src,
+                                   Solver::Utils::PROBLEME_SIMPLEXE_NOMME* src,
                                    NameTranslator& nameTranslator)
     {
         // Variables
@@ -109,7 +109,7 @@ private:
     std::vector<char*> mConstraintNames;
 };
 
-void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(Optimization::PROBLEME_SIMPLEXE_NOMME* Prob,
+void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(Solver::Utils::PROBLEME_SIMPLEXE_NOMME* Prob,
                                                Solver::IResultWriter& writer,
                                                const std::string& filename)
 {
@@ -134,7 +134,7 @@ void OPT_EcrireJeuDeDonneesLineaireAuFormatMPS(Optimization::PROBLEME_SIMPLEXE_N
 // --------------------
 // Full mps writing
 // --------------------
-fullMPSwriter::fullMPSwriter(Optimization::PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
+fullMPSwriter::fullMPSwriter(Solver::Utils::PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
                              uint optNumber):
     I_MPS_writer(optNumber),
     named_splx_problem_(named_splx_problem)

@@ -30,7 +30,7 @@ namespace Test
 class BasisStatus;
 }
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
 class BasisStatusImpl
 {

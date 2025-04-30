@@ -25,7 +25,7 @@
 
 #include "antares/solver/utils/basis_status.h"
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
 PROBLEME_SIMPLEXE_NOMME::PROBLEME_SIMPLEXE_NOMME(const std::vector<std::string>& NomDesVariables,
                                                  const std::vector<std::string>& NomDesContraintes,

@@ -59,7 +59,7 @@ bool solverSupportsWarmStart(const MPSolver::OptimizationProblemType solverType)
 
 bool doWeGiveBasisToSolver(const Antares::OptimizationOptions::SingleOptimOptions& options,
                            const MPSolver* solver,
-                           const Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* Probleme)
+                           const Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* Probleme)
 {
     return solverSupportsWarmStart(solver->ProblemType()) && Probleme->basisExists()
            && options.solverUsesBasis;
@@ -72,7 +72,7 @@ bool doWeStoreSolverBasis(const Antares::OptimizationOptions::SingleOptimOptions
 }
 
 void extractSolutionValues(const std::vector<MPVariable*>& variables,
-                           Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
+                           Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
 {
     int nbVar = problemeSimplexe->NombreDeVariables;
     for (int idxVar = 0; idxVar < nbVar; ++idxVar)
@@ -83,7 +83,7 @@ void extractSolutionValues(const std::vector<MPVariable*>& variables,
 }
 
 void extractReducedCosts(const std::vector<MPVariable*>& variables,
-                         Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
+                         Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
 {
     int nbVar = problemeSimplexe->NombreDeVariables;
     for (int idxVar = 0; idxVar < nbVar; ++idxVar)
@@ -94,7 +94,7 @@ void extractReducedCosts(const std::vector<MPVariable*>& variables,
 }
 
 void extractDualValues(const std::vector<MPConstraint*>& constraints,
-                       Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
+                       Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
 {
     int nbRows = problemeSimplexe->NombreDeContraintes;
     for (int idxRow = 0; idxRow < nbRows; ++idxRow)
@@ -105,7 +105,7 @@ void extractDualValues(const std::vector<MPConstraint*>& constraints,
 }
 
 void extract_from_MPSolver(const MPSolver* solver,
-                           Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
+                           Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe)
 {
     assert(solver);
     assert(problemeSimplexe);
@@ -197,7 +197,7 @@ void TuneSolverSpecificOptions(MPSolver* solver,
 
 namespace Antares::Optimization
 {
-MPSolver* ORTOOLS_Simplexe(Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* Probleme,
+MPSolver* ORTOOLS_Simplexe(Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* Probleme,
                            MPSolver* solver,
                            const OptimizationOptions::SingleOptimOptions& options)
 {

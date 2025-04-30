@@ -207,6 +207,7 @@ target_link_libraries(optimisation
         Antares::benchmarking
         Antares::optimization-options
         Antares::lps
+        Antares::data
         PRIVATE
         Antares::solverUtils
         infeasible_problem_analysis

@@ -20,6 +20,10 @@
 
 #pragma once
 
+namespace Antares::Solver::Utils {
+  struct PROBLEME_SIMPLEXE_NOMME;
+}
+
 namespace operations_research
 {
 class MPSolver;
@@ -38,7 +42,7 @@ struct SingleOptimOptions;
 namespace Antares::Optimization
 {
 operations_research::MPSolver* ORTOOLS_Simplexe(
-  Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* Probleme,
+  Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* Probleme,
   operations_research::MPSolver* solver,
   const OptimizationOptions::SingleOptimOptions& options);
 }

@@ -32,7 +32,7 @@ namespace operations_research
 class MPSolver;
 }
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
 class BasisStatusImpl;
 
@@ -49,7 +49,7 @@ public:
 
     bool exists() const;
     void setStartingBasis(operations_research::MPSolver* solver) const;
-    void extractBasis(const operations_research::MPSolver* solver);
+    void extractBasis(const operations_research::MPSolver* solver) const;
 
 private:
     std::unique_ptr<BasisStatusImpl> impl;

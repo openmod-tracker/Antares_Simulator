@@ -36,7 +36,7 @@ static void transferBasis(std::vector<operations_research::MPSolver::BasisStatus
     }
 }
 
-namespace Antares::Optimization
+namespace Antares::Solver::Utils
 {
 void BasisStatusImpl::setStartingBasis(operations_research::MPSolver* solver) const
 {

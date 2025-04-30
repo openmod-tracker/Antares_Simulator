@@ -59,12 +59,12 @@ protected:
 class fullMPSwriter final: public I_MPS_writer
 {
 public:
-    fullMPSwriter(Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
+    fullMPSwriter(Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* named_splx_problem,
                   uint currentOptimNumber);
     void runIfNeeded(Antares::Solver::IResultWriter& writer, const std::string& filename) override;
 
 private:
-    Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* named_splx_problem_ = nullptr;
+    Antares::Solver::Utils::PROBLEME_SIMPLEXE_NOMME* named_splx_problem_ = nullptr;
 };
 
 class fullOrToolsMPSwriter: public I_MPS_writer

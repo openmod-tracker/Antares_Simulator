@@ -111,7 +111,7 @@ struct PROBLEME_ANTARES_A_RESOUDRE
     std::vector<bool> VariablesEntieres; // true = int, false = continuous
 
     // PIMPL is used to break dependency to OR-Tools' linear_solver.h (big header)
-    Antares::Optimization::BasisStatus basisStatus;
+    Antares::Solver::Utils::BasisStatus basisStatus;
 };
 
 #endif /* __SOLVER_OPTIMISATION_STRUCTURE_PROBLEME_A_RESOUDRE_H__ */

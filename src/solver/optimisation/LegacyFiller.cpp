@@ -7,7 +7,7 @@ using namespace Antares::Optimization::LinearProblemApi;
 namespace Antares::Optimization
 {
 
-LegacyFiller::LegacyFiller(const Antares::Optimization::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe):
+LegacyFiller::LegacyFiller(const Solver::Utils::PROBLEME_SIMPLEXE_NOMME* problemeSimplexe):
     problemeSimplexe_(problemeSimplexe)
 {
 }
