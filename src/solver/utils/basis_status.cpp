@@ -39,7 +39,8 @@ void BasisStatus::setStartingBasis(operations_research::MPSolver* solver) const
     impl->setStartingBasis(solver);
 }
 
-void BasisStatus::extractBasis(const operations_research::MPSolver* solver) const {
+void BasisStatus::extractBasis(const operations_research::MPSolver* solver) const
+{
     impl->extractBasis(solver);
 }
 
@@ -47,4 +48,4 @@ bool BasisStatus::exists() const
 {
     return impl->exists();
 }
-} // namespace Antares::Optimization
+} // namespace Antares::Solver::Utils
