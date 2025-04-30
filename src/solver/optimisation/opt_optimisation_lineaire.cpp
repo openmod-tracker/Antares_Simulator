@@ -150,7 +150,7 @@ bool runWeeklyOptimization(const OptimizationOptions::SingleOptimOptions& option
                                         PremierPdtDeLIntervalle,
                                         DernierPdtDeLIntervalle);
 
-        Utils::FileNamer fn;
+        Antares::Solver::Utils::FileNamer fn;
         // An optimization period represents a sequence as <year>-<week> or <year>-<week>-<day>,
         // depending whether the optimization is daily or weekly.
         // These sequences are used when building the names of MPS or criterion files.
