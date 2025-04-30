@@ -513,7 +513,7 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
 
     // Write the header as a reminder
     {
-        path.clear() << "about-the-study" << fs::path::preferred_separator << "study.ini";
+        path.clear() << (fs::path("about-the-study") / "study.ini").string();
         Antares::IniFile ini;
         header.CopySettingsToIni(ini, false);
 
@@ -524,9 +524,9 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
     // Write parameters.ini
     {
         String dest;
-        dest << "about-the-study" << fs::path::preferred_separator << "parameters.ini";
-
-        buffer.clear() << folderSettings << fs::path::preferred_separator << "generaldata.ini";
+        // dest << "about-the-study" << fs::path::preferred_separator << "parameters.ini";
+        dest << (fs::path("about-the-study") / "parameters.ini").string();
+        buffer.clear() << folderSettings / "generaldata.ini";
         resultWriter.addEntryFromFile(dest.c_str(), buffer.c_str());
     }
 
@@ -551,7 +551,8 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
         // Write all available areas as a reminder
         {
             Yuni::Clob buffer;
-            path.clear() << "about-the-study" << fs::path::preferred_separator << "areas.txt";
+            // path.clear() << "about-the-study" << fs::path::preferred_separator << "areas.txt";
+            path.clear() << (fs::path("about-the-study") / "areas.txt").string();
             for (auto i = setsOfAreas.begin(); i != setsOfAreas.end(); ++i)
             {
                 if (setsOfAreas.hasOutput(i->first))
@@ -565,7 +566,8 @@ void Study::saveAboutTheStudy(Solver::IResultWriter& resultWriter)
 
         // Write all available links as a reminder
         {
-            path.clear() << "about-the-study" << fs::path::preferred_separator << "links.txt";
+            // path.clear() << "about-the-study" << fs::path::preferred_separator << "links.txt";
+            path.clear() << (fs::path("about-the-study") / "links.txt").string();
             Yuni::Clob buffer;
             areas.saveLinkListToBuffer(buffer);
             resultWriter.addEntryFromBuffer(path.c_str(), buffer);
@@ -1266,9 +1268,9 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
           });
 
         String filename;
-        filename << studyfolder << fs::path::preferred_separator << "output"
-                 << fs::path::preferred_separator;
-
+        // filename << studyfolder << fs::path::preferred_separator << "output"
+        //<< fs::path::preferred_separator;
+        filename << (fs::path(studyfolder.c_str()) / "output" / "").string();
         if (linkname.empty())
         {
             if (areaname.empty())
@@ -1280,23 +1282,31 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 // no links : obtained from areas
                 // The maximum filename should be obtained with links :
                 // Adequacy/mc-all/areas/languedocroussillon/without-network-hourly.txt
-                filename << (parameters.economy() ? "economy" : "adequacy")
-                         << fs::path::preferred_separator;
-                filename << "mc-all" << fs::path::preferred_separator << "areas";
-                filename << fs::path::preferred_separator << areaname
-                         << fs::path::preferred_separator;
-                filename << "values-hourly.txt";
+                // filename << (parameters.economy() ? "economy" : "adequacy")
+                //          << fs::path::preferred_separator;
+                // filename << "mc-all" << fs::path::preferred_separator << "areas";
+                // filename << fs::path::preferred_separator << areaname
+                //          << fs::path::preferred_separator;
+                // filename << "values-hourly.txt";
+                filename << (fs::path(parameters.economy() ? "economy" : "adequacy") / "mc-all"
+                             / "areas" / areaname.c_str() / "values-hourly.txt")
+                              .string();
             }
         }
         else
         {
             // The maximum filename should be obtained with links :
             // economy/mc-ind/00001/links/pyrennees\ -\ languedocroussillon/values-hourly.txt
-            filename << (parameters.adequacy() ? "adequacy" : "economy")
-                     << fs::path::preferred_separator;
-            filename << "mc-all" << fs::path::preferred_separator << "links";
-            filename << fs::path::preferred_separator << linkname << fs::path::preferred_separator
-                     << "values-hourly.txt";
+            // filename << (parameters.adequacy() ? "adequacy" : "economy")
+            //          << fs::path::preferred_separator;
+            //
+            // filename << "mc-all" << fs::path::preferred_separator << "links";
+            // filename << fs::path::preferred_separator << linkname <<
+            // fs::path::preferred_separator
+            //          << "values-hourly.txt";
+            filename << (fs::path((parameters.adequacy() ? "adequacy" : "economy")) / "mc-all"
+                         / "links" / linkname.c_str() / "values-hourly.txt")
+                          .string();
         }
 
         if (not filename.empty() and filename.size() >= limit)
@@ -1344,12 +1354,15 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         if (not areaname.empty() and not clustername.empty())
         {
             filename.clear();
-            filename << studyfolder << fs::path::preferred_separator << "input"
-                     << fs::path::preferred_separator;
-            filename << "thermal" << fs::path::preferred_separator << "series"
-                     << fs::path::preferred_separator << areaname << fs::path::preferred_separator;
-            filename << clustername << fs::path::preferred_separator << "series.txt";
-
+            // filename << studyfolder << fs::path::preferred_separator << "input"
+            //          << fs::path::preferred_separator;
+            // filename << "thermal" << fs::path::preferred_separator << "series"
+            //          << fs::path::preferred_separator << areaname <<
+            //          fs::path::preferred_separator;
+            // filename << clustername << fs::path::preferred_separator << "series.txt";
+            filename << (fs::path(studyfolder.c_str()) / "input" / "thermal" / "series"
+                         / areaname.c_str() / clustername.c_str() / "series.txt")
+                          .string();
             if (filename.size() >= limit)
             {
                 logs.error()
@@ -1366,11 +1379,16 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         if (not areaname.empty())
         {
             filename.clear();
-            filename << studyfolder << "input" << fs::path::preferred_separator;
-            filename << "hydro" << fs::path::preferred_separator << "common"
-                     << fs::path::preferred_separator << "capacity"
-                     << fs::path::preferred_separator;
-            areaname << "maxcapacityexpectation_" << areaname << ".txt";
+            // filename << studyfolder << "input" << fs::path::preferred_separator;
+            // filename << "hydro" << fs::path::preferred_separator << "common"
+            //          << fs::path::preferred_separator << "capacity"
+            //          << fs::path::preferred_separator;
+            filename << (fs::path(studyfolder.c_str()) / "input" / "hydro" / "common" / "capacity"
+                         / "")
+                          .string();
+            areaname << (fs::path("maxcapacityexpectation_")
+                         / (std::string(areaname.c_str()) + ".txt"))
+                          .string();
 
             if (filename.size() >= limit)
             {
@@ -1385,9 +1403,12 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
         // Checking constraints
         filename.clear();
         // /input/bindingconstraints/bindingconstraints.ini
-        filename << studyfolder << "input" << fs::path::preferred_separator;
-        filename << "bindingconstraints" << fs::path::preferred_separator
-                 << "bindingconstraints.ini";
+        // filename << studyfolder << "input" << fs::path::preferred_separator;
+        // filename << "bindingconstraints" << fs::path::preferred_separator
+        //          << "bindingconstraints.ini";
+        filename << (fs::path(studyfolder.c_str()) / "input" / "bindingconstraints"
+                     / "bindingconstraints.ini")
+                      .string();
         if (filename.size() >= limit)
         {
             logs.error()
@@ -1408,9 +1429,12 @@ bool Study::checkForFilenameLimits(bool output, const String& chfolder) const
                 auto& constraint = *(*i);
 
                 filename.clear();
-                filename << studyfolder << "input" << fs::path::preferred_separator
-                         << "bindingconstraints" << fs::path::preferred_separator;
-                filename << constraint.id() << ".ini";
+                // filename << studyfolder << "input" << fs::path::preferred_separator
+                //          << "bindingconstraints" << fs::path::preferred_separator;
+                // filename << constraint.id() << ".ini";
+                filename << (fs::path(studyfolder.c_str()) / "input" / "bindingconstraints"
+                             / (std::string(constraint.id().c_str()) + ".ini"))
+                              .string();
 
                 if (filename.size() >= limit)
                 {
