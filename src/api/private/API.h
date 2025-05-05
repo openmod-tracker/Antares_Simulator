@@ -21,6 +21,7 @@
 
 #pragma once
 #include <filesystem>
+#include <functional>
 
 #include <antares/optimization-options/options.h>
 #include <antares/study-loader/IStudyLoader.h>
@@ -49,13 +50,13 @@ public:
      */
     SimulationResults run(const IStudyLoader& study_loader,
                           const std::filesystem::path& output,
-                          const Antares::Solver::Optimization::OptimizationOptions& optOptions);
+                          const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions, std::function<void(Antares::Solver::LpsFromAntares&)> cb);
 
 private:
     std::shared_ptr<Antares::Data::Study> study_;
     SimulationResults execute(
       const std::filesystem::path& output,
-      const Antares::Solver::Optimization::OptimizationOptions& optOptions) const;
+      const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions, std::function<void(Antares::Solver::LpsFromAntares&)> cb) const;
 };
 
 } // namespace Antares::API

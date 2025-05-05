@@ -64,11 +64,16 @@ void SimulationObserver::notifyHebdoProblem(const PROBLEME_HEBDO& problemeHebdo,
         lps_.setConstantData(common_data.value());
     }
     lps_.addWeeklyData({year, week}, weekly_data);
+    newProblemCallBack_(lps_);
 }
 
 Solver::LpsFromAntares&& SimulationObserver::acquireLps() noexcept
 {
     std::lock_guard lock(lps_mutex_);
     return std::move(lps_);
+}
+
+void SimulationObserver::registerCallback(const std::function<void(Solver::LpsFromAntares &)> cb) {
+    newProblemCallBack_ = cb;
 }
 } // namespace Antares::API

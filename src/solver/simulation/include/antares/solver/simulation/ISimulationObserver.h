@@ -24,6 +24,9 @@
 
 #include "sim_structure_probleme_economique.h"
 
+namespace Antares::Solver {
+    class LpsFromAntares;
+}
 namespace Antares::Solver::Simulation
 {
 
@@ -46,6 +49,8 @@ public:
                                     int optimizationNumber,
                                     std::string_view name)
       = 0;
+
+    virtual void registerCallback(std::function<void(LpsFromAntares&)>) = 0;
 };
 
 /**
@@ -62,5 +67,7 @@ public:
     {
         // null object pattern
     }
+
+    void registerCallback(std::function<void(LpsFromAntares &)>) override {};
 };
 } // namespace Antares::Solver::Simulation

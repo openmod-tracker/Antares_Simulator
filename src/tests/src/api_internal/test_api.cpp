@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(api_run_contains_antares_problem)
 {
     API::APIInternal api;
     auto study_loader = std::make_unique<InMemoryStudyLoader>();
-    auto results = api.run(*study_loader, {}, {});
+    auto results = api.run(*study_loader, {}, {}, [](auto& ){});
 
     BOOST_CHECK(!results.antares_problems.empty());
     BOOST_CHECK(!results.error);
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(result_failure_when_study_is_null)
 {
     API::APIInternal api;
     auto study_loader = std::make_unique<InMemoryStudyLoader>(false);
-    auto results = api.run(*study_loader, {}, {});
+    auto results = api.run(*study_loader, {}, {}, [](auto& ){});
 
     BOOST_CHECK(results.error);
 }
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(result_contains_problems)
 {
     API::APIInternal api;
     auto study_loader = std::make_unique<InMemoryStudyLoader>();
-    auto results = api.run(*study_loader, {}, {});
+    auto results = api.run(*study_loader, {}, {}, [](auto& ){});
 
     BOOST_CHECK(!results.antares_problems.empty());
     BOOST_CHECK(!results.error);
@@ -94,9 +94,9 @@ BOOST_AUTO_TEST_CASE(result_with_ortools_coin)
 {
     API::APIInternal api;
     auto study_loader = std::make_unique<InMemoryStudyLoader>();
-    const Solver::Optimization::OptimizationOptions opt;
+    const Solver::Optimization::CmdLineOptimOptions opt;
 
-    auto results = api.run(*study_loader, {}, opt);
+    auto results = api.run(*study_loader, {}, opt,[](auto& ){});
 
     BOOST_CHECK(!results.antares_problems.empty());
     BOOST_CHECK(!results.error);
@@ -108,10 +108,10 @@ BOOST_AUTO_TEST_CASE(invalid_ortools_linear_solver)
 {
     API::APIInternal api;
     auto study_loader = std::make_unique<InMemoryStudyLoader>();
-    Solver::Optimization::OptimizationOptions opt;
-    opt.firstOptimOptions.solverName = "this-solver-does-not-exist";
+    Solver::Optimization::CmdLineOptimOptions opt;
+    opt.linearSolver = "this-solver-does-not-exist";
 
-    auto shouldThrow = [&api, &study_loader, &opt] { return api.run(*study_loader, {}, opt); };
+    auto shouldThrow = [&api, &study_loader, &opt] { return api.run(*study_loader, {}, opt, [](auto& ){}); };
     BOOST_CHECK_EXCEPTION(shouldThrow(),
                           std::invalid_argument,
                           checkMessage("Solver this-solver-does-not-exist is not supported by "

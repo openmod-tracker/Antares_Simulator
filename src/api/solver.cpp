@@ -19,6 +19,7 @@
  * along with Antares_Simulator. If not, see <https://opensource.org/license/mpl-2-0/>.
  */
 
+#include <functional>
 #include <antares/api/solver.h>
 #include "antares/file-tree-study-loader/FileTreeStudyLoader.h"
 #include "antares/study-loader/IStudyLoader.h"
@@ -31,13 +32,14 @@ namespace Antares::API
 SimulationResults PerformSimulation(
   const std::filesystem::path& study_path,
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions) noexcept
+  const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions,
+  std::function<void(Antares::Solver::LpsFromAntares&)> cb) noexcept
 {
     try
     {
         APIInternal api;
         FileTreeStudyLoader study_loader(study_path);
-        return api.run(study_loader, output, optOptions);
+        return api.run(study_loader, output, optOptions, cb);
     }
     catch (const std::exception& e)
     {

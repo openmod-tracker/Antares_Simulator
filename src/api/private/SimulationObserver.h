@@ -53,10 +53,13 @@ public:
      */
     Solver::LpsFromAntares&& acquireLps() noexcept;
 
+    void registerCallback(std::function<void(Solver::LpsFromAntares &)>) override;
+
 private:
     Solver::LpsFromAntares lps_;
     mutable std::mutex lps_mutex_;
     mutable std::once_flag flag_;
+    std::function<void(Solver::LpsFromAntares&)> newProblemCallBack_;
 };
 
 } // namespace Antares::API

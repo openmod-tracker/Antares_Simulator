@@ -35,7 +35,8 @@ namespace Antares::API
 SimulationResults APIInternal::run(
   const IStudyLoader& study_loader,
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions)
+  const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions,
+  std::function<void(Antares::Solver::LpsFromAntares&)> cb)
 {
     try
     {
@@ -46,7 +47,7 @@ SimulationResults APIInternal::run(
         Antares::API::Error err{.reason = e.what()};
         return {.antares_problems = {}, .error = err};
     }
-    return execute(output, optOptions);
+    return execute(output, optOptions, cb);
 }
 
 /**
@@ -58,7 +59,8 @@ SimulationResults APIInternal::run(
  */
 SimulationResults APIInternal::execute(
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions) const
+  const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions,
+  std::function<void(Antares::Solver::LpsFromAntares&)> cb) const
 {
     // study_ == nullptr e.g when the -h flag is given
     if (!study_)
@@ -69,7 +71,7 @@ SimulationResults APIInternal::execute(
     }
 
     auto& parameters = study_->parameters;
-    parameters.optOptions = optOptions;
+    parameters.optOptions.initializeWith(optOptions);
 
     Settings settings;
     Benchmarking::DurationCollector durationCollector;
@@ -91,6 +93,7 @@ SimulationResults APIInternal::execute(
     }
 
     SimulationObserver simulationObserver;
+    simulationObserver.registerCallback(cb);
 
     optimizationInfo = simulationRun(*study_,
                                      settings,

@@ -26,6 +26,9 @@
 
 #include "SimulationResults.h"
 
+namespace Antares::Solver {
+    class LpsFromAntares;
+}
 namespace Antares::API
 {
 /**
@@ -37,5 +40,7 @@ namespace Antares::API
 SimulationResults PerformSimulation(
   const std::filesystem::path& study_path,
   const std::filesystem::path& output,
-  const Antares::Solver::Optimization::OptimizationOptions& optOptions) noexcept;
+  const Antares::Solver::Optimization::CmdLineOptimOptions& optOptions,
+  std::function<void(Antares::Solver::LpsFromAntares&)> cb
+  ) noexcept;
 } // namespace Antares::API
