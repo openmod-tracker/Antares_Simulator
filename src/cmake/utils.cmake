@@ -18,6 +18,26 @@ macro(copy_dependency deps target)
 
 endmacro()
 
+macro(create_symlink deps target number)
+    if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+        get_target_property( DEPS_LIB ${deps} IMPORTED_LOCATION_RELEASE )
+    else()
+        get_target_property( DEPS_LIB ${deps} IMPORTED_LOCATION_DEBUG )
+    endif()
+
+    if (NOT "${DEPS_LIB}" STREQUAL "DEP_SHARED_LIB_PATH-NOTFOUND")
+        #get DEPS_LIB file name
+        get_filename_component(DEPS_LIB ${DEPS_LIB} NAME)
+        string(REGEX REPLACE "\\.so\\.[0-9.]+" ".so.${number}" LIB_SYMLINK ${DEPS_LIB})
+        add_custom_command(TARGET ${target} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E create_symlink $<TARGET_FILE_DIR:${target}>/${DEPS_LIB} $<TARGET_FILE_DIR:${target}>/${LIB_SYMLINK}
+                COMMENT "Creating symbolic link to LIB_SYMLINK"
+        )
+        install(FILES $<TARGET_FILE_DIR:${target}>/${LIB_SYMLINK} TYPE BIN)
+    endif()
+
+endmacro()
+
 function(get_linux_lsb_release_information)
     find_program(LSB_RELEASE_EXEC lsb_release)
     if(NOT LSB_RELEASE_EXEC)
