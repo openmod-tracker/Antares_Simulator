@@ -76,6 +76,11 @@ std::vector<ModelerStudy::SystemModel::Library> loadLibraries(const fs::path& st
     std::vector<ModelerStudy::SystemModel::Library> libraries;
 
     const fs::path directoryPath = studyPath / "input" / "model-libraries";
+    if (!fs::exists(directoryPath))
+    {
+        logs.info() << "No model libraries found in " << directoryPath;
+        return libraries;
+    }
     for (const auto& entry: fs::directory_iterator(directoryPath))
     {
         if (entry.path().extension() != ".yml")
