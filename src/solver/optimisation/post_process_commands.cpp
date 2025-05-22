@@ -27,6 +27,9 @@
 #include "antares/solver/simulation/common-eco-adq.h"
 #include "antares/solver/utils/filename.h"
 #include "antares/solver/optimisation/run-thermal-heuristic.h"
+#include <fstream>    // Defines std::ofstream, std::ifstream, std::fstream
+#include <string>
+#include <iomanip>
 
 
 
@@ -39,7 +42,7 @@ const uint nbHoursInWeek = 168;
 // -----------------------------
 DispatchableMarginPostProcessCmd::DispatchableMarginPostProcessCmd(PROBLEME_HEBDO* problemeHebdo,
                                                                    unsigned int numSpace,
-                                                                   AreaList& areas):
+                                                                   const AreaList& areas):
     basePostProcessCommand(problemeHebdo),
     numSpace_(numSpace),
     area_list_(areas)
@@ -280,22 +283,46 @@ void CurtailmentSharingPostProcessCmd::execute(const optRuntimeData& opt_runtime
     
     for (uint hour = 0; hour < nbHoursInWeek; hour++){
         auto f = problemeHebdo_->ValeursDeNTC[hour].ValeurDuFlux;
-        // logs.info() << "[adq-patch] flux Before ADQPTCH:" <<f;// << problemeHebdo_;
+        logs.info() << "[adq-patch] flux Before ADQPTCH:" <<f;// << problemeHebdo_;
     }
 
+
     // ens bef adqp
-    std::vector<std::vector<double>> ENSBef, ENSAfter, SpillBef, SpillAfter;
+    std::vector<std::vector<double>> ENSBef, ENSAfter, SpillBef, SpillAfter, ENSRedispatch, SpillRedispatch, dtgMrgBef,dtgMrgAfter, dtgMrgRedispatch;
     ENSBef.resize(problemeHebdo_->NombreDePays);
     SpillBef.resize(problemeHebdo_->NombreDePays);
     ENSAfter.resize(problemeHebdo_->NombreDePays);
     SpillAfter.resize(problemeHebdo_->NombreDePays);
+    ENSRedispatch.resize(problemeHebdo_->NombreDePays);
+    SpillRedispatch.resize(problemeHebdo_->NombreDePays);
+    dtgMrgBef.resize(problemeHebdo_->NombreDePays);
+    dtgMrgAfter.resize(problemeHebdo_->NombreDePays);
+    dtgMrgRedispatch.resize(problemeHebdo_->NombreDePays);
+
     
+    // const double dtgMrg = scratchpad.dispatchableGenerationMargin[hour];
+
+
     for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area)
     {
         // logs.info() << area << " with ens / Spill:";
         ENSBef[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillancePositive;
         SpillBef[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillanceNegative;
+        const auto& scratchpad = area_list_[area]->scratchpad[numSpace_];
+        dtgMrgBef[area] = std::vector<double>(std::begin(scratchpad.dispatchableGenerationMargin),std::end(scratchpad.dispatchableGenerationMargin));
+
+        // dtgMrgBef[area] = scratchpad.dispatchableGenerationMargin.copy();
     }
+
+    // for (uint32_t area = 0; area < ENSBef.size(); ++area) {
+    //     std::string areaName = problemeHebdo_->NomsDesPays[area];
+    //     // std::string areaName = getAreaName(area); // Replace with your method to get area names
+    //     for (uint h = 0; h < ENSBef[area].size(); ++h) {
+    //         logs.info("dtg bla ", dtgMrg[area].at(h))
+    //     }
+    // }
+
+ 
 
 
     // RUN ADQP
@@ -310,6 +337,10 @@ void CurtailmentSharingPostProcessCmd::execute(const optRuntimeData& opt_runtime
         ENSAfter[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillancePositive;
         SpillAfter[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillanceNegative;
     }
+
+
+
+
 
     // Filtering Affected Areas, i.e, areas with weird case
     std::set<uint32_t> affectedAreas;
@@ -351,7 +382,7 @@ void CurtailmentSharingPostProcessCmd::execute(const optRuntimeData& opt_runtime
         double oldValue;
         for (uint h = 0; h < nbHoursInWeek ; ++h){
             for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area) {
-                if (affectedAreas.contains(area)){
+                if (!affectedAreas.contains(area)){
                     logs.info() << "[adq-patch] Affected Area loop I "<<area;
                     var = problemeHebdo_->CorrespondanceVarNativesVarOptim[h].NumeroDeVariableDefaillancePositive[area];
                     oldValue = ENSAfter[area][h];
@@ -457,8 +488,108 @@ void CurtailmentSharingPostProcessCmd::execute(const optRuntimeData& opt_runtime
                                     *optPeriodStringGenerator,
                                     opt_runtime_data.weeklyOptimization.writer_);    
             } // END second sep
+            logs.info() << "End of second Step";
+
+
+
+               // fileG1:
+             // 1. Define the dump file path in your build/run folder
+            std::string dumpFile = "/home/alzoobiali/Desktop/Redispatch/intermediateResults/ENSdispatch.csv";
+
+
+            // 2. Open the file (overwrite or append as you wish)
+            std::ofstream ofsDispatch(dumpFile, std::ios::app /* or std::ios::app */);
+
+            for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area) {
+                std::string areaName = problemeHebdo_->NomsDesPays[area];
+                // std::string areaName = getAreaName(area); // Replace with your method to get area names
+                for (uint h = 0; h < nbHoursInWeek; ++h) {
+                    uint32_t timeId = h + week * 168; // Assuming 'week' is defined in your context
+                    ofsDispatch << h << "\t"
+                        << timeId << "\t"
+                        << area << "\t"
+                        << areaName << "\t"
+                        << std::fixed << std::setprecision(3) << ENSBef[area][h] << "\t"
+                        << std::fixed << std::setprecision(3) << SpillBef[area][h] << "\t"
+                        << std::fixed << std::setprecision(3) << dtgMrgBef[area][h] << "\n";
+
+                }
+            }
+
+            // 4. Close the file when done
+            ofsDispatch.close();
+
+            // FileG2
+            // 1. Define the dump file path in your build/run folder
+            std::string dumpFile2 = "/home/alzoobiali/Desktop/Redispatch/intermediateResults/ENSAdequacyPatch.csv";
+            // 2. Open the file (overwrite or append as you wish)
+            std::ofstream ofsAdequacyPatch(dumpFile2, std::ios::app /* or std::ios::app */);
+
+
+            for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area) {
+                std::string areaName = problemeHebdo_->NomsDesPays[area];
+                // std::string areaName = getAreaName(area); // Replace with your method to get area names
+                for (uint h = 0; h < nbHoursInWeek; ++h) {
+                    uint32_t timeId = h + week * 168; // Assuming 'week' is defined in your context
+                    ofsAdequacyPatch << h << "\t"
+                        << timeId << "\t"
+                        << area << "\t"
+                        << areaName << "\t"
+                        << std::fixed << std::setprecision(3) << ENSAfter[area][h] << "\t"
+                        << std::fixed << std::setprecision(3) << SpillAfter[area][h] << "\n";
+                }
+            }
+            // 4. Close the file when done
+            ofsAdequacyPatch.close();
+
+            // DispatchableMarginPostProcessCmd
+            // std::vector<uint32_t> dummyAreas(problemeHebdo_->NombreDePays);
+            // std::iota(dummyAreas.begin(), dummyAreas.end(), 0);
+            DispatchableMarginPostProcessCmd dispatchableMarginCmd(problemeHebdo_, numSpace_, area_list_);
+            dispatchableMarginCmd.execute(opt_runtime_data);
+
+            //FileG3
+            // extracting data:
+            for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area){
+                // logs.info() << area << " with ens / Spill:";
+                ENSRedispatch[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillancePositive;
+                SpillRedispatch[area] = problemeHebdo_->ResultatsHoraires[area].ValeursHorairesDeDefaillanceNegative;
+                const auto& scratchpad = area_list_[area]->scratchpad[numSpace_];
+                dtgMrgRedispatch[area] = std::vector<double>(std::begin(scratchpad.dispatchableGenerationMargin),std::end(scratchpad.dispatchableGenerationMargin));
+            }
+
+            // 1. Define the dump file path in your build/run folder
+            std::string dumpFile3 = "/home/alzoobiali/Desktop/Redispatch/intermediateResults/ENSRedispatch.csv";
+
+
+            // 2. Open the file (overwrite or append as you wish)
+            std::ofstream ofsRedispatch(dumpFile3, std::ios::app /* or std::ios::app */);
+
+            for (uint32_t area = 0; area < problemeHebdo_->NombreDePays; ++area) {
+                std::string areaName = problemeHebdo_->NomsDesPays[area];
+                // std::string areaName = getAreaName(area); // Replace with your method to get area names
+                for (uint h = 0; h < nbHoursInWeek; ++h) {
+                    uint32_t timeId = h + week * 168; // Assuming 'week' is defined in your context
+                    ofsRedispatch << h << "\t"
+                        << timeId << "\t"
+                        << area << "\t"
+                        << areaName << "\t"
+                        << std::fixed << std::setprecision(3) << ENSRedispatch[area][h] << "\t"
+                        << std::fixed << std::setprecision(3) << SpillRedispatch[area][h] << "\t"
+                        << std::fixed << std::setprecision(3) << dtgMrgRedispatch[area][h] << "\n";
+                }
+            }
+
+            // 4. Close the file when done
+            ofsRedispatch.close();
+
+            
         } // ENS REDISPATCH
+
+         
     } // END REDISPATCH IF SET Affected non empty
+
+    
 } // END CSR
 
 double CurtailmentSharingPostProcessCmd::calculateDensNewAndTotalLmrViolation()

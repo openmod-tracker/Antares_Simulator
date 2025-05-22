@@ -29,7 +29,7 @@ class DispatchableMarginPostProcessCmd: public basePostProcessCommand
 public:
     DispatchableMarginPostProcessCmd(PROBLEME_HEBDO* problemeHebdo,
                                      unsigned int numSpace,
-                                     AreaList& areas);
+                                     const AreaList& areas);
     void execute(const optRuntimeData& opt_runtime_data) override;
 
 private:
