@@ -186,6 +186,9 @@ jobs:
         with:
           feature: "features/modeler-features"
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
 
       - name: Run unfeasibility-related tests
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && ! cancelled() }}
@@ -238,14 +241,6 @@ jobs:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v860
           os: ${{ env.os }}
-
-      - name: Upload build on failure
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: valid-v860
-          path: ${{ github.workspace }}/src/tests/resources/batches
-
 
       - name: Run tests introduced in 8.7.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
