@@ -20,21 +20,23 @@ class integrity_compare(check_interface):
 
     def compare_files(self):
         reference_values = get_integrity_check_values(self.ref_folder)
-
+        print(
+            "************************************* reference_values = {} *************************************".format(
+                reference_values))
         path_to_output = find_dated_output_folder(self.study_path)
         output_values = get_integrity_check_values(path_to_output)
-
+        print("************************************* output_values = {} *************************************".format(
+            output_values))
         numpy.testing.assert_allclose(reference_values[0:8], output_values[0:8], rtol=1e-3, atol=0)
 
 
-def get_integrity_check_values(output : Path) -> numpy.array :
+def get_integrity_check_values(output: Path) -> np.ndarray:
+
     integrity_path = find_integrity_path(output)
-    integrity_file = open(str(integrity_path), 'r')
-    output_values = list()
-    for x in integrity_file:
-        output_values.append(float(x))
+    with open(integrity_path, 'r') as integrity_file:
+        output_values = [float(x) for x in integrity_file]
     assert len(output_values) == 8
-    return output_values
+    return numpy.array(output_values)
 
 def find_integrity_path(output_dir):
     files_found = []
