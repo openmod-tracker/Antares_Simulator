@@ -189,7 +189,11 @@ bool Economy::year(Progression::Task& progression,
             for (int opt = 0; opt < 7; opt++)
             {
                 state.optimalSolutionCost1 += currentProblem.coutOptimalSolution1[opt];
+                logs.notice() << "state.optimalSolutionCost1 += "
+                              << currentProblem.coutOptimalSolution1[opt];
                 state.optimalSolutionCost2 += currentProblem.coutOptimalSolution2[opt];
+                logs.notice() << "state.optimalSolutionCost2 += "
+                              << currentProblem.coutOptimalSolution2[opt];
             }
             optWriter.addTime(w, currentProblem.timeMeasure);
         }

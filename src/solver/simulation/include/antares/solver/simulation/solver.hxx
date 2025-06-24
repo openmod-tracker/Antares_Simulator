@@ -856,7 +856,9 @@ void ISimulation<ImplementationType>::computeAnnualCostsStatistics(
             const Variable::State& s = state[numSpace];
             pAnnualStatistics.systemCost.addCost(s.annualSystemCost);
             pAnnualStatistics.criterionCost1.addCost(s.optimalSolutionCost1);
+            logs.notice() << "pAnnualStatistics.criterionCost1.addCost " << s.optimalSolutionCost1;
             pAnnualStatistics.criterionCost2.addCost(s.optimalSolutionCost2);
+            logs.notice() << "pAnnualStatistics.criterionCost2.addCost " << s.optimalSolutionCost2;
             pAnnualStatistics.optimizationTime1.addCost(s.averageOptimizationTime1);
             pAnnualStatistics.optimizationTime2.addCost(s.averageOptimizationTime2);
             pAnnualStatistics.updateTime.addCost(s.averageUpdateTime);
