@@ -187,6 +187,7 @@ jobs:
           feature: "features/modeler-features"
 
       - name: Setup tmate session
+        if: ${{ !cancelled() }}
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 15
 
