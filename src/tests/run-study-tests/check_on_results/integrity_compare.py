@@ -30,7 +30,7 @@ class integrity_compare(check_interface):
         numpy.testing.assert_allclose(reference_values[0:8], output_values[0:8], rtol=1e-3, atol=0)
 
 
-def get_integrity_check_values(output: Path) -> np.ndarray:
+def get_integrity_check_values(output: Path) -> numpy.ndarray:
 
     integrity_path = find_integrity_path(output)
     with open(integrity_path, 'r') as integrity_file:
