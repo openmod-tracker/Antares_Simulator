@@ -145,6 +145,10 @@ jobs:
         run: |
           cmake --build _build --config Release -j$(nproc)
 
+      - name: Setup tmate session
+        if: ${{ !cancelled() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
 
       - name: Add OR-Tools to PATH
         run: echo "D:\a\Antares_Simulator\Antares_Simulator/or-tools/install/bin" | Out-File -Append -Encoding ascii $env:GITHUB_PATH
@@ -185,11 +189,6 @@ jobs:
         uses: ./.github/workflows/cucumber-tests
         with:
           feature: "features/modeler-features"
-
-      - name: Setup tmate session
-        if: ${{ !cancelled() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 15
 
       - name: Run unfeasibility-related tests
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && ! cancelled() }}
