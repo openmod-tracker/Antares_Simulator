@@ -239,6 +239,14 @@ jobs:
           batch-name: valid-v860
           os: ${{ env.os }}
 
+      - name: Upload build on failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: valid-v860
+          path: ${{ github.workspace }}/src/tests/resources/batches
+
+
       - name: Run tests introduced in 8.7.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
         uses: ./.github/workflows/run-tests

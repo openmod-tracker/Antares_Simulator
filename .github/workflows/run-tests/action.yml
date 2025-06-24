@@ -32,9 +32,3 @@ runs:
            cd _build
            ctest -C Release --output-on-failure -R ${{inputs.variant}}
            echo "RET_CODE=$?" >> $GITHUB_ENV
-
-  - name: Clean batches
-    shell: bash
-    run: |
-           rm -rf src/tests/resources/batches/*
-           (exit ${{env.RET_CODE}})

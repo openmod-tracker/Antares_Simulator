@@ -9,8 +9,7 @@ class results_remover:
         self.study_path = study_path
 
     def run(self):
-        self.remove_logs()
-        self.clean_results()
+        pass
 
     def remove_logs(self):
         logs_folder = self.study_path / 'logs'
