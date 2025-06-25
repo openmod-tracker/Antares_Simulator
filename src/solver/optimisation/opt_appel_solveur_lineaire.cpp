@@ -298,16 +298,24 @@ static SimplexResult OPT_TryToCallSimplex(const SingleOptimOptions& options,
                           writer);
     if (solver)
     {
-        logs.info() << " ****** Objective: " << solver->Objective().Value() << "\n";
+        const auto& obj = solver->Objective();
+        logs.info() << " ****** solver->Objective().Value(): " << solver->Objective().Value()
+                    << "\n";
+        logs.info() << " ****** const auto& obj = solver->Objective(); obj.Value(); : "
+                    << obj.Value() << "\n";
+        return {.success = true,
+                .timeMeasure = timeMeasure,
+                .mps_writer_factory = mps_writer_factory,
+                .objectiveValue = obj.Value()};
     }
     else
     {
         logs.info() << " solver is nullptr";
+        return {.success = true,
+                .timeMeasure = timeMeasure,
+                .mps_writer_factory = mps_writer_factory,
+                .objectiveValue = 0};
     }
-    return {.success = true,
-            .timeMeasure = timeMeasure,
-            .mps_writer_factory = mps_writer_factory,
-            .objectiveValue = solver != nullptr ? solver->Objective().Value() : 0};
 }
 
 bool OPT_AppelDuSimplexe(const SingleOptimOptions& options,
