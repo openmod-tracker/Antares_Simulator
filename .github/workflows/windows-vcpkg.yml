@@ -145,10 +145,19 @@ jobs:
         run: |
           cmake --build _build --config Release -j$(nproc)
 
-      - name: Setup tmate session
-        if: ${{ !cancelled() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 15
+      - name: .zip creation
+        shell: bash
+        run: |
+          cd _build
+          FIXED_PATH=${ORTOOLS_DIR//\\//}
+          cpack -G ZIP -D CPACK_INSTALLED_DIRECTORIES="${FIXED_PATH}/install/bin;bin"
+
+      - name: Installer upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer
+          path: _build/${{env.NSIS_NAME}}
+
 
       - name: Add OR-Tools to PATH
         run: echo "D:\a\Antares_Simulator\Antares_Simulator/or-tools/install/bin" | Out-File -Append -Encoding ascii $env:GITHUB_PATH
@@ -368,19 +377,6 @@ jobs:
         with:
           name: NSISError.log
           path: _build/_CPack_Packages/win64/NSIS/NSISOutput.log
-
-      - name: .zip creation
-        shell: bash
-        run: |
-          cd _build
-          FIXED_PATH=${ORTOOLS_DIR//\\//}
-          cpack -G ZIP -D CPACK_INSTALLED_DIRECTORIES="${FIXED_PATH}/install/bin;bin"
-
-      - name: Installer upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: installer
-          path: _build/${{env.NSIS_NAME}}
 
       - name: Publish assets
         if: ${{ env.IS_RELEASE == 'true' }}
