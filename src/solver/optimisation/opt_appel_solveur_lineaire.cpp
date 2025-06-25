@@ -296,7 +296,14 @@ static SimplexResult OPT_TryToCallSimplex(const SingleOptimOptions& options,
                           optimizationNumber,
                           optPeriodStringGenerator,
                           writer);
-
+    if (solver)
+    {
+        logs.info() << " ****** Objective: " << solver->Objective().Value() << "\n";
+    }
+    else
+    {
+        logs.info() << " solver is nullptr";
+    }
     return {.success = true,
             .timeMeasure = timeMeasure,
             .mps_writer_factory = mps_writer_factory,
