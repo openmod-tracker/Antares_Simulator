@@ -28,6 +28,8 @@
 #include <limits>
 #include <sstream>
 
+#include <antares/logs/logs.h>
+
 namespace fs = std::filesystem;
 
 static const std::string systemCostFilename = "annualSystemCost.txt";
@@ -129,7 +131,26 @@ void annualCostsStatistics::writeCriterionCostsToOutput(IResultWriter& writer) c
            << criterionCost2.costMin << endl
            << criterionCost2.costMax << endl;
 
+    logs.info() << R"(<< toScientific << criterionCost1.costAverage << endl
+           << criterionCost1.costStdDeviation << endl
+           << criterionCost1.costMin << endl
+           << criterionCost1.costMax << endl
+           << criterionCost2.costAverage << endl
+           << criterionCost2.costStdDeviation << endl
+           << criterionCost2.costMin << endl
+           << criterionCost2.costMax << endl;)";
+    logs.info() << criterionCost1.costAverage << "\n"
+                << criterionCost1.costStdDeviation << "\n"
+                << criterionCost1.costMin << "\n"
+                << criterionCost1.costMax << "\n"
+                << criterionCost2.costAverage << "\n"
+                << criterionCost2.costStdDeviation << "\n"
+                << criterionCost2.costMin << "\n"
+                << criterionCost2.costMax << "\n";
+
     std::string s = buffer.str(); // TODO allow std::string&& in addEntryFromBuffer
+    std::cout << __LINE__ << endl;
+    std::cout << s << endl;
     writer.addEntryFromBuffer(criterionsCostsFilename, s);
 }
 
