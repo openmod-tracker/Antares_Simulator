@@ -91,9 +91,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ${{ github.workspace }}/.ccache_windows
-          key: ${{ windows-2022 }}-${{ github.ref_name }}
+          key: windows-2022-${{ github.ref_name }}
           restore-keys: |
-            ${{ windows-2022 }}-  
+            windows-2022-  
 
       - name: Configure ccache
         run: |
@@ -182,7 +182,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-named-mps
-          os: ${{ windows-2022 }}
+          os: windows-2022
           variant: "named-mps"
 
       - name: Run fast cucumber
@@ -223,7 +223,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: adequacy-patch-CSR
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run tests about infinity on BCs RHS
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -231,7 +231,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v830
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run MILP with CBC
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -240,7 +240,7 @@ jobs:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-milp
           variant: "milp-cbc"
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run tests introduced in 8.6.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -248,7 +248,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v860
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run tests introduced in 8.7.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -256,7 +256,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v870
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run tests introduced in 9.1.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -264,7 +264,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v910
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run tests introduced in 9.2.0
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -272,7 +272,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-v920
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run short-tests
         if: ${{ env.RUN_SIMPLE_TESTS == 'true' && !cancelled() }}
@@ -280,7 +280,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: short-tests
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
 
       - name: Run cucumber on v9.2 tests
@@ -295,7 +295,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-mps
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run parallel tests
         if: ${{ env.RUN_EXTENDED_TESTS == 'true' && !cancelled() }}
@@ -303,7 +303,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: valid-parallel
-          os: ${{ windows-2022 }}
+          os: windows-2022
           variant: "parallel"
 
       - name: Run medium-tests
@@ -312,7 +312,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: medium-tests
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run cucumber on medium-tests
         uses: ./.github/workflows/cucumber-tests
@@ -325,7 +325,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: long-tests-1
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run long-tests-2
         if: ${{ env.RUN_EXTENDED_TESTS == 'true' && !cancelled() }}
@@ -333,7 +333,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: long-tests-2
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
       - name: Run long-tests-3
         if: ${{ env.RUN_EXTENDED_TESTS == 'true' && !cancelled() }}
@@ -341,7 +341,7 @@ jobs:
         with:
           simtest-tag: ${{ env.SIMTEST }}
           batch-name: long-tests-3
-          os: ${{ windows-2022 }}
+          os: windows-2022
 
 
       - name: Run cucumber on hybrid studies
@@ -424,4 +424,4 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: ${{ github.workspace }}/.ccache_windows
-          key: ${{ windows-2022 }}-${{ github.ref_name }}
+          key: windows-2022-${{ github.ref_name }}
