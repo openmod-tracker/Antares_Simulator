@@ -12,6 +12,7 @@ on:
       - doc/*
       - dependabot/*
       - tests/*
+      - windows-server-2025
   schedule:
     - cron: '21 2 * * *'
   workflow_call:
