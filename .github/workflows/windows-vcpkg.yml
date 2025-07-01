@@ -133,6 +133,11 @@ jobs:
       - name: Install pip dependencies if necessary
         run: pip install -r src/tests/examples/requirements.txt
 
+      - name: sirius-solver
+        run: |
+          wget https://github.com/rte-france/sirius-solver/releases/download/antares-integration-v1.8/windows-latest_sirius-solver.zip
+          unzip windows-latest_sirius-solver.zip
+
       - name: Enable git longpaths
         run: git config --system core.longpaths true
 
@@ -140,7 +145,7 @@ jobs:
         shell: bash
         run: |
           cmake -B _build -S src \
-          -DCMAKE_PREFIX_PATH="${{ env.ORTOOLS_DIR }}/install" \
+          -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/windows-latest_sirius-solver;${{ env.ORTOOLS_DIR }}/install" \
           -DVCPKG_ROOT="${{env.VCPKG_ROOT}}" \
           -DVCPKG_TARGET_TRIPLET=${{ env.triplet }} \
           -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" \
