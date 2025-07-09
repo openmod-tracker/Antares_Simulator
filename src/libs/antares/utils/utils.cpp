@@ -162,14 +162,25 @@ double round(double d, unsigned precision)
 
 static constexpr double largeValue = 1000000;
 
-double ceilDiv(double numerator, double denominator)
+double ceil(double d)
 {
-    return std::ceil(std::round(numerator / denominator * largeValue) / largeValue);
+    return std::ceil(std::round(d * largeValue) / largeValue);
 }
 
-double floorDiv(double numerator, double denominator)
+double floor(double d)
 {
-    return std::floor(std::round(numerator / denominator * largeValue) / largeValue);
+    return std::floor(std::round(d * largeValue) / largeValue);
+}
+
+std::map<std::string, unsigned> giveNumbersToStrings(const std::vector<std::string>& strs)
+{
+    unsigned strNb = 0;
+    std::map<std::string, unsigned> strToNumber;
+    for (const auto& s: strs)
+    {
+        strToNumber[s] = strNb++;
+    }
+    return strToNumber;
 }
 
 bool checkAllElementsIdenticalOrOne(std::vector<unsigned> w)
