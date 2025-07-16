@@ -117,8 +117,6 @@ if(MSVC)
 	# RELEASE
 	set(CMAKE_EXE_LINKER_FLAGS_RELEASE)
 	set(MSVC_RELEASE_FLAGS)
-	# O2x: optimization
-	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /O2")
 	# Prefer speed instead of size
 	set(MSVC_RELEASE_FLAGS "${MSVC_RELEASE_FLAGS} /Ot")
 	# Omit frame pointer
