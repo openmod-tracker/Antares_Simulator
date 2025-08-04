@@ -107,7 +107,7 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ${{ github.workspace }}/.ccache
-        key: centos7-on-${{ runner.os }}-${{ github.sha }}
+          key: centos7-on-${{ runner.os }}-${{ github.ref_name }}
         restore-keys: |
           centos7-on-${{ runner.os }}-   
 
@@ -141,6 +141,11 @@ jobs:
         ls -la .ccache
         docker rm $container_id
 
+      - name: Push artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: centos-targz
+          path: archive/*.tar.gz
 
     - name: Publish assets
       if: ${{ env.IS_RELEASE == 'true' }}
@@ -181,5 +186,5 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: ${{ github.workspace }}/.ccache
-        key: centos7-on-${{ runner.os }}-${{ github.sha }}
+          key: centos7-on-${{ runner.os }}-${{ github.ref_name }}
 
